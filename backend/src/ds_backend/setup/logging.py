@@ -4,7 +4,8 @@ def validate_logging_level(logging_level: str) -> str:
     """
     This function validates the logging level and,
     if it's valid, returns the string in the correct
-    (upper-case) format.
+    (upper-case) format. If logging_level is NoneType,
+    logging level defaults to DEBUG.
 
     Args:
         logging_level (str): Logging level string value.
@@ -25,6 +26,9 @@ def validate_logging_level(logging_level: str) -> str:
         "ERROR",
         "CRITICAL"
     ]
+
+    if logging_level is None:
+        return "DEBUG"
 
     llvl = logging_level.upper()
 
