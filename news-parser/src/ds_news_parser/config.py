@@ -8,6 +8,6 @@ LOGGING_LEVEL: str = logging.validate_logging_level(
     os.getenv("DS_NEWS_PARSER_LOGGING_LEVEL")
 )
 
-WEBSERBER_PORT: int = webserver_port.validate_webserver_port(
-    os.getenv("DS_NEWS_WEBSERVER_PORT")
+WEBSERVER_PORT, IS_WEBSERVER_PORT_DEFAULT = webserver_port.validate_webserver_port(  # noqa: E501
+    os.getenv("DS_NEWS_PARSER_WEBSERVER_PORT")
 )

@@ -18,10 +18,12 @@ def run() -> None:
     app = FastAPI()
     # app.include_router(user_router)
 
-    logger.info(f"Starting FastAPI on port {config.WEBSERBER_PORT}")
+    logger.info(f"Starting FastAPI on port {config.WEBSERVER_PORT}.")
+    if config.IS_WEBSERVER_PORT_DEFAULT:
+        logger.warning("Running webserver on standard port.")
     uvicorn.run(
         app,
-        port=config.WEBSERBER_PORT
+        port=config.WEBSERVER_PORT
     )
 
 
