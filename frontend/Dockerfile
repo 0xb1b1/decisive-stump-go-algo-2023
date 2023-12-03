@@ -1,9 +1,8 @@
-# hadolint global ignore=DL3059,DL3008
-
-# Environemnt to install flutter and build web
+# Environemnt to install flutter and build Web
 FROM debian:bookworm AS build
 
-# install all needed stuff
+# Install system packages/dependencies
+# hadolint ignore=DL3008
 RUN apt-get update &&\
     apt-get install -y --no-install-recommends \
     curl git unzip ca-certificates
@@ -36,9 +35,9 @@ WORKDIR ${APP}
 COPY . .
 
 # Run build: 1 - clean, 2 - pub get, 3 - build web
-RUN flutter clean
-RUN flutter pub get
-RUN flutter build web
+RUN flutter clean && \
+    flutter pub get && \
+    flutter build web
 
 
 #########################
