@@ -1,4 +1,5 @@
 ---
+# yamllint disable rule:line-length
 kind: pipeline
 type: docker
 name: default
@@ -18,7 +19,34 @@ steps:
   #       from_secret: docker_username
   #     password:
   #       from_secret: docker_password
-  - name: test
-    image: debian:latest
-    commands:
-      - ps
+  - name: lint
+    image: osshelp/drone-linter
+
+  - name: build_notification
+    image: appleboy/drone-discord
+    settings:
+      webhook_id:
+        from_secret: build_notif_discord_id
+      webhook_token:
+        from_secret: build_notif_discord_token
+      message: >
+        {{#success build.status}}
+          # 🦄 Build successful
+        {{else}}
+          # 💩 Build failed
+        {{/success}}
+        Repository `[{{repo.name}}/{{commit.branch}}]`
+        triggered by event `[{{uppercase build.event}}]` for build.
+
+        ## Git
+
+          - Commit [[{{commit.sha}}]({{commit.link}})]
+          - Author `[{{commit.author}} / {{commit.email}}]`
+          - Message: {{commit.message}}
+
+        ## Drone CI
+
+          - Build [[#{{build.number}}]({{build.link}})]
+          - Reported `[{{uppercase build.status}}]` at `[{{datetime build.finished "2006.01.02 15:04" ""}}]`
+    when:
+      status: [success, failure, changed]

@@ -6,7 +6,7 @@ from ds_backend.http.models.user import User
 
 router = APIRouter(
     prefix="/user",
-    tags=['User',],
+    tags=['User', ],
     # dependencies=[Depends(get_token_header)],
     responses={404: {"description": "Not found"}}
 )
