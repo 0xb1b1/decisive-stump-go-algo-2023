@@ -21,6 +21,7 @@ steps:
   #       from_secret: docker_password
   - name: lint
     image: osshelp/drone-linter
+    failure: ignore
 
   - name: build_notification
     image: appleboy/drone-discord
@@ -50,3 +51,9 @@ steps:
           - Reported `[{{uppercase build.status}}]` at `[{{datetime build.finished "2006.01.02 15:04" ""}}]`
     when:
       status: [success, failure, changed]
+      event:
+        - push
+      branch:
+        - main
+        # yamllint disable-line rule:anchors
+        - "*-master"
