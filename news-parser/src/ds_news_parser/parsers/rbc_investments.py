@@ -67,7 +67,7 @@ class RBCInvestmentsParser:
         scroll_count = 0
         retry_count = 0  # Retries of the same page
         while True:
-            logger.info(f"Getting page {scroll_count + 1}")
+            logger.info(f"Getting page {scroll_count + 1}.")
             # Scroll down to the bottom
             drv.execute_script(
                 "window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });"
@@ -135,8 +135,10 @@ class RBCInvestmentsParser:
 
             link: str = raw_article.find(
                 "a",
-                {"class": "MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone quote-style-1afmlf2"}
-            ).text.strip()
+                {"class": "MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone quote-style-1afmlf2"},
+                href=True
+            )["href"]
+            link = self._construct_full_url(link)
 
             timestamps_raw = raw_article.find_all(
                 "div",
