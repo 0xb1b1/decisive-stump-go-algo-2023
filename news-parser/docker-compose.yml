@@ -1,6 +1,10 @@
 ---
 version: '3'
 
+volumes:
+  mongo:
+    driver: local
+
 services:
   news-parser:
     image: 0xb1b1/ds-news-parser-algo-hack-2023:latest
@@ -24,8 +28,8 @@ services:
   mongo:
     image: 'mongo:latest'
     restart: always
-    # volumes:
-    #   - "db:/data/db"
+    volumes:
+      - "mongo:/data/db"
     ports:
       - "27017:27017"
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pydantic import BaseModel
 from pydantic_mongo import ObjectIdField
+from datetime import datetime
 
 
 class Stock(BaseModel):
@@ -17,5 +18,7 @@ class Article(BaseModel):
     id: ObjectIdField = None
     title: str
     tldr: str
+    link: str
+    timestamp: datetime | None
     stocks: list[Stock] = []
     tags: list[Tag] = []

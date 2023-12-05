@@ -7,6 +7,7 @@ from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from loguru import logger
 from pymongo.errors import DuplicateKeyError
+from datetime import datetime
 
 from ds_news_parser.models.article import Article, Stock
 from ds_news_parser.db.repositories.article import ArticleRepository
@@ -71,6 +72,14 @@ class RBCInvestmentsParser:
             drv.execute_script(
                 "window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });"
             )
+            if retry_count % 2 == 0 and retry_count not in [0, 2]:
+                drv.execute_script(
+                    "window.scrollTo({ top: 0, behavior: 'smooth' });"
+                )
+                sleep(3)
+                drv.execute_script(
+                    "window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });"
+                )
 
             # Wait to load more articles
             logger.info(f"Sleeping for {self.SCROLL_COOLDOWN} seconds.")
@@ -81,12 +90,12 @@ class RBCInvestmentsParser:
                 "return document.body.scrollHeight"
             )
 
-            if scroll_count == self.MAX_SCROLL_COUNT:
+            if scroll_count == self.MAX_SCROLL_COUNT - 1:
                 logger.info(f"Stopped scrolling because reached max scroll count at page {scroll_count + 1}")
                 break
 
             if new_height == last_height:
-                if retry_count >= 3:
+                if retry_count >= 7:
                     logger.info(f"Stopped getting any new updates at page {scroll_count + 1}")
                     break
                 logger.info(f"Retrying (attempt {retry_count})")
@@ -124,6 +133,23 @@ class RBCInvestmentsParser:
                 {"class": "MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 quote-style-idahbs"}
             ).text.strip()
 
+            link: str = raw_article.find(
+                "a",
+                {"class": "MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone quote-style-1afmlf2"}
+            ).text.strip()
+
+            timestamps_raw = raw_article.find_all(
+                "div",
+                {"class": "MuiGrid-root MuiGrid-item MuiGrid-grid-xs-auto quote-style-1r0qme3"}
+            )
+
+            timestamp: datetime | None = None
+            for ts in timestamps_raw:
+                try:
+                    timestamp = datetime.strptime(ts.text.strip(), "%d.%m.%y, %H:%M")
+                except ValueError:
+                    continue
+
             stocks: list[Stock] = []
             for raw_stock in raw_stocks:
                 attrs = raw_stock.attrs
@@ -141,6 +167,8 @@ class RBCInvestmentsParser:
             article = Article(
                 title=title,
                 tldr=tldr,
+                link=link,
+                timestamp=timestamp,
                 stocks=stocks,
                 tags=[],
             )
