@@ -1,0 +1,15 @@
+{
+  "firefox": {
+    "default": "118.0",
+    "versions": {
+      "118.0": {
+        "image": "selenoid/firefox:118.0",
+        "port": "4444",
+        "path": "/wd/hub",
+        "tmpfs": {
+          "/tmp": "size=128m"
+        }
+      }
+    }
+  }
+}
