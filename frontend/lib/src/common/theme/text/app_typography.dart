@@ -29,6 +29,13 @@ class AppTypography {
     color: AppPalette.black,
   );
 
+  static const caseTitle = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w700,
+    fontSize: 24,
+    color: AppPalette.black,
+  );
+
   static const tableTitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w700,

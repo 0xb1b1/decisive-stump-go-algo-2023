@@ -10,6 +10,7 @@ class News with _$News {
     required String title,
     required String source,
     required DateTime date,
+    required String url,
   }) = _News;
 
   factory News.mock() => News(
@@ -17,6 +18,7 @@ class News with _$News {
             'Politico узнало о жалобе Пентагона на медленное производство оружия',
         source: 'РБК',
         date: DateTime.now(),
+        url: "https://quote.rbc.ru/news/article/6570390b9a79474f59a1da8f",
       );
 
   factory News.fromJson(Map<String, Object?> json) => _$NewsFromJson(json);

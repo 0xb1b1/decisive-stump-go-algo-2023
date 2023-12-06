@@ -2,11 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/features/stats/widgets/news_card.dart';
 
+import '../../../common/strings.dart';
+import '../../../common/theme/text/app_typography.dart';
 import '../models/news.dart';
 
 class NewsBlock extends StatefulWidget {
   final List<News> newsList;
-  final VoidCallback onNewsTap;
+  final Future<void> Function(String) onNewsTap;
 
   const NewsBlock({
     required this.newsList,
@@ -47,7 +49,15 @@ class _NewsBlockState extends State<NewsBlock> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const Text(
+          Strings.news,
+          style: AppTypography.sectionTitle,
+        ),
+        const SizedBox(
+          height: 12,
+        ),
         SizedBox(
           height: 240,
           child: ListView.builder(
@@ -59,7 +69,7 @@ class _NewsBlockState extends State<NewsBlock> {
               return Row(
                 children: [
                   GestureDetector(
-                    onTap: widget.onNewsTap,
+                    onTap: () => widget.onNewsTap(widget.newsList[index].url),
                     child: NewsCard(news: widget.newsList[index]),
                   ),
                   if (index != widget.newsList.length - 1)

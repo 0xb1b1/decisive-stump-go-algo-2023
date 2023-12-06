@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
+import 'package:frontend/src/features/cases/single_case_page.dart';
 import 'package:frontend/src/widgets/info_card.dart';
 
 import '../../common/strings.dart';
@@ -66,14 +67,23 @@ class AllCasesBlock extends StatelessWidget {
         SizedBox(
           height: gridHeight,
           child: GridView.count(
+            childAspectRatio: 1.66346153846,
             mainAxisSpacing: 24,
             crossAxisSpacing: 24,
             crossAxisCount: 3,
             children: cases
                 .map(
-                  (e) => InfoCard(
-                    title: Strings.singleCase,
-                    rewardAmount: e.amount,
+                  (e) => GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SingleCasePage(),
+                      ),
+                    ),
+                    child: InfoCard(
+                      title: Strings.singleCase,
+                      rewardAmount: e.amount,
+                    ),
                   ),
                 )
                 .toList(),

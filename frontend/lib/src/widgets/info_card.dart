@@ -72,8 +72,7 @@ class InfoCard extends StatelessWidget {
                       children: parts.length > 1
                           ? [
                               TextSpan(
-                                text:
-                                    '.${rewardAmount.toString().split('.')[1]}',
+                                text: '.${parts[1]}',
                                 style: AppTypography.rewardSmall
                                     .copyWith(color: rewardFracColor),
                               )

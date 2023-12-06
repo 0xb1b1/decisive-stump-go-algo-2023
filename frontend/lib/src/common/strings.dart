@@ -13,9 +13,12 @@ class Strings {
     'Сумма',
   ];
   static const bestCase = 'Лучший портфель -';
-  static const stats = 'Статистика';
-  static const cases = 'Портфели';
   static const singleCase = 'Портфель';
   static const news = 'Новости';
   static const allCases = 'Все портфели';
+
+  static const stats = 'Статистика';
+  static const cases = 'Портфели';
+  static const newCase = 'Новый портфель';
+  static const myAccount = 'Мой счет';
 }

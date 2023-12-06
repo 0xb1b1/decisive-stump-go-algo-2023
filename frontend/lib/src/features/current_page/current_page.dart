@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/src/features/current_page/current_page_cubit.dart';
+
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/src/features/cases/single_case_page.dart';
 
 import '../../common/strings.dart';
 import '../../common/theme/colors/app_palette.dart';
@@ -40,17 +41,34 @@ class _CurrentPageState extends State<CurrentPage> {
             },
             backgroundColor: AppPalette.mainBlue,
             elevation: 0,
-            children: const [
+            children: [
+              const SizedBox(
+                height: 24,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              SvgPicture.asset('img/divider.svg'),
               NavigationDrawerDestination(
-                icon: Icon(Icons.favorite_border),
-                selectedIcon: Icon(Icons.favorite),
-                label: Text(Strings.stats),
+                icon: SvgPicture.asset('icons/deselected/stats_d.svg'),
+                selectedIcon: SvgPicture.asset('icons/selected/stats.svg'),
+                label: const Text(Strings.stats),
               ),
               NavigationDrawerDestination(
-                icon: Icon(Icons.bookmark_border),
-                selectedIcon: Icon(Icons.book),
-                label: Text(Strings.cases),
-              )
+                icon: SvgPicture.asset('icons/deselected/cases_d.svg'),
+                selectedIcon: SvgPicture.asset('icons/selected/cases.svg'),
+                label: const Text(Strings.cases),
+              ),
+              NavigationDrawerDestination(
+                icon: SvgPicture.asset('icons/deselected/new_case_d.svg'),
+                selectedIcon: SvgPicture.asset('icons/selected/new_case.svg'),
+                label: const Text(Strings.newCase),
+              ),
+              NavigationDrawerDestination(
+                icon: SvgPicture.asset('icons/deselected/account_d.svg'),
+                selectedIcon: SvgPicture.asset('icons/selected/account.svg'),
+                label: const Text(Strings.myAccount),
+              ),
             ],
           ),
           Expanded(child: pages[_selectedIndex]),

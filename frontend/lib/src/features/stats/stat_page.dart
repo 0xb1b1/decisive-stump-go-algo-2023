@@ -29,7 +29,9 @@ class StatsPage extends StatelessWidget {
             builder: (BuildContext context, StatsCubitState state) {
               return state.when(
                 loading: () => const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: AppPalette.mainBlue,
+                  ),
                 ),
                 error: () => const Center(
                   child: Text(
@@ -71,10 +73,6 @@ class StatsPage extends StatelessWidget {
                     ),
                     const SizedBox(
                       height: 24,
-                    ),
-                    const Text(
-                      Strings.news,
-                      style: AppTypography.sectionTitle,
                     ),
                     NewsBlock(
                       newsList: news,

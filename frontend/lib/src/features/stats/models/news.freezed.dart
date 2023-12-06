@@ -23,6 +23,7 @@ mixin _$News {
   String get title => throw _privateConstructorUsedError;
   String get source => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $NewsCopyWith<$Res> {
   factory $NewsCopyWith(News value, $Res Function(News) then) =
       _$NewsCopyWithImpl<$Res, News>;
   @useResult
-  $Res call({String title, String source, DateTime date});
+  $Res call({String title, String source, DateTime date, String url});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$NewsCopyWithImpl<$Res, $Val extends News>
     Object? title = null,
     Object? source = null,
     Object? date = null,
+    Object? url = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -67,6 +69,10 @@ class _$NewsCopyWithImpl<$Res, $Val extends News>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -78,7 +84,7 @@ abstract class _$$NewsImplCopyWith<$Res> implements $NewsCopyWith<$Res> {
       __$$NewsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String source, DateTime date});
+  $Res call({String title, String source, DateTime date, String url});
 }
 
 /// @nodoc
@@ -94,6 +100,7 @@ class __$$NewsImplCopyWithImpl<$Res>
     Object? title = null,
     Object? source = null,
     Object? date = null,
+    Object? url = null,
   }) {
     return _then(_$NewsImpl(
       title: null == title
@@ -108,6 +115,10 @@ class __$$NewsImplCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -116,7 +127,10 @@ class __$$NewsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$NewsImpl implements _News {
   const _$NewsImpl(
-      {required this.title, required this.source, required this.date});
+      {required this.title,
+      required this.source,
+      required this.date,
+      required this.url});
 
   factory _$NewsImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewsImplFromJson(json);
@@ -127,10 +141,12 @@ class _$NewsImpl implements _News {
   final String source;
   @override
   final DateTime date;
+  @override
+  final String url;
 
   @override
   String toString() {
-    return 'News(title: $title, source: $source, date: $date)';
+    return 'News(title: $title, source: $source, date: $date, url: $url)';
   }
 
   @override
@@ -140,12 +156,13 @@ class _$NewsImpl implements _News {
             other is _$NewsImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.source, source) || other.source == source) &&
-            (identical(other.date, date) || other.date == date));
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.url, url) || other.url == url));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, source, date);
+  int get hashCode => Object.hash(runtimeType, title, source, date, url);
 
   @JsonKey(ignore: true)
   @override
@@ -165,7 +182,8 @@ abstract class _News implements News {
   const factory _News(
       {required final String title,
       required final String source,
-      required final DateTime date}) = _$NewsImpl;
+      required final DateTime date,
+      required final String url}) = _$NewsImpl;
 
   factory _News.fromJson(Map<String, dynamic> json) = _$NewsImpl.fromJson;
 
@@ -175,6 +193,8 @@ abstract class _News implements News {
   String get source;
   @override
   DateTime get date;
+  @override
+  String get url;
   @override
   @JsonKey(ignore: true)
   _$$NewsImplCopyWith<_$NewsImpl> get copyWith =>

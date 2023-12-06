@@ -10,6 +10,7 @@ _$NewsImpl _$$NewsImplFromJson(Map<String, dynamic> json) => _$NewsImpl(
       title: json['title'] as String,
       source: json['source'] as String,
       date: DateTime.parse(json['date'] as String),
+      url: json['url'] as String,
     );
 
 Map<String, dynamic> _$$NewsImplToJson(_$NewsImpl instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$$NewsImplToJson(_$NewsImpl instance) =>
       'title': instance.title,
       'source': instance.source,
       'date': instance.date.toIso8601String(),
+      'url': instance.url,
     };
