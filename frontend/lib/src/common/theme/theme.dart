@@ -13,6 +13,20 @@ class AppTheme {
         bodyMedium: AppTypography.regularBlack,
       ),
       extensions: [_defaultColors],
+      navigationDrawerTheme: NavigationDrawerThemeData(
+        shadowColor: Colors.white,
+        labelTextStyle: MaterialStateProperty.resolveWith(
+          (states) {
+            if (states.contains(MaterialState.selected)) {
+              return AppTypography.selectedTile;
+            }
+            return AppTypography.unselectedTile;
+          },
+        ),
+        tileHeight: 40,
+        backgroundColor: AppPalette.mainBlue,
+        indicatorColor: Colors.transparent,
+      ),
     );
   }();
 

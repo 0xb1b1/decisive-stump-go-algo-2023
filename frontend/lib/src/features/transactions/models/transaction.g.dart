@@ -6,8 +6,8 @@ part of 'transaction.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Transaction _$$_TransactionFromJson(Map<String, dynamic> json) =>
-    _$_Transaction(
+_$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
+    _$TransactionImpl(
       portfolio: json['portfolio'] as String,
       type: $enumDecode(_$TransactionTypeEnumMap, json['type']),
       date: DateTime.parse(json['date'] as String),
@@ -16,7 +16,7 @@ _$_Transaction _$$_TransactionFromJson(Map<String, dynamic> json) =>
       amount: (json['amount'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$$_TransactionToJson(_$_Transaction instance) =>
+Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) =>
     <String, dynamic>{
       'portfolio': instance.portfolio,
       'type': _$TransactionTypeEnumMap[instance.type]!,

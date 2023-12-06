@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 import 'package:frontend/src/widgets/table/paginated_data_table.dart';
 import 'package:frontend/src/widgets/table/table_source.dart';

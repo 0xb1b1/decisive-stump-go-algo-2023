@@ -1,10 +1,9 @@
 class Strings {
   Strings._();
 
-  static const String example = "Example";
-  static const String totalToday = 'Всего за сегодня';
-  static const String rurSymbol = '₽';
-  static const String transactions = 'Транзакции';
+  static const totalToday = 'Всего за сегодня';
+  static const rurSymbol = '₽';
+  static const transactions = 'Транзакции';
   static const columnLabels = [
     'Портфель',
     'Тип',
@@ -13,5 +12,10 @@ class Strings {
     'Cумма за шт.',
     'Сумма',
   ];
-  static const String bestCase = 'Лучший портфель -';
+  static const bestCase = 'Лучший портфель -';
+  static const stats = 'Статистика';
+  static const cases = 'Портфели';
+  static const singleCase = 'Портфель';
+  static const news = 'Новости';
+  static const allCases = 'Все портфели';
 }
