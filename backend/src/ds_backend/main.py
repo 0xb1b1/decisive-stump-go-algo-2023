@@ -11,7 +11,7 @@ def run() -> None:
     # Set up Loguru
     logger.remove()
     logger.add(sys.stderr, level=config.LOGGING_LEVEL)
-    logger.info(f"Logging level set to {config.LOGGING_LEVEL}.")
+    logger.critical(f"Logging level set to {config.LOGGING_LEVEL}.")
 
     from ds_backend.http.routers.user import router as user_router
 
@@ -21,7 +21,11 @@ def run() -> None:
     logger.info(f"Starting FastAPI on port {config.WEBSERVER_PORT}.")
     if config.IS_WEBSERVER_PORT_DEFAULT:
         logger.warning("Running webserver on standard port.")
-    uvicorn.run(app, port=config.WEBSERVER_PORT)
+    uvicorn.run(
+        app,
+        host=config.WEBSERVER_HOST,
+        port=config.WEBSERVER_PORT
+    )
 
 
 if __name__ == "__main__":
