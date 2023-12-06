@@ -1,0 +1,63 @@
+---
+version: '3'
+
+volumes:
+  mongo:
+    driver: local
+
+services:
+  mongo:
+    image: 'mongo:latest'
+    restart: always
+    volumes:
+      - "mongo:/data/db"
+    ports:
+      - "27017:27017"
+
+  mongo-express:
+    image: 'mongo-express:latest'
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+    ports:
+      - "9112:8081"
+    depends_on:
+      - mongo
+
+  ##########
+  backend:
+    image: 0xb1b1/ds-backend-algo-hack-2023:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 2280:8080
+    environment:
+      DS_BACKEND_LOGGING_LEVEL: "DEBUG"
+      DS_BACKEND_WEBSERVER_HOST: "0.0.0.0"
+      DS_BACKEND_WEBSERVER_PORT: 8080
+      DS_BACKEND_MONGO_URL: "mongodb://mongo:27017/"
+      DS_BACKEND_MONGO_BACKEND_DB: "ds_backend"
+      DS_BACKEND_MONGO_NEWS_DB: "ds_news_parser"
+    depends_on:
+      - mongo
+
+  news-parser:
+    image: 0xb1b1/ds-news-parser-algo-hack-2023:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 2281:8080
+    environment:
+      DS_NEWS_PARSER_LOGGING_LEVEL: "DEBUG"
+      DS_NEWS_PARSER_WEBSERVER_HOST: "0.0.0.0"
+      DS_NEWS_PARSER_WEBSERVER_PORT: 8080
+      DS_NEWS_PARSER_MONGO_URL: "mongodb://mongo:27017/"
+      DS_NEWS_PARSER_MONGO_DB: "ds_news_parser"
+      DS_NEWS_PARSER_SELENIUM_DOMAIN: "100.64.0.1"
+      DS_NEWS_PARSER_SELENIUM_PORT: 4444
+    depends_on:
+      - mongo
