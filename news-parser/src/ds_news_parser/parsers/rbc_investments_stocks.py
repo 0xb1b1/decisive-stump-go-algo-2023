@@ -1,6 +1,7 @@
 import os
 from time import sleep
 import requests
+from requests.exceptions import ReadTimeout
 from urllib import parse as urlparse
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
@@ -39,10 +40,11 @@ class RBCInvestmentsStocksParser:
         selenff_options = webdriver.FirefoxOptions()
         selenff_options.set_preference("http.response.timeout", 5)
         selenff_options.set_preference("dom.max_script_run_time", 5)
-        # drv = webdriver.Remote(
-        #     f"http://{self.selenium_domain}:{self.selenium_port}/wd/hub",
-        #     options=selenff_options
-        # )
+        drv = webdriver.Remote(
+            f"http://{self.selenium_domain}:{self.selenium_port}/wd/hub",
+            options=selenff_options
+        )
+        drv.set_page_load_timeout(7)
         # print(drv)
 
         # # Load the webpage
@@ -68,14 +70,67 @@ class RBCInvestmentsStocksParser:
                     description_text = description.text.strip()
                 else:
                     description_text = None
-                logger.info(description_text)
+                logger.info(f"Description text (before Tinkoff Stocks): {description_text}")
+
+                # Tinkoff Stocks Description & Sector
+
+                sector_text: str | None = None
+
+                tinkoff_response = None
+                tinkoff_url = f"https://www.tinkoff.ru/invest/stocks/{stock.symbol}"
+                logger.error(f"Requesting {tinkoff_url}")
+
+                try:
+                    drv.get(tinkoff_url)
+                except WebDriverException:
+                    raise TimeoutError("Parser timed out")
+                else:  # Nothing went wrong
+
+                    # Check if we arrived on page 404
+                    # h1 ErrorPageDesktop-module__title_x1q0O
+                    # TODO: Check if this h1 sappears elsewhere
+
+                    soup = bs(drv.page_source, features="html.parser")
+                    is_404 = soup.find(
+                        "h1",
+                        {"class": "ErrorPageDesktop-module__title_x1q0O"}
+                    ) is not None
+                    if is_404:
+                        logger.warning(f"Tinkoff 404'd for stock {stock.symbol}")
+                    else:
+                        if description_text is None:
+                            logger.info(f"Getting stock info for {stock.symbol} on Tinkoff")
+                            description = soup.find(
+                                "div",
+                                {"class": "TruncateHTML__lineClamp_dx9Qy"}
+                            )
+
+                            if description is not None:
+                                description_text = description.text.strip()
+                                logger.warning(f"Description for {stock.symbol} on Tinkoff: {description_text}")
+                            else:
+                                logger.warning(f"Not found description for {stock.symbol} on Tinkoff")
+
+                        sector = soup.find(
+                            "div",
+                            {"class": "SecurityHeader__panel_itBzT SecurityHeader__desktop_dL7RD"}
+                        )
+                        if sector is not None:
+                            sector = sector.find(
+                                "div",
+                                {"class": "SecurityHeader__panelText_KDJdO"}
+                            )
+                            sector_text = sector.text.strip()
+
                 try:
                     self.repo.save(StockInfo(
                         symbol=stock.symbol,
-                        description=description_text
+                        description=description_text,
+                        sector=sector_text,
                     ))
                 except DuplicateKeyError:
                     logger.info(f"Description for {stock.symbol} is already saved.")
+
 
         logger.info("Stocks parsing completed successfully.")
 

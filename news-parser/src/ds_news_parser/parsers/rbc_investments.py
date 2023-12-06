@@ -54,7 +54,7 @@ class RBCInvestmentsParser:
             f"http://{self.selenium_domain}:{self.selenium_port}/wd/hub",
             options=selenff_options
         )
-        print(drv)
+        # print(drv)
 
         # Load the webpage
         try:

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from fastapi import APIRouter
-from ds_backend.http.models.user import User
+from ds_backend.models.user import User
 
 # See https://fastapi.tiangolo.com/tutorial/bigger-applications/
 

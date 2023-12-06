@@ -7,3 +7,4 @@ class StockInfo(BaseModel):
     id: ObjectIdField = None
     symbol: str
     description: str | None
+    sector: str | None
