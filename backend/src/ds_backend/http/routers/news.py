@@ -66,9 +66,6 @@ def get_articles(
         },
         limit=article_limit,
     ):
-        logger.debug(
-            f"Processing article {article.title}"
-        )
         article_schema = ArticleSchema(
             title=article.title,
             tldr=article.tldr,
