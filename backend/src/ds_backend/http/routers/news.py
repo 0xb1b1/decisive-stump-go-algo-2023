@@ -64,6 +64,9 @@ def get_articles(
             }
         }
     ):
+        logger.debug(
+            f"Processing article {article.title}"
+        )
         article_schema = ArticleSchema(
             title=article.title,
             tldr=article.tldr,
