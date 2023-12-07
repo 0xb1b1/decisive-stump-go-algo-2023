@@ -49,6 +49,26 @@ steps:
         # yamllint disable-line rule:anchors
         - "frontend-master"
 
+  - name: build-news-parser
+    image: plugins/docker
+    settings:
+      dockerfile: news-parser/Dockerfile
+      context: news-parser
+      repo: 0xb1b1/ds-news-parser-algo-hack-2023
+      tags: latest
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+    when:
+      status: [success, changed]
+      event:
+        - push
+      branch:
+        - main
+        # yamllint disable-line rule:anchors
+        - "news-parser-master"
+
   - name: build_notification
     image: appleboy/drone-discord
     settings:
