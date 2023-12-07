@@ -40,6 +40,7 @@ services:
       DS_BACKEND_MONGO_URL: "mongodb://mongo:27017/"
       DS_BACKEND_MONGO_BACKEND_DB: "ds_backend"
       DS_BACKEND_MONGO_NEWS_DB: "ds_news_parser"
+      DS_BACKEND_JWT_ACCESS_EXPIRATION_MINUTES: 300
     env_file:
       - secrets.env
     depends_on:
