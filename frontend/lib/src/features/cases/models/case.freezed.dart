@@ -22,6 +22,9 @@ Case _$CaseFromJson(Map<String, dynamic> json) {
 mixin _$Case {
   String get title => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
+  double get weeklyProfitability => throw _privateConstructorUsedError;
+  double get account => throw _privateConstructorUsedError;
+  String get sector => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +36,12 @@ abstract class $CaseCopyWith<$Res> {
   factory $CaseCopyWith(Case value, $Res Function(Case) then) =
       _$CaseCopyWithImpl<$Res, Case>;
   @useResult
-  $Res call({String title, double amount});
+  $Res call(
+      {String title,
+      double amount,
+      double weeklyProfitability,
+      double account,
+      String sector});
 }
 
 /// @nodoc
@@ -51,6 +59,9 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
   $Res call({
     Object? title = null,
     Object? amount = null,
+    Object? weeklyProfitability = null,
+    Object? account = null,
+    Object? sector = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -61,6 +72,18 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
+      weeklyProfitability: null == weeklyProfitability
+          ? _value.weeklyProfitability
+          : weeklyProfitability // ignore: cast_nullable_to_non_nullable
+              as double,
+      account: null == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as double,
+      sector: null == sector
+          ? _value.sector
+          : sector // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -72,7 +95,12 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
       __$$CaseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, double amount});
+  $Res call(
+      {String title,
+      double amount,
+      double weeklyProfitability,
+      double account,
+      String sector});
 }
 
 /// @nodoc
@@ -87,6 +115,9 @@ class __$$CaseImplCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? amount = null,
+    Object? weeklyProfitability = null,
+    Object? account = null,
+    Object? sector = null,
   }) {
     return _then(_$CaseImpl(
       title: null == title
@@ -97,6 +128,18 @@ class __$$CaseImplCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
+      weeklyProfitability: null == weeklyProfitability
+          ? _value.weeklyProfitability
+          : weeklyProfitability // ignore: cast_nullable_to_non_nullable
+              as double,
+      account: null == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as double,
+      sector: null == sector
+          ? _value.sector
+          : sector // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -104,7 +147,12 @@ class __$$CaseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CaseImpl implements _Case {
-  const _$CaseImpl({required this.title, required this.amount});
+  const _$CaseImpl(
+      {required this.title,
+      required this.amount,
+      required this.weeklyProfitability,
+      required this.account,
+      required this.sector});
 
   factory _$CaseImpl.fromJson(Map<String, dynamic> json) =>
       _$$CaseImplFromJson(json);
@@ -113,10 +161,16 @@ class _$CaseImpl implements _Case {
   final String title;
   @override
   final double amount;
+  @override
+  final double weeklyProfitability;
+  @override
+  final double account;
+  @override
+  final String sector;
 
   @override
   String toString() {
-    return 'Case(title: $title, amount: $amount)';
+    return 'Case(title: $title, amount: $amount, weeklyProfitability: $weeklyProfitability, account: $account, sector: $sector)';
   }
 
   @override
@@ -125,12 +179,17 @@ class _$CaseImpl implements _Case {
         (other.runtimeType == runtimeType &&
             other is _$CaseImpl &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.amount, amount) || other.amount == amount));
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.weeklyProfitability, weeklyProfitability) ||
+                other.weeklyProfitability == weeklyProfitability) &&
+            (identical(other.account, account) || other.account == account) &&
+            (identical(other.sector, sector) || other.sector == sector));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, amount);
+  int get hashCode => Object.hash(
+      runtimeType, title, amount, weeklyProfitability, account, sector);
 
   @JsonKey(ignore: true)
   @override
@@ -148,7 +207,11 @@ class _$CaseImpl implements _Case {
 
 abstract class _Case implements Case {
   const factory _Case(
-      {required final String title, required final double amount}) = _$CaseImpl;
+      {required final String title,
+      required final double amount,
+      required final double weeklyProfitability,
+      required final double account,
+      required final String sector}) = _$CaseImpl;
 
   factory _Case.fromJson(Map<String, dynamic> json) = _$CaseImpl.fromJson;
 
@@ -156,6 +219,12 @@ abstract class _Case implements Case {
   String get title;
   @override
   double get amount;
+  @override
+  double get weeklyProfitability;
+  @override
+  double get account;
+  @override
+  String get sector;
   @override
   @JsonKey(ignore: true)
   _$$CaseImplCopyWith<_$CaseImpl> get copyWith =>

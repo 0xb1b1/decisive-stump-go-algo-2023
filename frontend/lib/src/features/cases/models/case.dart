@@ -9,9 +9,18 @@ class Case with _$Case {
   const factory Case({
     required String title,
     required double amount,
+    required double weeklyProfitability,
+    required double account,
+    required String sector,
   }) = _Case;
 
-  factory Case.mock() => const Case(title: 'Недвижимость', amount: 500.43);
+  factory Case.mock() => const Case(
+        title: 'Недвижимость',
+        amount: 500.43,
+        weeklyProfitability: 285.44,
+        account: 12000,
+        sector: 'Говна кусок',
+      );
 
   factory Case.fromJson(Map<String, Object?> json) => _$CaseFromJson(json);
 }
