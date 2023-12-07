@@ -20,3 +20,8 @@ class UserResponseSchema(UserBaseSchema):
 class UserLoginSchema(BaseModel):
     email: EmailStr
     password_hash: str
+
+
+class UserInfoSchema(BaseModel):
+    email: EmailStr
+    role: str
