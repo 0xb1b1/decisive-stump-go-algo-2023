@@ -41,6 +41,7 @@ stock_info_repo = StockInfoRepository(database=news_db)
 def get_articles(
     from_timestamp: datetime | None = None,
     to_timestamp: datetime | None = None,
+    article_limit: int | None = None,
 ):
     curr_year = datetime.now().year
     is_from_timestamp = True
@@ -62,7 +63,8 @@ def get_articles(
                 "$gte": from_timestamp,
                 "$lt": to_timestamp,
             }
-        }
+        },
+        limit=article_limit,
     ):
         logger.debug(
             f"Processing article {article.title}"
