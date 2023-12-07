@@ -8,6 +8,7 @@ from ds_backend.models.article import \
 
 class ArticleSchema(BaseModel):
     title: str
+    source: str
     tldr: str
     link: str
     timestamp: datetime | None

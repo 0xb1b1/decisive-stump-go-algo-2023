@@ -17,6 +17,7 @@ class Tag(BaseModel):
 class Article(BaseModel):
     id: ObjectIdField = None
     title: str
+    source: str
     tldr: str
     link: str
     timestamp: datetime | None

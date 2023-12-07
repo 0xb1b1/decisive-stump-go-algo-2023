@@ -68,6 +68,7 @@ def get_articles(
     ):
         article_schema = ArticleSchema(
             title=article.title,
+            source=article.source,
             tldr=article.tldr,
             link=article.link,
             timestamp=article.timestamp,
