@@ -41,13 +41,14 @@ def get_articles(
     from_timestamp: datetime | None = None,
     to_timestamp: datetime | None = None,
 ):
+    curr_year = datetime.now().year
     is_from_timestamp = True
     is_to_timestamp = True
     if from_timestamp is None:
         from_timestamp = datetime(1970, 1, 1, 0, 0, 0)
         is_from_timestamp = False
     if to_timestamp is None:
-        to_timestamp = datetime(1970, 1, 1, 0, 0, 0)
+        to_timestamp = datetime(curr_year + 1, 1, 1, 0, 0, 0)
         is_to_timestamp = False
     logger.debug(
         f"Getting articles from DB; from: {from_timestamp}, to: {to_timestamp}"
