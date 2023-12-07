@@ -1,16 +1,22 @@
-// import 'package:freezed_annotation/freezed_annotation.dart';
-// part 'case_state.freezed.dart';
-//
-// @freezed
-// class CaseState with _$CaseState {
-//   const factory CaseState.loading() = _Loading;
-//
-//   const factore CaseState.stats() =
-//
-//   const factory CaseState.success({
-//     required List<News> news,
-//     required List<Transaction> transactions,
-//     required List<Case> cases,
-//   }) = _Success;
-// }
-//
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend/src/features/cases/models/case.dart';
+
+import '../models/company.dart';
+
+part 'case_state.freezed.dart';
+
+@freezed
+class CaseState with _$CaseState {
+  const factory CaseState.loading() = _Loading;
+
+  const factory CaseState.stats({
+    required Case portfolio,
+    required List<Company> companies,
+  }) = _Stats;
+
+  const factory CaseState.editing({
+    required List<Company> inCase,
+    required List<Company> stopped,
+    required List<Company> inActive,
+  }) = _Editing;
+}

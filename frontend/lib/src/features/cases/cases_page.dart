@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
-import 'package:frontend/src/features/cases/single_case_page.dart';
+import 'package:frontend/src/features/cases/case_details.dart';
 import 'package:frontend/src/widgets/info_card.dart';
 
 import '../../common/strings.dart';
@@ -77,7 +77,9 @@ class AllCasesBlock extends StatelessWidget {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SingleCasePage(),
+                        builder: (context) => CaseDetails(
+                          portfolio: e,
+                        ),
                       ),
                     ),
                     child: InfoCard(

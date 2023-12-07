@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:frontend/src/features/cases/single_case_page.dart';
-
+import 'package:frontend/src/features/account/account_page.dart';
+import 'package:frontend/src/features/cases/case_details.dart';
+import 'package:frontend/src/features/new_case/new_case_page.dart';
 import '../../common/strings.dart';
 import '../../common/theme/colors/app_palette.dart';
-import '../cases/case_page.dart';
+import '../cases/cases_page.dart';
 import '../cases/models/case.dart';
 import '../stats/stat_page.dart';
 
@@ -23,7 +24,10 @@ class _CurrentPageState extends State<CurrentPage> {
     CasesPage(
       cases: List.generate(8, (index) => Case.mock()),
       onCaseTap: () {},
-    )
+    ),
+    NewCasePage(),
+    AccountPage(),
+
   ];
 
   @override

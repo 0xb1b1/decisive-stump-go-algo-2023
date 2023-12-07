@@ -6,28 +6,31 @@ import 'colors/app_colors_extension.dart';
 
 class AppTheme {
   static final defaultTheme = () {
-    final sourceTheme = ThemeData.light();
+    final sourceTheme = ThemeData.light().copyWith(
+      colorScheme: ColorScheme.fromSeed(seedColor: AppPalette.mainBlue),
+    );
 
     return sourceTheme.copyWith(
-      textTheme: sourceTheme.textTheme.copyWith(
-        bodyMedium: AppTypography.regularBlack,
-      ),
-      extensions: [_defaultColors],
-      navigationDrawerTheme: NavigationDrawerThemeData(
-        shadowColor: Colors.white,
-        labelTextStyle: MaterialStateProperty.resolveWith(
-          (states) {
-            if (states.contains(MaterialState.selected)) {
-              return AppTypography.selectedTile;
-            }
-            return AppTypography.unselectedTile;
-          },
+        cardTheme: const CardTheme(color: AppPalette.white),
+        textTheme: sourceTheme.textTheme.copyWith(
+          bodyMedium: AppTypography.regularBlack,
         ),
-        tileHeight: 40,
-        backgroundColor: AppPalette.mainBlue,
-        indicatorColor: Colors.transparent,
-      ),
-    );
+        extensions: [_defaultColors],
+        navigationDrawerTheme: NavigationDrawerThemeData(
+          shadowColor: Colors.white,
+          labelTextStyle: MaterialStateProperty.resolveWith(
+            (states) {
+              if (states.contains(MaterialState.selected)) {
+                return AppTypography.selectedTile;
+              }
+              return AppTypography.unselectedTile;
+            },
+          ),
+          tileHeight: 40,
+          backgroundColor: AppPalette.mainBlue,
+          indicatorColor: Colors.transparent,
+        ),
+        scaffoldBackgroundColor: AppPalette.greyBg);
   }();
 
   static final _defaultColors = AppColorsExtension(

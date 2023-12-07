@@ -21,4 +21,34 @@ class Strings {
   static const cases = 'Портфели';
   static const newCase = 'Новый портфель';
   static const myAccount = 'Мой счет';
+
+// страница авторизации
+  static const authTitle =
+      'Начните свой путь\n в инвестициях \nвместе с MOEX Trading';
+  static const authSubtitle =
+      'Подберите портфель, который идеально вам подойдет, отслеживайте последние новости и прогнозы компаний ';
+  static const enterEmail = 'Введите почту';
+  static const enterPassword = 'Введите пароль';
+  static const signUp = 'Войти';
+
+  //таблица компании
+  static const companyColumnLabels = [
+    'Компания',
+    'Тикер',
+    'Количество',
+    'Cумма за шт.',
+    'Сумма',
+  ];
+
+  //заголовки таблиц компаний
+  static const companiesInCase = 'Компании в портфеле';
+  static const stoppedCompanies = 'Приостановленные торги';
+  static const inactiveCompanies = 'Неактивны';
+
+  static const caseStats = 'Cтатистика портфеля';
+
+  //для кнопок в портфелях
+  static const stopStocks = 'Приостановить торги';
+  static const makeInactiveStocks = 'Прекратить торги';
+  static const resumeStocks = 'Возобновить торги';
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
-import 'package:frontend/src/features/cases/case_page.dart';
 import 'package:frontend/src/features/stats/cubit/stats_cubit.dart';
 import 'package:frontend/src/features/stats/widgets/graph_stats.dart';
 import 'package:frontend/src/features/stats/widgets/news_block.dart';
@@ -9,6 +8,7 @@ import 'package:frontend/src/widgets/info_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../common/strings.dart';
 import '../../widgets/table/table.dart';
+import '../cases/cases_page.dart';
 import 'cubit/stats_cubit_state.dart';
 
 class StatsPage extends StatelessWidget {
@@ -19,7 +19,6 @@ class StatsPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => StatsCubit()..initialFetch(),
       child: Scaffold(
-        backgroundColor: AppPalette.greyBg,
         body: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 48,

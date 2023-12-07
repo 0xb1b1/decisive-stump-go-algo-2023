@@ -21,6 +21,7 @@ Case _$CaseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Case {
   String get title => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   double get weeklyProfitability => throw _privateConstructorUsedError;
   double get account => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $CaseCopyWith<$Res> {
   @useResult
   $Res call(
       {String title,
+      String id,
       double amount,
       double weeklyProfitability,
       double account,
@@ -58,6 +60,7 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
   @override
   $Res call({
     Object? title = null,
+    Object? id = null,
     Object? amount = null,
     Object? weeklyProfitability = null,
     Object? account = null,
@@ -67,6 +70,10 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       amount: null == amount
           ? _value.amount
@@ -97,6 +104,7 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
   @useResult
   $Res call(
       {String title,
+      String id,
       double amount,
       double weeklyProfitability,
       double account,
@@ -114,6 +122,7 @@ class __$$CaseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? title = null,
+    Object? id = null,
     Object? amount = null,
     Object? weeklyProfitability = null,
     Object? account = null,
@@ -123,6 +132,10 @@ class __$$CaseImplCopyWithImpl<$Res>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       amount: null == amount
           ? _value.amount
@@ -149,6 +162,7 @@ class __$$CaseImplCopyWithImpl<$Res>
 class _$CaseImpl implements _Case {
   const _$CaseImpl(
       {required this.title,
+      required this.id,
       required this.amount,
       required this.weeklyProfitability,
       required this.account,
@@ -160,6 +174,8 @@ class _$CaseImpl implements _Case {
   @override
   final String title;
   @override
+  final String id;
+  @override
   final double amount;
   @override
   final double weeklyProfitability;
@@ -170,7 +186,7 @@ class _$CaseImpl implements _Case {
 
   @override
   String toString() {
-    return 'Case(title: $title, amount: $amount, weeklyProfitability: $weeklyProfitability, account: $account, sector: $sector)';
+    return 'Case(title: $title, id: $id, amount: $amount, weeklyProfitability: $weeklyProfitability, account: $account, sector: $sector)';
   }
 
   @override
@@ -179,6 +195,7 @@ class _$CaseImpl implements _Case {
         (other.runtimeType == runtimeType &&
             other is _$CaseImpl &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.weeklyProfitability, weeklyProfitability) ||
                 other.weeklyProfitability == weeklyProfitability) &&
@@ -189,7 +206,7 @@ class _$CaseImpl implements _Case {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, title, amount, weeklyProfitability, account, sector);
+      runtimeType, title, id, amount, weeklyProfitability, account, sector);
 
   @JsonKey(ignore: true)
   @override
@@ -208,6 +225,7 @@ class _$CaseImpl implements _Case {
 abstract class _Case implements Case {
   const factory _Case(
       {required final String title,
+      required final String id,
       required final double amount,
       required final double weeklyProfitability,
       required final double account,
@@ -217,6 +235,8 @@ abstract class _Case implements Case {
 
   @override
   String get title;
+  @override
+  String get id;
   @override
   double get amount;
   @override

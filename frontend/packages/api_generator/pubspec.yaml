@@ -15,3 +15,4 @@ dev_dependencies:
   openapi_generator: ^4.13.1
   lints: ^2.1.0
   test: ^1.24.0
+  build_runner: ^2.4.7

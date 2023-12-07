@@ -8,6 +8,7 @@ part 'case.g.dart';
 class Case with _$Case {
   const factory Case({
     required String title,
+    required String id,
     required double amount,
     required double weeklyProfitability,
     required double account,
@@ -15,6 +16,7 @@ class Case with _$Case {
   }) = _Case;
 
   factory Case.mock() => const Case(
+        id: 'eweKKKd2',
         title: 'Недвижимость',
         amount: 500.43,
         weeklyProfitability: 285.44,
