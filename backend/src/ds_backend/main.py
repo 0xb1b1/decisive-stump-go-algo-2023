@@ -13,10 +13,10 @@ def run() -> None:
     logger.add(sys.stderr, level=config.LOGGING_LEVEL)
     logger.critical(f"Logging level set to {config.LOGGING_LEVEL}.")
 
-    from ds_backend.http.routers.user import router as user_router
+    from ds_backend.http.routers.auth import router as auth_router
 
     app = FastAPI()
-    app.include_router(user_router)
+    app.include_router(auth_router)
 
     logger.info(f"Starting FastAPI on port {config.WEBSERVER_PORT}.")
     if config.IS_WEBSERVER_PORT_DEFAULT:

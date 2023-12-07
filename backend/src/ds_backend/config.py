@@ -3,6 +3,8 @@
 import os
 import sys
 from loguru import logger
+from fastapi_jwt import JwtAccessBearer
+from datetime import timedelta
 
 from ds_backend.setup import logging, webserver_port
 
@@ -35,6 +37,25 @@ MONGO_BACKEND_DB: str = os.getenv("DS_BACKEND_MONGO_BACKEND_DB", "")
 if MONGO_NEWS_DB == "":
     logger.critical("MongoDB Backend Database is not specified.")
     is_run_fatal = True
+
+# Authentication (oauth2//jwt)
+JWT_SECRET_KEY = os.getenv("DS_BACKEND_JWT_SECRET_KEY", "")
+JWT_ACCESS_EXPIRATION_MINUTES = int(
+    os.getenv(
+        "DS_BACKEND_JWT_ACCESS_EXPIRATION_MINUTES",
+        "30",
+    )
+)
+
+if JWT_SECRET_KEY == "":
+    logger.critical("JWT Secret key is not specified.")
+    is_run_fatal = True
+
+jwt_ac = JwtAccessBearer(
+    secret_key=JWT_SECRET_KEY,
+    auto_error=True,
+    access_expires_delta=timedelta(JWT_ACCESS_EXPIRATION_MINUTES),
+)
 
 
 ########
