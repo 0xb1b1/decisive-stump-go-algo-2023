@@ -4,10 +4,8 @@ from fastapi_jwt import JwtAuthorizationCredentials
 from loguru import logger
 from pymongo.errors import DuplicateKeyError
 
-from ds_backend.http.schemas.user import UserBaseSchema, \
-    UserResponseSchema, \
-    UserSignupSchema, \
-    UserLoginSchema
+from ds_backend.http.schemas.user import UserSignupSchema, \
+    UserLoginSchema, UserInfoSchema
 from ds_backend.http.schemas.token import TokenSchema
 from ds_backend import config
 
@@ -91,14 +89,15 @@ async def login(credentials: UserLoginSchema):
 
 
 @router.get(
-    "/me"
+    "/me",
+    response_model=UserInfoSchema,
 )
 def user(
     credentials: JwtAuthorizationCredentials = Security(
         config.jwt_ac,
     ),
 ):
-    return {
-        "email": credentials["email"],
-        "role": credentials["role"]
-    }
+    return UserInfoSchema(
+        email=credentials["email"],
+        role=credentials["role"],
+    )

@@ -1,21 +1,12 @@
 #!/usr/bin/env python3
 from pydantic import BaseModel
-from pydantic_mongo import ObjectIdField
 from datetime import datetime
 
-
-class Stock(BaseModel):
-    symbol: str
-    link: str
+from ds_backend.models.article import \
+    Tag, Stock
 
 
-class Tag(BaseModel):
-    name: str
-    link: str
-
-
-class Article(BaseModel):
-    id: ObjectIdField = None
+class ArticleSchema(BaseModel):
     title: str
     source: str
     tldr: str
@@ -23,3 +14,9 @@ class Article(BaseModel):
     timestamp: datetime | None
     stocks: list[Stock] = []
     tags: list[Tag] = []
+
+
+class ArticlesSchema(BaseModel):
+    articles: list[ArticleSchema]
+    from_timestamp: datetime | None
+    to_timestamp: datetime | None

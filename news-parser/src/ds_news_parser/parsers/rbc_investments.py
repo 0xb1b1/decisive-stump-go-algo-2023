@@ -168,6 +168,7 @@ class RBCInvestmentsParser:
                 )
             article = Article(
                 title=title,
+                source="РБК Инвестиции",
                 tldr=tldr,
                 link=link,
                 timestamp=timestamp,
