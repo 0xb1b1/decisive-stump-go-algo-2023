@@ -9,41 +9,6 @@ steps:
     image: osshelp/drone-linter
     failure: ignore
 
-  - name: build_notification
-    image: appleboy/drone-discord
-    settings:
-      webhook_id:
-        from_secret: build_notif_discord_id
-      webhook_token:
-        from_secret: build_notif_discord_token
-      message: >
-        {{#success build.status}}
-          # 🦄 Build successful
-        {{else}}
-          # 💩 Build failed
-        {{/success}}
-        Repository `[{{repo.name}}/{{commit.branch}}]`
-        triggered by event `[{{uppercase build.event}}]` for build.
-
-        ## Git
-
-          - Commit [[{{commit.sha}}]({{commit.link}})]
-          - Author `[{{commit.author}} / {{commit.email}}]`
-          - Message: {{commit.message}}
-
-        ## Drone CI
-
-          - Build [[#{{build.number}}]({{build.link}})]
-          - Reported `[{{uppercase build.status}}]` at `[{{datetime build.finished "2006.01.02 15:04" ""}}]`
-    when:
-      status: [success, failure, changed]
-      event:
-        - push
-      branch:
-        - main
-        # yamllint disable-line rule:anchors
-        - "*-master"
-
   - name: build-backend
     image: plugins/docker
     settings:
@@ -83,3 +48,38 @@ steps:
         - main
         # yamllint disable-line rule:anchors
         - "frontend-master"
+
+  - name: build_notification
+    image: appleboy/drone-discord
+    settings:
+      webhook_id:
+        from_secret: build_notif_discord_id
+      webhook_token:
+        from_secret: build_notif_discord_token
+      message: >
+        {{#success build.status}}
+          # 🦄 Build successful
+        {{else}}
+          # 💩 Build failed
+        {{/success}}
+        Repository `[{{repo.name}}/{{commit.branch}}]`
+        triggered by event `[{{uppercase build.event}}]` for build.
+
+        ## Git
+
+          - Commit [[{{commit.sha}}]({{commit.link}})]
+          - Author `[{{commit.author}} / {{commit.email}}]`
+          - Message: {{commit.message}}
+
+        ## Drone CI
+
+          - Build [[#{{build.number}}]({{build.link}})]
+          - Reported `[{{uppercase build.status}}]` at `[{{datetime build.finished "2006.01.02 15:04" ""}}]`
+    when:
+      status: [success, failure, changed]
+      event:
+        - push
+      branch:
+        - main
+        # yamllint disable-line rule:anchors
+        - "*-master"
