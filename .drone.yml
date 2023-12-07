@@ -52,7 +52,7 @@ steps:
   - name: build-news-parser
     image: plugins/docker
     settings:
-      dockerfile: news-parser/Dockerfile
+      dockerfile: news-parser/Dockerfile.no-buildkit
       context: news-parser
       repo: 0xb1b1/ds-news-parser-algo-hack-2023
       tags: latest
