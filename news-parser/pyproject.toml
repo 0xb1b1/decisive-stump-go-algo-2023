@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "decisive-stump-go-algo-2023-backend"
-packages = [{include = "ds_backend", from="src"}]
+name = "decisive-stump-go-algo-2023-news-parser"
+packages = [{include = "ds_news_parser", from="src"}]
 version = "0.0.1"
 description = ""
 authors = ["0xb1b1 <hello@axelreitenbach.online>"]
@@ -13,15 +13,14 @@ fastapi = {extras = ["all"], version = "^0.104.1"}
 pydantic = "^2.5.2"
 uvicorn = "^0.24.0.post1"
 loguru = "^0.7.2"
+selenium = "^4.15.2"
+requests = "^2.31.0"
+beautifulsoup4 = "^4.12.2"
 pyhumps = "^3.8.0"
-fastapi-jwt = "^0.2.0"
 pydantic-mongo = "^2.0.3"
 
 [tool.poetry.scripts]
-start = "ds_backend.main:run"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.3"
+start = "ds_news_parser.main:run"
 
 [build-system]
 requires = ["poetry-core"]

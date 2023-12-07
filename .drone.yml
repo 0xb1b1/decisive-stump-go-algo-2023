@@ -5,23 +5,49 @@ type: docker
 name: default
 
 steps:
-  # - name: lint
-  #   image: 0xb1b1/drone-linter
-  # - name: docker-build
-  #   image: plugins/docker
-  #   pull: never
-  #   settings:
-  #     dockerfile: backend/Dockerfile
-  #     context: src
-  #     repo: 0xb1b1/decisive-stump-backend
-  #     tags: dev
-  #     username:
-  #       from_secret: docker_username
-  #     password:
-  #       from_secret: docker_password
   - name: lint
     image: osshelp/drone-linter
     failure: ignore
+
+  - name: build-backend
+    image: plugins/docker
+    settings:
+      dockerfile: backend/Dockerfile.no-buildkit
+      context: backend
+      repo: 0xb1b1/ds-backend-algo-hack-2023
+      tags: latest
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+    when:
+      status: [success, changed]
+      event:
+        - push
+      branch:
+        - main
+        # yamllint disable-line rule:anchors
+        - "backend-master"
+
+  - name: build-frontend
+    image: plugins/docker
+    settings:
+      dockerfile: frontend/Dockerfile
+      context: frontend
+      repo: 0xb1b1/ds-frontend-algo-hack-2023
+      tags: latest
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+    when:
+      status: [success, changed]
+      event:
+        - push
+      branch:
+        - main
+        # yamllint disable-line rule:anchors
+        - "frontend-master"
 
   - name: build_notification
     image: appleboy/drone-discord
