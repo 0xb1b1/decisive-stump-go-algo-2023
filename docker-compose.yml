@@ -40,13 +40,15 @@ services:
       DS_BACKEND_MONGO_URL: "mongodb://mongo:27017/"
       DS_BACKEND_MONGO_BACKEND_DB: "ds_backend"
       DS_BACKEND_MONGO_NEWS_DB: "ds_news_parser"
+    env_file:
+      - secrets.env
     depends_on:
       - mongo
 
   news-parser:
     image: 0xb1b1/ds-news-parser-algo-hack-2023:latest
     build:
-      context: .
+      context: ./news-parser
       dockerfile: Dockerfile
     restart: always
     ports:
