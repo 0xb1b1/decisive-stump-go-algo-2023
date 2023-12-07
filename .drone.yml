@@ -103,3 +103,7 @@ steps:
         - main
         # yamllint disable-line rule:anchors
         - "*-master"
+    depends_on:
+      - build-backend
+      - build-frontend
+      - build-news-parser
