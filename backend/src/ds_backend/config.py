@@ -57,6 +57,11 @@ jwt_ac = JwtAccessBearer(
     access_expires_delta=timedelta(JWT_ACCESS_EXPIRATION_MINUTES),
 )
 
+# Local services
+NEWS_PARSER_BASE_URL = os.getenv(
+    "DS_BACKEND_NEWS_PARSER_BASE_URL", "news-parser"
+)
+
 
 ########
 if is_run_fatal:
