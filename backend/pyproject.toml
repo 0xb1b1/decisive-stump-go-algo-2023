@@ -17,6 +17,7 @@ pyhumps = "^3.8.0"
 fastapi-jwt = "^0.2.0"
 pydantic-mongo = "^2.0.3"
 sentry-sdk = {extras = ["fastapi", "loguru", "pymongo"], version = "^1.38.0"}
+requests = "^2.31.0"
 
 [tool.poetry.scripts]
 start = "ds_backend.main:run"
