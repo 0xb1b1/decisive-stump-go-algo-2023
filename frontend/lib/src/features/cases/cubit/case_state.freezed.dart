@@ -19,7 +19,7 @@ mixin _$CaseState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Case portfolio, List<Company> companies) stats,
+    required TResult Function(List<Company> companies) stats,
     required TResult Function(
             List<Company> inCase, List<Company> stopped, List<Company> inActive)
         editing,
@@ -28,7 +28,7 @@ mixin _$CaseState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Case portfolio, List<Company> companies)? stats,
+    TResult? Function(List<Company> companies)? stats,
     TResult? Function(List<Company> inCase, List<Company> stopped,
             List<Company> inActive)?
         editing,
@@ -37,7 +37,7 @@ mixin _$CaseState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Case portfolio, List<Company> companies)? stats,
+    TResult Function(List<Company> companies)? stats,
     TResult Function(List<Company> inCase, List<Company> stopped,
             List<Company> inActive)?
         editing,
@@ -124,7 +124,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Case portfolio, List<Company> companies) stats,
+    required TResult Function(List<Company> companies) stats,
     required TResult Function(
             List<Company> inCase, List<Company> stopped, List<Company> inActive)
         editing,
@@ -136,7 +136,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Case portfolio, List<Company> companies)? stats,
+    TResult? Function(List<Company> companies)? stats,
     TResult? Function(List<Company> inCase, List<Company> stopped,
             List<Company> inActive)?
         editing,
@@ -148,7 +148,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Case portfolio, List<Company> companies)? stats,
+    TResult Function(List<Company> companies)? stats,
     TResult Function(List<Company> inCase, List<Company> stopped,
             List<Company> inActive)?
         editing,
@@ -205,9 +205,7 @@ abstract class _$$StatsImplCopyWith<$Res> {
           _$StatsImpl value, $Res Function(_$StatsImpl) then) =
       __$$StatsImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Case portfolio, List<Company> companies});
-
-  $CaseCopyWith<$Res> get portfolio;
+  $Res call({List<Company> companies});
 }
 
 /// @nodoc
@@ -221,39 +219,23 @@ class __$$StatsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? portfolio = null,
     Object? companies = null,
   }) {
     return _then(_$StatsImpl(
-      portfolio: null == portfolio
-          ? _value.portfolio
-          : portfolio // ignore: cast_nullable_to_non_nullable
-              as Case,
       companies: null == companies
           ? _value._companies
           : companies // ignore: cast_nullable_to_non_nullable
               as List<Company>,
     ));
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CaseCopyWith<$Res> get portfolio {
-    return $CaseCopyWith<$Res>(_value.portfolio, (value) {
-      return _then(_value.copyWith(portfolio: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$StatsImpl implements _Stats {
-  const _$StatsImpl(
-      {required this.portfolio, required final List<Company> companies})
+  const _$StatsImpl({required final List<Company> companies})
       : _companies = companies;
 
-  @override
-  final Case portfolio;
   final List<Company> _companies;
   @override
   List<Company> get companies {
@@ -264,7 +246,7 @@ class _$StatsImpl implements _Stats {
 
   @override
   String toString() {
-    return 'CaseState.stats(portfolio: $portfolio, companies: $companies)';
+    return 'CaseState.stats(companies: $companies)';
   }
 
   @override
@@ -272,15 +254,13 @@ class _$StatsImpl implements _Stats {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StatsImpl &&
-            (identical(other.portfolio, portfolio) ||
-                other.portfolio == portfolio) &&
             const DeepCollectionEquality()
                 .equals(other._companies, _companies));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, portfolio, const DeepCollectionEquality().hash(_companies));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_companies));
 
   @JsonKey(ignore: true)
   @override
@@ -292,38 +272,38 @@ class _$StatsImpl implements _Stats {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Case portfolio, List<Company> companies) stats,
+    required TResult Function(List<Company> companies) stats,
     required TResult Function(
             List<Company> inCase, List<Company> stopped, List<Company> inActive)
         editing,
   }) {
-    return stats(portfolio, companies);
+    return stats(companies);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Case portfolio, List<Company> companies)? stats,
+    TResult? Function(List<Company> companies)? stats,
     TResult? Function(List<Company> inCase, List<Company> stopped,
             List<Company> inActive)?
         editing,
   }) {
-    return stats?.call(portfolio, companies);
+    return stats?.call(companies);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Case portfolio, List<Company> companies)? stats,
+    TResult Function(List<Company> companies)? stats,
     TResult Function(List<Company> inCase, List<Company> stopped,
             List<Company> inActive)?
         editing,
     required TResult orElse(),
   }) {
     if (stats != null) {
-      return stats(portfolio, companies);
+      return stats(companies);
     }
     return orElse();
   }
@@ -364,11 +344,8 @@ class _$StatsImpl implements _Stats {
 }
 
 abstract class _Stats implements CaseState {
-  const factory _Stats(
-      {required final Case portfolio,
-      required final List<Company> companies}) = _$StatsImpl;
+  const factory _Stats({required final List<Company> companies}) = _$StatsImpl;
 
-  Case get portfolio;
   List<Company> get companies;
   @JsonKey(ignore: true)
   _$$StatsImplCopyWith<_$StatsImpl> get copyWith =>
@@ -484,7 +461,7 @@ class _$EditingImpl implements _Editing {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Case portfolio, List<Company> companies) stats,
+    required TResult Function(List<Company> companies) stats,
     required TResult Function(
             List<Company> inCase, List<Company> stopped, List<Company> inActive)
         editing,
@@ -496,7 +473,7 @@ class _$EditingImpl implements _Editing {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Case portfolio, List<Company> companies)? stats,
+    TResult? Function(List<Company> companies)? stats,
     TResult? Function(List<Company> inCase, List<Company> stopped,
             List<Company> inActive)?
         editing,
@@ -508,7 +485,7 @@ class _$EditingImpl implements _Editing {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Case portfolio, List<Company> companies)? stats,
+    TResult Function(List<Company> companies)? stats,
     TResult Function(List<Company> inCase, List<Company> stopped,
             List<Company> inActive)?
         editing,

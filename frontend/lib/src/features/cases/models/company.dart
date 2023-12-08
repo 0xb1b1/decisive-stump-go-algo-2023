@@ -8,7 +8,7 @@ part 'company.g.dart';
 class Company with _$Company {
   const factory Company({
     required String title,
-    required String income,
+    required double income,
     required String ticker,
     required int count,
     required double amountSingle,
@@ -17,7 +17,7 @@ class Company with _$Company {
 
   factory Company.mock() => const Company(
         title: "ООО Говно",
-        income: "+285.44%",
+        income: 285.5,
         ticker: "АААА",
         count: 150,
         amountSingle: 2340.34,

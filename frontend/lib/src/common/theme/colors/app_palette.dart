@@ -17,4 +17,5 @@ class AppPalette {
   static const greyText = Color(0xff898A8D);
 
   static const green = Color(0xFF1E833E);
+  static const red = Color(0xFFBE0000);
 }

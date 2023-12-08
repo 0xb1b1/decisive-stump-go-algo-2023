@@ -55,4 +55,6 @@ class Strings {
   //портфель
   static const currentIncome = 'Текущий доход';
   static const withdrawMoney = "Вывести средства";
+  static const upAccount = "Пополнить счёт";
+  static const companies = "Компании";
 }

@@ -9,7 +9,7 @@ part of 'company.dart';
 _$CompanyImpl _$$CompanyImplFromJson(Map<String, dynamic> json) =>
     _$CompanyImpl(
       title: json['title'] as String,
-      income: json['income'] as String,
+      income: (json['income'] as num).toDouble(),
       ticker: json['ticker'] as String,
       count: json['count'] as int,
       amountSingle: (json['amountSingle'] as num).toDouble(),

@@ -22,7 +22,6 @@ Case _$CaseFromJson(Map<String, dynamic> json) {
 mixin _$Case {
   String get title => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
-  double get amount => throw _privateConstructorUsedError;
   double get weeklyProfitability => throw _privateConstructorUsedError;
   double get account => throw _privateConstructorUsedError;
   String get sector => throw _privateConstructorUsedError;
@@ -40,7 +39,6 @@ abstract class $CaseCopyWith<$Res> {
   $Res call(
       {String title,
       String id,
-      double amount,
       double weeklyProfitability,
       double account,
       String sector});
@@ -61,7 +59,6 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
   $Res call({
     Object? title = null,
     Object? id = null,
-    Object? amount = null,
     Object? weeklyProfitability = null,
     Object? account = null,
     Object? sector = null,
@@ -75,10 +72,6 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
       weeklyProfitability: null == weeklyProfitability
           ? _value.weeklyProfitability
           : weeklyProfitability // ignore: cast_nullable_to_non_nullable
@@ -105,7 +98,6 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
   $Res call(
       {String title,
       String id,
-      double amount,
       double weeklyProfitability,
       double account,
       String sector});
@@ -123,7 +115,6 @@ class __$$CaseImplCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? id = null,
-    Object? amount = null,
     Object? weeklyProfitability = null,
     Object? account = null,
     Object? sector = null,
@@ -137,10 +128,6 @@ class __$$CaseImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
       weeklyProfitability: null == weeklyProfitability
           ? _value.weeklyProfitability
           : weeklyProfitability // ignore: cast_nullable_to_non_nullable
@@ -163,7 +150,6 @@ class _$CaseImpl implements _Case {
   const _$CaseImpl(
       {required this.title,
       required this.id,
-      required this.amount,
       required this.weeklyProfitability,
       required this.account,
       required this.sector});
@@ -176,8 +162,6 @@ class _$CaseImpl implements _Case {
   @override
   final String id;
   @override
-  final double amount;
-  @override
   final double weeklyProfitability;
   @override
   final double account;
@@ -186,7 +170,7 @@ class _$CaseImpl implements _Case {
 
   @override
   String toString() {
-    return 'Case(title: $title, id: $id, amount: $amount, weeklyProfitability: $weeklyProfitability, account: $account, sector: $sector)';
+    return 'Case(title: $title, id: $id, weeklyProfitability: $weeklyProfitability, account: $account, sector: $sector)';
   }
 
   @override
@@ -196,7 +180,6 @@ class _$CaseImpl implements _Case {
             other is _$CaseImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.weeklyProfitability, weeklyProfitability) ||
                 other.weeklyProfitability == weeklyProfitability) &&
             (identical(other.account, account) || other.account == account) &&
@@ -205,8 +188,8 @@ class _$CaseImpl implements _Case {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, title, id, amount, weeklyProfitability, account, sector);
+  int get hashCode =>
+      Object.hash(runtimeType, title, id, weeklyProfitability, account, sector);
 
   @JsonKey(ignore: true)
   @override
@@ -226,7 +209,6 @@ abstract class _Case implements Case {
   const factory _Case(
       {required final String title,
       required final String id,
-      required final double amount,
       required final double weeklyProfitability,
       required final double account,
       required final String sector}) = _$CaseImpl;
@@ -237,8 +219,6 @@ abstract class _Case implements Case {
   String get title;
   @override
   String get id;
-  @override
-  double get amount;
   @override
   double get weeklyProfitability;
   @override

@@ -12,7 +12,7 @@ class CaseCubit extends Cubit<CaseState> {
       10,
       (index) => Company(
           title: 'недвиж $index',
-          income: index.toString(),
+          income: 239392.23,
           ticker: 'AAAA $index',
           count: 20 + index,
           amountSingle: 1239.03 + index,
@@ -23,10 +23,8 @@ class CaseCubit extends Cubit<CaseState> {
       () {},
     );
     emit(
-      CaseState.editing(
-        inCase: companies,
-        stopped: [],
-        inActive: [],
+      CaseState.stats(
+        companies: companies,
       ),
     );
   }
@@ -153,5 +151,4 @@ class CaseCubit extends Cubit<CaseState> {
   }
 
   void sendCurrentState() {}
-
 }

@@ -21,7 +21,7 @@ Company _$CompanyFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Company {
   String get title => throw _privateConstructorUsedError;
-  String get income => throw _privateConstructorUsedError;
+  double get income => throw _privateConstructorUsedError;
   String get ticker => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
   double get amountSingle => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $CompanyCopyWith<$Res> {
   @useResult
   $Res call(
       {String title,
-      String income,
+      double income,
       String ticker,
       int count,
       double amountSingle,
@@ -74,7 +74,7 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
       income: null == income
           ? _value.income
           : income // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       ticker: null == ticker
           ? _value.ticker
           : ticker // ignore: cast_nullable_to_non_nullable
@@ -104,7 +104,7 @@ abstract class _$$CompanyImplCopyWith<$Res> implements $CompanyCopyWith<$Res> {
   @useResult
   $Res call(
       {String title,
-      String income,
+      double income,
       String ticker,
       int count,
       double amountSingle,
@@ -137,7 +137,7 @@ class __$$CompanyImplCopyWithImpl<$Res>
       income: null == income
           ? _value.income
           : income // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       ticker: null == ticker
           ? _value.ticker
           : ticker // ignore: cast_nullable_to_non_nullable
@@ -175,7 +175,7 @@ class _$CompanyImpl implements _Company {
   @override
   final String title;
   @override
-  final String income;
+  final double income;
   @override
   final String ticker;
   @override
@@ -226,7 +226,7 @@ class _$CompanyImpl implements _Company {
 abstract class _Company implements Company {
   const factory _Company(
       {required final String title,
-      required final String income,
+      required final double income,
       required final String ticker,
       required final int count,
       required final double amountSingle,
@@ -237,7 +237,7 @@ abstract class _Company implements Company {
   @override
   String get title;
   @override
-  String get income;
+  double get income;
   @override
   String get ticker;
   @override

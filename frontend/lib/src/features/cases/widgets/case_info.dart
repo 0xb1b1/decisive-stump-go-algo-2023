@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
+import 'package:frontend/src/features/account/account_page.dart';
 
+import '../../../common/strings.dart';
 import '../../../common/theme/border_radius/border_radius.dart';
 import '../../../widgets/info_card.dart';
+import '../models/case.dart';
 
 class CaseInfo extends StatelessWidget {
-  final double rewardAmount = 500.34;
+  final Case portfolio;
 
-  const CaseInfo({Key? key}) : super(key: key);
+  const CaseInfo({required this.portfolio, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final parts = rewardAmount.toString().split('.');
+    final parts = portfolio.weeklyProfitability.toString().split('.');
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
@@ -24,15 +27,19 @@ class CaseInfo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const CurrencyBlock(),
               const SizedBox(
                 width: 16,
               ),
-              const Text(
-                'Портфель\n«Недвижимость»',
-                style: AppTypography.caseTitle,
+              Flexible(
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  'Портфель\n"${portfolio.title}"',
+                  style: AppTypography.caseTitle,
+                ),
               ),
               Expanded(
                 child: Container(
@@ -40,7 +47,11 @@ class CaseInfo extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AccountPage(),
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   backgroundColor: AppPalette.greyBg,
@@ -51,9 +62,12 @@ class CaseInfo extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12), // Rounded edgesr
                   ),
                 ),
-                child: const Text(
-                  "Пополнить счет",
-                  style: AppTypography.sectionTitle,
+                child: const Flexible(
+                  child: Text(
+                    overflow: TextOverflow.ellipsis,
+                    Strings.upAccount,
+                    style: AppTypography.sectionTitle,
+                  ),
                 ),
               ),
             ],
@@ -62,13 +76,14 @@ class CaseInfo extends StatelessWidget {
             height: 34,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Parameter(
                 title: "Доходность за неделю",
                 value: RichText(
                   text: TextSpan(
-                    text: '+ ${rewardAmount.truncate()}',
+                    text: '+ ${parts[0]} %',
                     style: AppTypography.sectionTitle,
                     children: parts.length > 1
                         ? [
@@ -82,26 +97,26 @@ class CaseInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 36,
               ),
-              const Parameter(
+              Parameter(
                 title: "Cчёт портфеля",
                 value: Text(
-                  "+ 12000",
+                  "+ ${portfolio.account} ${Strings.rurSymbol}",
                   style: AppTypography.sectionTitle,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 36,
               ),
-              const Parameter(
-                title: "Сектор",
-                value: Text(
-                  "Недвижимость",
-                  style: AppTypography.sectionTitle,
-                ),
-              ),
+              // const Parameter(
+              //   title: "Сектор",
+              //   value: Text(
+              //     "Недвижимость",
+              //     style: AppTypography.sectionTitle,
+              //   ),
+              // ),
             ],
           ),
         ],

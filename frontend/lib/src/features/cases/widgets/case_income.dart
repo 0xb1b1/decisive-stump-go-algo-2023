@@ -3,6 +3,7 @@ import 'package:frontend/src/common/strings.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import '../../../common/theme/border_radius/border_radius.dart';
 import '../../../common/theme/text/app_typography.dart';
+import '../../account/account_page.dart';
 
 class CaseIncome extends StatelessWidget {
   const CaseIncome({super.key});
@@ -28,11 +29,17 @@ class CaseIncome extends StatelessWidget {
                 fontSize: 40,
                 fontWeight: FontWeight.bold),
           ),
-          const SizedBox(
-            height: 11,
+          Expanded(
+            child: Container(
+              width: 20,
+            ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const AccountPage(),
+              ),
+            ),
             style: ElevatedButton.styleFrom(
               elevation: 0,
               backgroundColor: AppPalette.greyBg,

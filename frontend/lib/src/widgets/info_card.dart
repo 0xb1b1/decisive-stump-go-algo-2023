@@ -55,11 +55,13 @@ class InfoCard extends StatelessWidget {
                       width: 10,
                     ),
                   ),
-                  Text(
-                    title,
-                    style: isPrimary
-                        ? AppTypography.regularWhite
-                        : AppTypography.regularBlack,
+                  Flexible(
+                    child: Text(
+                      title,
+                      style: isPrimary
+                          ? AppTypography.regularWhite
+                          : AppTypography.regularBlack,
+                    ),
                   ),
                   const SizedBox(
                     height: smallPadding,
