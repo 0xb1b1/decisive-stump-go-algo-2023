@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 import uvicorn
 import sys
@@ -33,6 +34,19 @@ def run() -> None:
     from ds_backend.http.routers.signals import router as sig_router
 
     app = FastAPI()
+
+    # CORS Policy
+    origins = ["*"]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # Routers
     app.include_router(auth_router)
     app.include_router(news_router)
     app.include_router(sig_router)

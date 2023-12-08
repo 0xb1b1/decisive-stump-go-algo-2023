@@ -36,4 +36,10 @@ stock_info_repo = StockInfoRepository(database=news_db)
     response_model=StocksInfoSchema,
 )
 def parse_stocks(stocks: StockInfoParseRequestSchema):
-    
+    """Gets a list of tickers from user,
+    fetches information on them and saves to DB.
+
+    Args:
+        stocks (StockInfoParseRequestSchema): List of tickers to parse.
+    """
+    pass
