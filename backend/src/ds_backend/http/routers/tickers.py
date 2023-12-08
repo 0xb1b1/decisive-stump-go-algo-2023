@@ -5,10 +5,13 @@ from loguru import logger
 from pymongo.errors import DuplicateKeyError
 from datetime import datetime
 import requests
+from urllib import parse as urlparse
 
 from ds_backend.http.schemas.stock_info import \
     StockInfoParseRequestSchema, \
     StocksInfoSchema
+from ds_backend.http.schemas.company import \
+    CompanyInfo
 from ds_backend.http.schemas.token import TokenSchema
 from ds_backend import config
 
@@ -31,6 +34,25 @@ article_repo = ArticleRepository(database=news_db)
 stock_info_repo = StockInfoRepository(database=news_db)
 
 
+@router.get(
+    "/company",
+    response_model=CompanyInfo,
+)
+def company_info(ticker: str):
+    stock_info = stock_info_repo.find_one_by(
+        {
+            "symbol": ticker,
+        }
+    )
+
+    return CompanyInfo(
+        symbol=stock_info.symbol,
+        name=stock_info.company,
+        description=stock_info.description,
+        sector=stock_info.sector,
+    )
+
+
 @router.post(
     "/parse",
     response_model=StocksInfoSchema,
@@ -43,3 +65,9 @@ def parse_stocks(stocks: StockInfoParseRequestSchema):
         stocks (StockInfoParseRequestSchema): List of tickers to parse.
     """
     pass
+    # requests.post(
+    #     urlparse.urljoin(
+    #         config.NEWS_PARSER_BASE_URL,
+    #         "",
+    #     )
+    # )
