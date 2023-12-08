@@ -34,10 +34,7 @@ repo = UserRepository(database=backend_db)
 )
 async def signup(credentials: UserSignupSchema):
     logger.debug(
-        f"A user tries to sign up (email: {credentials.email}, \
-first_name: {credentials.first_name}), \
-last_name: {credentials.last_name}"
-    )
+        f"A user tries to sign up (email: {credentials.email}")
     user = user_signup_schema_to_user(credentials)
 
     try:
@@ -71,9 +68,7 @@ last_name: {credentials.last_name}"
 )
 async def login(credentials: UserLoginSchema):
     logger.debug(
-        f"A user tries to sign in (email: {credentials.email}, \
-first_name: {credentials.first_name}), \
-last_name: {credentials.last_name}"
+        f"A user tries to sign in (email: {credentials.email})"
     )
     user = repo.find_one_by({"email": credentials.email})
     if user is None:
