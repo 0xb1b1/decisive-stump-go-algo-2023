@@ -33,6 +33,11 @@ repo = UserRepository(database=backend_db)
     response_model=TokenSchema,
 )
 async def signup(credentials: UserSignupSchema):
+    logger.debug(
+        f"A user tries to sign up (email: {credentials.email}, \
+first_name: {credentials.first_name}), \
+last_name: {credentials.last_name}"
+    )
     user = user_signup_schema_to_user(credentials)
 
     try:
@@ -65,6 +70,11 @@ async def signup(credentials: UserSignupSchema):
     response_model=TokenSchema,
 )
 async def login(credentials: UserLoginSchema):
+    logger.debug(
+        f"A user tries to sign in (email: {credentials.email}, \
+first_name: {credentials.first_name}), \
+last_name: {credentials.last_name}"
+    )
     user = repo.find_one_by({"email": credentials.email})
     if user is None:
         raise HTTPException(
