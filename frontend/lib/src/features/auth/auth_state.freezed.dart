@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'stats_cubit_state.dart';
+part of 'auth_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,32 +15,26 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$StatsCubitState {
+mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)
-        success,
+    required TResult Function() success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
-        success,
+    TResult? Function()? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
-        success,
+    TResult Function()? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,16 +63,15 @@ mixin _$StatsCubitState {
 }
 
 /// @nodoc
-abstract class $StatsCubitStateCopyWith<$Res> {
-  factory $StatsCubitStateCopyWith(
-          StatsCubitState value, $Res Function(StatsCubitState) then) =
-      _$StatsCubitStateCopyWithImpl<$Res, StatsCubitState>;
+abstract class $AuthStateCopyWith<$Res> {
+  factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
+      _$AuthStateCopyWithImpl<$Res, AuthState>;
 }
 
 /// @nodoc
-class _$StatsCubitStateCopyWithImpl<$Res, $Val extends StatsCubitState>
-    implements $StatsCubitStateCopyWith<$Res> {
-  _$StatsCubitStateCopyWithImpl(this._value, this._then);
+class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
+    implements $AuthStateCopyWith<$Res> {
+  _$AuthStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -95,7 +88,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$StatsCubitStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$AuthStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -109,7 +102,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'StatsCubitState.loading()';
+    return 'AuthState.loading()';
   }
 
   @override
@@ -126,9 +119,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)
-        success,
+    required TResult Function() success,
   }) {
     return loading();
   }
@@ -138,9 +129,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
-        success,
+    TResult? Function()? success,
   }) {
     return loading?.call();
   }
@@ -150,9 +139,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
-        success,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -196,7 +183,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements StatsCubitState {
+abstract class _Loading implements AuthState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -209,7 +196,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$StatsCubitStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$AuthStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -223,7 +210,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'StatsCubitState.error()';
+    return 'AuthState.error()';
   }
 
   @override
@@ -240,9 +227,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)
-        success,
+    required TResult Function() success,
   }) {
     return error();
   }
@@ -252,9 +237,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
-        success,
+    TResult? Function()? success,
   }) {
     return error?.call();
   }
@@ -264,9 +247,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
-        success,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -310,7 +291,7 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements StatsCubitState {
+abstract class _Error implements AuthState {
   const factory _Error() = _$ErrorImpl;
 }
 
@@ -319,120 +300,44 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {ArticleList news, List<Transaction> transactions, List<Case> cases});
-
-  $ArticleListCopyWith<$Res> get news;
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$StatsCubitStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$AuthStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? news = null,
-    Object? transactions = null,
-    Object? cases = null,
-  }) {
-    return _then(_$SuccessImpl(
-      news: null == news
-          ? _value.news
-          : news // ignore: cast_nullable_to_non_nullable
-              as ArticleList,
-      transactions: null == transactions
-          ? _value._transactions
-          : transactions // ignore: cast_nullable_to_non_nullable
-              as List<Transaction>,
-      cases: null == cases
-          ? _value._cases
-          : cases // ignore: cast_nullable_to_non_nullable
-              as List<Case>,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ArticleListCopyWith<$Res> get news {
-    return $ArticleListCopyWith<$Res>(_value.news, (value) {
-      return _then(_value.copyWith(news: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(
-      {required this.news,
-      required final List<Transaction> transactions,
-      required final List<Case> cases})
-      : _transactions = transactions,
-        _cases = cases;
-
-  @override
-  final ArticleList news;
-  final List<Transaction> _transactions;
-  @override
-  List<Transaction> get transactions {
-    if (_transactions is EqualUnmodifiableListView) return _transactions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_transactions);
-  }
-
-  final List<Case> _cases;
-  @override
-  List<Case> get cases {
-    if (_cases is EqualUnmodifiableListView) return _cases;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cases);
-  }
+  const _$SuccessImpl();
 
   @override
   String toString() {
-    return 'StatsCubitState.success(news: $news, transactions: $transactions, cases: $cases)';
+    return 'AuthState.success()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SuccessImpl &&
-            (identical(other.news, news) || other.news == news) &&
-            const DeepCollectionEquality()
-                .equals(other._transactions, _transactions) &&
-            const DeepCollectionEquality().equals(other._cases, _cases));
+        (other.runtimeType == runtimeType && other is _$SuccessImpl);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      news,
-      const DeepCollectionEquality().hash(_transactions),
-      const DeepCollectionEquality().hash(_cases));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
-      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)
-        success,
+    required TResult Function() success,
   }) {
-    return success(news, transactions, cases);
+    return success();
   }
 
   @override
@@ -440,11 +345,9 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
-        success,
+    TResult? Function()? success,
   }) {
-    return success?.call(news, transactions, cases);
+    return success?.call();
   }
 
   @override
@@ -452,13 +355,11 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
-        success,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(news, transactions, cases);
+      return success();
     }
     return orElse();
   }
@@ -498,16 +399,6 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements StatsCubitState {
-  const factory _Success(
-      {required final ArticleList news,
-      required final List<Transaction> transactions,
-      required final List<Case> cases}) = _$SuccessImpl;
-
-  ArticleList get news;
-  List<Transaction> get transactions;
-  List<Case> get cases;
-  @JsonKey(ignore: true)
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class _Success implements AuthState {
+  const factory _Success() = _$SuccessImpl;
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/api/models/article.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/theme/border_radius/border_radius.dart';
-import '../models/news.dart';
 
 class NewsCard extends StatelessWidget {
-  final News news;
+  final Article news;
 
   const NewsCard({
     required this.news,
@@ -45,7 +45,7 @@ class NewsCard extends StatelessWidget {
             ),
           ),
           Text(
-            DateFormat('dd.MM.yyyy – HH:mm').format(news.date),
+            DateFormat('dd.MM.yyyy – HH:mm').format(news.timestamp),
             style: AppTypography.regularBlack.copyWith(
               color: AppPalette.greyText,
             ),

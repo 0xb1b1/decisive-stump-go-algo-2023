@@ -51,4 +51,8 @@ class Strings {
   static const stopStocks = 'Приостановить торги';
   static const makeInactiveStocks = 'Прекратить торги';
   static const resumeStocks = 'Возобновить торги';
+
+  //портфель
+  static const currentIncome = 'Текущий доход';
+  static const withdrawMoney = "Вывести средства";
 }

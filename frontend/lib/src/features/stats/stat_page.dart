@@ -6,6 +6,7 @@ import 'package:frontend/src/features/stats/widgets/graph_stats.dart';
 import 'package:frontend/src/features/stats/widgets/news_block.dart';
 import 'package:frontend/src/widgets/info_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import '../../common/strings.dart';
 import '../../widgets/table/table.dart';
 import '../cases/cases_page.dart';
@@ -17,7 +18,7 @@ class StatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => StatsCubit()..initialFetch(),
+      create: (context) => GetIt.I.get<StatsCubit>()..initialFetch(),
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(

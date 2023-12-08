@@ -46,7 +46,7 @@ class _CompaniesTableState extends State<CompaniesTable> {
   Widget build(BuildContext context) {
     return CustomPaginatedDataTable(
       horizontalMargin: 20,
-      rowsPerPage: 5,
+      rowsPerPage: getRowsPerPage(),
       header: Row(
         children: [
           Text(
@@ -111,5 +111,14 @@ class _CompaniesTableState extends State<CompaniesTable> {
 
   void updateSelected() {
     selected = List.generate(widget.companies.length, (index) => false);
+  }
+
+  int getRowsPerPage() {
+    if (widget.companies.length > 5) {
+      return 5;
+    } else if (widget.companies.isEmpty) {
+      return 1;
+    }
+    return widget.companies.length;
   }
 }

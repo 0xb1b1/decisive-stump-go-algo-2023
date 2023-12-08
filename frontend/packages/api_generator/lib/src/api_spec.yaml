@@ -105,7 +105,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfoSchema"
+                }
               }
             }
           },
@@ -119,10 +121,195 @@
           }
         ]
       }
+    },
+    "/news/get": {
+      "get": {
+        "tags": [
+          "News"
+        ],
+        "summary": "Get Articles",
+        "operationId": "get_articles_news_get_get",
+        "parameters": [
+          {
+            "name": "from_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "From Timestamp"
+            }
+          },
+          {
+            "name": "to_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "To Timestamp"
+            }
+          },
+          {
+            "name": "article_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Article Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticlesSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "ArticleSchema": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "tldr": {
+            "type": "string",
+            "title": "Tldr"
+          },
+          "link": {
+            "type": "string",
+            "title": "Link"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timestamp"
+          },
+          "stocks": {
+            "items": {
+              "$ref": "#/components/schemas/Stock"
+            },
+            "type": "array",
+            "title": "Stocks",
+            "default": [ ]
+          },
+          "tags": {
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "type": "array",
+            "title": "Tags",
+            "default": [ ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "source",
+          "tldr",
+          "link",
+          "timestamp"
+        ],
+        "title": "ArticleSchema"
+      },
+      "ArticlesSchema": {
+        "properties": {
+          "articles": {
+            "items": {
+              "$ref": "#/components/schemas/ArticleSchema"
+            },
+            "type": "array",
+            "title": "Articles"
+          },
+          "from_timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From Timestamp"
+          },
+          "to_timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "To Timestamp"
+          }
+        },
+        "type": "object",
+        "required": [
+          "articles",
+          "from_timestamp",
+          "to_timestamp"
+        ],
+        "title": "ArticlesSchema"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -136,6 +323,42 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "Stock": {
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "Symbol"
+          },
+          "link": {
+            "type": "string",
+            "title": "Link"
+          }
+        },
+        "type": "object",
+        "required": [
+          "symbol",
+          "link"
+        ],
+        "title": "Stock"
+      },
+      "Tag": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "link": {
+            "type": "string",
+            "title": "Link"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "link"
+        ],
+        "title": "Tag"
+      },
       "TokenSchema": {
         "properties": {
           "access_token": {
@@ -148,6 +371,25 @@
           "access_token"
         ],
         "title": "TokenSchema"
+      },
+      "UserInfoSchema": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "role"
+        ],
+        "title": "UserInfoSchema"
       },
       "UserLoginSchema": {
         "properties": {

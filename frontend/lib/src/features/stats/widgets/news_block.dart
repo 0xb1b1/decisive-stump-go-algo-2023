@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/src/api/models/article_list.dart';
 import 'package:frontend/src/features/stats/widgets/news_card.dart';
 
 import '../../../common/strings.dart';
 import '../../../common/theme/text/app_typography.dart';
-import '../models/news.dart';
 
 class NewsBlock extends StatefulWidget {
-  final List<News> newsList;
+  final ArticleList newsList;
   final Future<void> Function(String) onNewsTap;
 
   const NewsBlock({
@@ -64,15 +64,16 @@ class _NewsBlockState extends State<NewsBlock> {
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             controller: _scrollController,
-            itemCount: widget.newsList.length,
+            itemCount: widget.newsList.articles.length,
             itemBuilder: (context, index) {
               return Row(
                 children: [
                   GestureDetector(
-                    onTap: () => widget.onNewsTap(widget.newsList[index].url),
-                    child: NewsCard(news: widget.newsList[index]),
+                    onTap: () =>
+                        widget.onNewsTap(widget.newsList.articles[index].link),
+                    child: NewsCard(news: widget.newsList.articles[index]),
                   ),
-                  if (index != widget.newsList.length - 1)
+                  if (index != widget.newsList.articles.length - 1)
                     const SizedBox(
                       width: 24,
                     ),

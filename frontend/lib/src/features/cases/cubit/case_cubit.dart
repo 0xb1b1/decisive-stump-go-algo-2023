@@ -151,4 +151,7 @@ class CaseCubit extends Cubit<CaseState> {
       );
     }
   }
+
+  void sendCurrentState() {}
+
 }

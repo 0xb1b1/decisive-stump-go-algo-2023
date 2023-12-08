@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/src/features/cases/cubit/case_cubit.dart';
 import 'package:frontend/src/features/cases/models/button_parameters.dart';
 import 'package:frontend/src/features/cases/models/case.dart';
+import 'package:frontend/src/features/cases/widgets/case_income.dart';
 import 'package:frontend/src/features/cases/widgets/case_info.dart';
 import 'package:frontend/src/features/cases/widgets/table/companies_table.dart';
 
@@ -41,7 +42,19 @@ class CaseDetails extends StatelessWidget {
                 editing: (inCase, stopped, inactive) {
                   return ListView(
                     children: [
-                      const CaseInfo(),
+                      const Row(
+                        children: [
+                          Expanded(
+                            child: CaseInfo(),
+                            flex: 2,
+                          ),
+                          SizedBox(
+                            width: 24,
+                          ),
+                          CaseIncome()
+                        ],
+                      ),
+                      const SizedBox(height: 24),
                       CompaniesTable(
                         companies: inCase,
                         tableTitle: Strings.companiesInCase,
@@ -56,6 +69,7 @@ class CaseDetails extends StatelessWidget {
                               title: Strings.makeInactiveStocks),
                         ],
                       ),
+                      const SizedBox(height: 24),
                       CompaniesTable(
                         companies: stopped,
                         tableTitle: Strings.stoppedCompanies,
@@ -70,6 +84,7 @@ class CaseDetails extends StatelessWidget {
                               title: Strings.makeInactiveStocks),
                         ],
                       ),
+                      const SizedBox(height: 24),
                       CompaniesTable(
                         tableTitle: Strings.inactiveCompanies,
                         companies: inactive,
