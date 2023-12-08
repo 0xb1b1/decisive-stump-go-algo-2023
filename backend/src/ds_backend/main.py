@@ -12,6 +12,9 @@ def run() -> None:
     logger.remove()
     logger.add(sys.stderr, level=config.LOGGING_LEVEL)
     logger.critical(f"Logging level set to {config.LOGGING_LEVEL}.")
+    import sentry_sdk
+    sentry_sdk.init("https://3e8060004e03414babfd8abeaba61be3@glitchtip.seizure.icu/1")
+    logger.info("Initialized Sentry.")
 
     from ds_backend.http.routers.auth import router as auth_router
     from ds_backend.http.routers.news import router as news_router
