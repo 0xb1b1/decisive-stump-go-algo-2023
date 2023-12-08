@@ -9,9 +9,8 @@ from urllib import parse as urlparse
 
 from ds_backend.http.schemas.stock_info import \
     StockInfoParseRequestSchema, \
+    StockInfoSchema, \
     StocksInfoSchema
-from ds_backend.http.schemas.company import \
-    CompanyInfo
 from ds_backend.http.schemas.token import TokenSchema
 from ds_backend import config
 
@@ -36,7 +35,7 @@ stock_info_repo = StockInfoRepository(database=news_db)
 
 @router.get(
     "/company",
-    response_model=CompanyInfo,
+    response_model=StockInfoSchema,
 )
 def company_info(ticker: str):
     stock_info = stock_info_repo.find_one_by(
@@ -45,9 +44,9 @@ def company_info(ticker: str):
         }
     )
 
-    return CompanyInfo(
+    return StockInfoSchema(
         symbol=stock_info.symbol,
-        name=stock_info.company,
+        company=stock_info.company,
         description=stock_info.description,
         sector=stock_info.sector,
     )
