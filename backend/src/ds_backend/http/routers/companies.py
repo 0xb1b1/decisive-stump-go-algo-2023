@@ -26,10 +26,11 @@ from ds_backend.db.repositories.news.stock_info import \
 
 from ds_backend.http.schemas.company import \
     CompanyInfoSchema, \
-    StockActionRecommendation
+    StockActionRecommendation, \
+    StockActionRecommendationEnum
 
 from ds_backend.http.constants.stock_recommendation_colors import \
-    StockRecommendationColor, StockActionRecommendationEnum
+    StockRecommendationColor
 
 
 router = APIRouter(
