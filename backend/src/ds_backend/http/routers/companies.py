@@ -20,7 +20,7 @@ from ds_backend.db.repositories.news.article import \
 from ds_backend.db.repositories.news.stock_info import \
     StockInfoRepository
 from ds_backend.http.schemas.company import \
-    CompanyInfoSchema, CompanyInfoRequestSchema, \
+    CompanyInfoSchema, \
     StockActionRecommendation
 
 
