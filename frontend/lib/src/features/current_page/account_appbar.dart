@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/src/features/search/cubit/search_cubit.dart';
 import 'package:frontend/src/widgets/search_input.dart';
 
 class AccountAppbar extends StatelessWidget {
-  const AccountAppbar({super.key});
+  final Future<void> Function(String) onSearch;
+
+  const AccountAppbar({required this.onSearch, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class AccountAppbar extends StatelessWidget {
       child: Row(
         children: [
           SearchInput(
-            onSearch: BlocProvider.of<SearchCubit>(context).getCompany,
+            onSearch: onSearch,
           ),
           const Spacer(),
           Container(

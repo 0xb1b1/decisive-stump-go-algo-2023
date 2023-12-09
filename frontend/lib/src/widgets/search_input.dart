@@ -3,7 +3,7 @@ import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 
 class SearchInput extends StatelessWidget {
-  final Future<bool> Function(String) onSearch;
+  final Future<void> Function(String) onSearch;
 
   const SearchInput({
     required this.onSearch,
@@ -21,12 +21,7 @@ class SearchInput extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: TextField(
-        onSubmitted: (value) async{
-          final isSuccess = await onSearch(value);
-          if(!isSuccess){
-            showErrorDialog(context);
-          }
-        },
+        onSubmitted: (value) => onSearch(value),
         decoration: InputDecoration(
           hintText: 'Поиск по компаниям',
           hintStyle:
@@ -36,28 +31,6 @@ class SearchInput extends StatelessWidget {
             Icons.search,
             color: AppPalette.greyText,
           ),
-        ),
-      ),
-    );
-  }
-
-  Future<void> showErrorDialog(BuildContext context) async {
-    await showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text(
-              'Понятно',
-            ),
-          ),
-        ],
-        content: const Text(
-            "Проверьте интернет-соединение и введите тикер компании"),
-        title: const Text(
-          "Произошла ошибка",
-          style: AppTypography.sectionTitle,
         ),
       ),
     );

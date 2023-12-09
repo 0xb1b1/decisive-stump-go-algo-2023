@@ -63,7 +63,7 @@ class AppApi {
   Future<Response<CompanyInfo>> getCompany({
     required String ticker,
   }) async {
-    const path = r'https://backend.ds.seizure.icu/company/info';
+    const path = r'https://backend.ds.seizure.icu/company/info_company';
 
     final queryParameters = <String, dynamic>{
       r'ticker': ticker,

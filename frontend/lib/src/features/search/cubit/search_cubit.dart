@@ -8,18 +8,16 @@ class SearchCubit extends Cubit<SearchState> {
 
   SearchCubit({required AppRepository repository})
       : _repository = repository,
-        super(const SearchState.unknown());
+        super(const SearchState.initial());
 
-  Future<bool> getCompany(String ticker) async {
+  Future<void> getCompany(String ticker) async {
     emit(const SearchState.loading());
     final result = await _repository.getCompany(ticker);
     final value = result.value;
     if (result.succeed && value != null) {
       emit(SearchState.data(companies: value));
-      return true;
     } else {
-      emit(const SearchState.unknown());
-      return false;
+      emit(const SearchState.error());
     }
   }
 }

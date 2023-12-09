@@ -20,49 +20,49 @@ mixin _$SearchState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
+    required TResult Function() initial,
     required TResult Function(CompanyInfo companies) data,
-    required TResult Function() unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
+    TResult? Function()? initial,
     TResult? Function(CompanyInfo companies)? data,
-    TResult? Function()? unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
+    TResult Function()? initial,
     TResult Function(CompanyInfo companies)? data,
-    TResult Function()? unknown,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Loading value) error,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Initial value) initial,
     required TResult Function(_Data value) data,
-    required TResult Function(_Unknown value) unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loading value)? error,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(_Data value)? data,
-    TResult? Function(_Unknown value)? unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
-    TResult Function(_Loading value)? error,
+    TResult Function(_Error value)? error,
+    TResult Function(_Initial value)? initial,
     TResult Function(_Data value)? data,
-    TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,8 +126,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
+    required TResult Function() initial,
     required TResult Function(CompanyInfo companies) data,
-    required TResult Function() unknown,
   }) {
     return loading();
   }
@@ -137,8 +137,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
+    TResult? Function()? initial,
     TResult? Function(CompanyInfo companies)? data,
-    TResult? Function()? unknown,
   }) {
     return loading?.call();
   }
@@ -148,8 +148,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
+    TResult Function()? initial,
     TResult Function(CompanyInfo companies)? data,
-    TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -162,9 +162,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Loading value) error,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Initial value) initial,
     required TResult Function(_Data value) data,
-    required TResult Function(_Unknown value) unknown,
   }) {
     return loading(this);
   }
@@ -173,9 +173,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loading value)? error,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(_Data value)? data,
-    TResult? Function(_Unknown value)? unknown,
   }) {
     return loading?.call(this);
   }
@@ -184,9 +184,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
-    TResult Function(_Loading value)? error,
+    TResult Function(_Error value)? error,
+    TResult Function(_Initial value)? initial,
     TResult Function(_Data value)? data,
-    TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -201,25 +201,25 @@ abstract class _Loading implements SearchState {
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$SearchStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
+class _$ErrorImpl implements _Error {
+  const _$ErrorImpl();
 
   @override
   String toString() {
@@ -229,7 +229,7 @@ class _$LoadingImpl implements _Loading {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+        (other.runtimeType == runtimeType && other is _$ErrorImpl);
   }
 
   @override
@@ -240,8 +240,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
+    required TResult Function() initial,
     required TResult Function(CompanyInfo companies) data,
-    required TResult Function() unknown,
   }) {
     return error();
   }
@@ -251,8 +251,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
+    TResult? Function()? initial,
     TResult? Function(CompanyInfo companies)? data,
-    TResult? Function()? unknown,
   }) {
     return error?.call();
   }
@@ -262,8 +262,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
+    TResult Function()? initial,
     TResult Function(CompanyInfo companies)? data,
-    TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -276,9 +276,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Loading value) error,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Initial value) initial,
     required TResult Function(_Data value) data,
-    required TResult Function(_Unknown value) unknown,
   }) {
     return error(this);
   }
@@ -287,9 +287,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loading value)? error,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(_Data value)? data,
-    TResult? Function(_Unknown value)? unknown,
   }) {
     return error?.call(this);
   }
@@ -298,9 +298,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
-    TResult Function(_Loading value)? error,
+    TResult Function(_Error value)? error,
+    TResult Function(_Initial value)? initial,
     TResult Function(_Data value)? data,
-    TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -310,8 +310,122 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements SearchState {
-  const factory _Loading() = _$LoadingImpl;
+abstract class _Error implements SearchState {
+  const factory _Error() = _$ErrorImpl;
+}
+
+/// @nodoc
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl();
+
+  @override
+  String toString() {
+    return 'SearchState.initial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() error,
+    required TResult Function() initial,
+    required TResult Function(CompanyInfo companies) data,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function()? error,
+    TResult? Function()? initial,
+    TResult? Function(CompanyInfo companies)? data,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? error,
+    TResult Function()? initial,
+    TResult Function(CompanyInfo companies)? data,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Data value) data,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Data value)? data,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Data value)? data,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initial implements SearchState {
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
@@ -390,8 +504,8 @@ class _$DataImpl implements _Data {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
+    required TResult Function() initial,
     required TResult Function(CompanyInfo companies) data,
-    required TResult Function() unknown,
   }) {
     return data(companies);
   }
@@ -401,8 +515,8 @@ class _$DataImpl implements _Data {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
+    TResult? Function()? initial,
     TResult? Function(CompanyInfo companies)? data,
-    TResult? Function()? unknown,
   }) {
     return data?.call(companies);
   }
@@ -412,8 +526,8 @@ class _$DataImpl implements _Data {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
+    TResult Function()? initial,
     TResult Function(CompanyInfo companies)? data,
-    TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -426,9 +540,9 @@ class _$DataImpl implements _Data {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Loading value) error,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Initial value) initial,
     required TResult Function(_Data value) data,
-    required TResult Function(_Unknown value) unknown,
   }) {
     return data(this);
   }
@@ -437,9 +551,9 @@ class _$DataImpl implements _Data {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loading value)? error,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(_Data value)? data,
-    TResult? Function(_Unknown value)? unknown,
   }) {
     return data?.call(this);
   }
@@ -448,9 +562,9 @@ class _$DataImpl implements _Data {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
-    TResult Function(_Loading value)? error,
+    TResult Function(_Error value)? error,
+    TResult Function(_Initial value)? initial,
     TResult Function(_Data value)? data,
-    TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -467,118 +581,4 @@ abstract class _Data implements SearchState {
   @JsonKey(ignore: true)
   _$$DataImplCopyWith<_$DataImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UnknownImplCopyWith<$Res> {
-  factory _$$UnknownImplCopyWith(
-          _$UnknownImpl value, $Res Function(_$UnknownImpl) then) =
-      __$$UnknownImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$UnknownImplCopyWithImpl<$Res>
-    extends _$SearchStateCopyWithImpl<$Res, _$UnknownImpl>
-    implements _$$UnknownImplCopyWith<$Res> {
-  __$$UnknownImplCopyWithImpl(
-      _$UnknownImpl _value, $Res Function(_$UnknownImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$UnknownImpl implements _Unknown {
-  const _$UnknownImpl();
-
-  @override
-  String toString() {
-    return 'SearchState.unknown()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnknownImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() error,
-    required TResult Function(CompanyInfo companies) data,
-    required TResult Function() unknown,
-  }) {
-    return unknown();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function()? error,
-    TResult? Function(CompanyInfo companies)? data,
-    TResult? Function()? unknown,
-  }) {
-    return unknown?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? error,
-    TResult Function(CompanyInfo companies)? data,
-    TResult Function()? unknown,
-    required TResult orElse(),
-  }) {
-    if (unknown != null) {
-      return unknown();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loading value) error,
-    required TResult Function(_Data value) data,
-    required TResult Function(_Unknown value) unknown,
-  }) {
-    return unknown(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loading value)? error,
-    TResult? Function(_Data value)? data,
-    TResult? Function(_Unknown value)? unknown,
-  }) {
-    return unknown?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loading value)? error,
-    TResult Function(_Data value)? data,
-    TResult Function(_Unknown value)? unknown,
-    required TResult orElse(),
-  }) {
-    if (unknown != null) {
-      return unknown(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Unknown implements SearchState {
-  const factory _Unknown() = _$UnknownImpl;
 }
