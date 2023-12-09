@@ -65,7 +65,7 @@ def get_articles(
             }
         },
         limit=article_limit,
-        sort=[("timestamp", 1),]
+        sort=[("timestamp", -1),]
     ):
         article_schema = ArticleSchema(
             title=article.title,
