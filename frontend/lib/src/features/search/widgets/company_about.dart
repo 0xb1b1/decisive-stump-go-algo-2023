@@ -31,7 +31,6 @@ class CompanyAbout extends StatelessWidget {
           Flexible(
             child: Text(
               about,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

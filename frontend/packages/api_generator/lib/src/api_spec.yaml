@@ -208,13 +208,13 @@
         }
       }
     },
-    "/tickers/company": {
+    "/tickers/info": {
       "get": {
         "tags": [
           "Tickers"
         ],
         "summary": "Company Info",
-        "operationId": "company_info_tickers_company_get",
+        "operationId": "company_info_tickers_info_get",
         "parameters": [
           {
             "name": "ticker",
@@ -278,6 +278,51 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StocksInfoSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company/info": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Company Info",
+        "operationId": "company_info_company_info_get",
+        "parameters": [
+          {
+            "name": "ticker",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Ticker"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyInfoSchema"
                 }
               }
             }
@@ -400,6 +445,99 @@
         ],
         "title": "ArticlesSchema"
       },
+      "CompanyInfoSchema": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "Company name. Lang: RU/EN"
+          },
+          "ticker": {
+            "type": "string",
+            "title": "Ticker",
+            "description": "Company's stock ticker name. Lang: EN"
+          },
+          "sector": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sector",
+            "description": "Economical sector. Lang: RU/EN"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "Stock description, parsed. Lang: RU"
+          },
+          "prediction": {
+            "type": "null",
+            "title": "Prediction",
+            "description": "Price prediction. TODO: create model"
+          },
+          "stock_price": {
+            "type": "number",
+            "title": "Stock Price",
+            "description": "Stock price in RUR, double decimal precision"
+          },
+          "recommendation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StockActionRecommendation"
+              }
+            ],
+            "description": "Suggested stock action"
+          },
+          "prognosis_percentage": {
+            "type": "number",
+            "title": "Prognosis Percentage",
+            "description": "Price prognosis for the stock"
+          },
+          "portfolio_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Portfolio Id",
+            "description": "Portfolio ID which contains the stock. null if not in portfolio"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "ticker",
+          "sector",
+          "description",
+          "prediction",
+          "stock_price",
+          "recommendation",
+          "prognosis_percentage",
+          "portfolio_id"
+        ],
+        "title": "CompanyInfoSchema"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -431,6 +569,16 @@
         ],
         "title": "Stock"
       },
+      "StockActionRecommendation": {
+        "type": "string",
+        "enum": [
+          "buy",
+          "sell",
+          "hold"
+        ],
+        "title": "StockActionRecommendation",
+        "description": "Suggested stock action.\n    "
+      },
       "StockInfoParseRequestSchema": {
         "properties": {
           "tickers": {
@@ -451,7 +599,8 @@
         "properties": {
           "symbol": {
             "type": "string",
-            "title": "Symbol"
+            "title": "Symbol",
+            "description": "Stock ticker. Example: YNDX"
           },
           "company": {
             "anyOf": [
@@ -462,7 +611,8 @@
                 "type": "null"
               }
             ],
-            "title": "Company"
+            "title": "Company",
+            "description": "Company name. Example: ÐžÐžÐž Ð¯Ð½Ð´ÐµÐºÑ"
           },
           "description": {
             "anyOf": [
@@ -473,7 +623,8 @@
                 "type": "null"
               }
             ],
-            "title": "Description"
+            "title": "Description",
+            "description": "Stock description, parsed. Lang: Russian"
           },
           "sector": {
             "anyOf": [
@@ -484,7 +635,8 @@
                 "type": "null"
               }
             ],
-            "title": "Sector"
+            "title": "Sector",
+            "description": "Economics industry name. Lang: Russian. Example: Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ðµ Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¸"
           }
         },
         "type": "object",

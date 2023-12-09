@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/api/models/company_info.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 
 import '../../../common/strings.dart';
 import '../../../common/theme/border_radius/border_radius.dart';
-import '../../cases/models/company.dart';
 
-class CompanyInfo extends StatelessWidget {
-  final Company company;
+class CompanyInfoWidget extends StatelessWidget {
+  final CompanyInfo company;
 
-  const CompanyInfo({required this.company, Key? key}) : super(key: key);
+  const CompanyInfoWidget({required this.company, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final parts = company.amount.toString().split('.');
+    final parts = company.prognosisPercentage.toString().split('.');
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 33),
@@ -31,7 +31,7 @@ class CompanyInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                company.title,
+                company.name == null ? company.name! : "Название компании",
                 overflow: TextOverflow.ellipsis,
                 style: AppTypography.caseTitle,
               ),
@@ -69,21 +69,24 @@ class CompanyInfo extends StatelessWidget {
               Parameter(
                 title: "Текущая стоимость",
                 value: Text(
-                  "${company.currentPrice} ${Strings.rurSymbol}",
+                  "${company.stockPrice} ${Strings.rurSymbol}",
                   style: AppTypography.sectionTitle,
                 ),
               ),
               Parameter(
                 title: "Рекомендация",
                 value: Text(
-                  company.recomendation,
+                  // company.recommendation.recommendation,
+                  'dsdsd',
                   style: AppTypography.sectionTitle,
                 ),
               ),
               Parameter(
                 title: "Cектор",
                 value: Text(
-                  company.sector,
+                  (company.sector != null
+                      ? company.sector!
+                      : "Название сектора"),
                   style: AppTypography.sectionTitle,
                 ),
               ),

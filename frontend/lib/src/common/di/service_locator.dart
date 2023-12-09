@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:frontend/src/api/app_api.dart';
 import 'package:frontend/src/common/di/dio_token_interceptor.dart';
+import 'package:frontend/src/features/search/cubit/search_cubit.dart';
 import 'package:frontend/src/features/stats/cubit/stats_cubit.dart';
 import 'package:frontend/src/repository/app_repository.dart';
 import 'package:frontend/src/repository/auth_repository.dart';
@@ -38,6 +39,8 @@ class ServiceLocator {
     dio.interceptors.add(DioTokenInterceptor(token: token));
     final appRepository = AppRepository(AppApi(dio));
     final statCubit = StatsCubit(repository: appRepository);
+    final searchCubit = SearchCubit(repository: appRepository);
     _getIt.registerSingleton<StatsCubit>(statCubit);
+    _getIt.registerSingleton<SearchCubit>(searchCubit);
   }
 }

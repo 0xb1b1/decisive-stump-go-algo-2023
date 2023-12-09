@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/features/search/widgets/company_about.dart';
+import 'package:frontend/src/features/search/widgets/company_info_widget.dart';
 import 'package:frontend/src/widgets/graph_widget.dart';
 import 'package:frontend/src/widgets/income_widget.dart';
 
+import '../../api/models/company_info.dart';
 import '../../common/strings.dart';
 import '../../common/theme/colors/app_palette.dart';
-import '../cases/models/company.dart';
-import 'widgets/company_info.dart';
 
 class CompanyPage extends StatelessWidget {
-  final Company company;
+  final CompanyInfo company;
   final bool isInCase;
 
   const CompanyPage({
@@ -47,7 +47,7 @@ class CompanyPage extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: CompanyInfo(
+                    child: CompanyInfoWidget(
                       company: company,
                     ),
                   ),
@@ -63,7 +63,8 @@ class CompanyPage extends StatelessWidget {
                       onButtonTap: () {},
                       buttonTitle:
                           isInCase ? Strings.caseTransition : Strings.addToCase,
-                      income: company.amount,
+                      income: 2343.43,
+                      // company.stockPrice.toDouble(),
                     ),
                   ),
                 ],
@@ -87,7 +88,9 @@ class CompanyPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: CompanyAbout(
-                      about: company.about,
+                      about: (company.description != null
+                          ? company.description!
+                          : 'Описание компании'),
                     ),
                   ),
                 ],

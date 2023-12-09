@@ -1,4 +1,5 @@
 import 'package:frontend/src/api/models/article_list.dart';
+import 'package:frontend/src/api/models/company_info.dart';
 import 'package:frontend/src/repository/client_result.dart';
 import 'dart:core';
 import '../api/app_api.dart';
@@ -18,10 +19,24 @@ class AppRepository {
       if (data == null) {
         return ClientResult.failed(Exception());
       } else {
-        print('succeed');
         return ClientResult.succeed(data);
       }
     } catch (e, s) {
+      return ClientResult.failed(e, s);
+    }
+  }
+
+  Future<ClientResult<CompanyInfo>> getCompany(String ticker) async {
+    try {
+      final response = await _api.getCompany(ticker: ticker);
+      final data = response.data;
+      if (data == null) {
+        return ClientResult.failed(Exception());
+      } else {
+        return ClientResult.succeed(data);
+      }
+    } catch (e, s) {
+      print(e);
       return ClientResult.failed(e, s);
     }
   }

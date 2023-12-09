@@ -142,7 +142,7 @@ class _AuthPageState extends State<AuthPage> {
                                 borderSide: BorderSide.none,
                               ),
                             ),
-                            obscureText: true, // To hide password text
+                            obscureText: true,
                           ),
                           const SizedBox(height: 36),
                           ElevatedButton(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/common/theme/colors/app_palette.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/src/features/search/cubit/search_cubit.dart';
+import 'package:frontend/src/widgets/search_input.dart';
 
 class AccountAppbar extends StatelessWidget {
   const AccountAppbar({super.key});
@@ -8,45 +10,21 @@ class AccountAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 72,
-      padding: EdgeInsets.symmetric(horizontal: 48),
-      decoration: BoxDecoration(color: Colors.white),
+      padding: const EdgeInsets.symmetric(horizontal: 48),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Row(
         children: [
-          Container(
-            width: 472,
-            height: 40,
-            decoration: ShapeDecoration(
-              color: Color(0xFFF3F4F6),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            child: Row(
-              children: [
-                Text(
-                  'Поиск по компаниям',
-                  style: TextStyle(
-                    color: Color(0xFF898A8D),
-                    fontSize: 14,
-                    fontFamily: 'Favorit Pro',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                Spacer(),
-                Icon(
-                  Icons.search,
-                  size: 18,
-                  color: AppPalette.greyText,
-                )
-              ],
-            ),
+          SearchInput(
+            onSearch: BlocProvider.of<SearchCubit>(context).getCompany,
           ),
-          Spacer(),
+          const Spacer(),
           Container(
             width: 220,
             height: 40,
             decoration: ShapeDecoration(
-              color: Color(0xFFF3F4F6),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+              color: const Color(0xFFF3F4F6),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -80,7 +58,7 @@ class AccountAppbar extends StatelessWidget {
                   width: 1,
                   height: 20,
                   decoration: ShapeDecoration(
-                    color: Color(0xFF898A8D),
+                    color: const Color(0xFF898A8D),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
