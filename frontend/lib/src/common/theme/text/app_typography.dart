@@ -57,7 +57,7 @@ class AppTypography {
     color: AppPalette.white700,
   );
 
-  static const ryrSymbol = TextStyle(
+  static const rurSymbol = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,
     fontSize: 40,

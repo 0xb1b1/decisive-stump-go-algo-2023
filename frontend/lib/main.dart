@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/common/di/service_locator.dart';
 import 'package:frontend/src/common/theme/theme.dart';
 import 'package:frontend/src/features/auth/auth_page.dart';
-import 'package:frontend/src/features/current_page/current_page.dart';
 
 void main() {
   final locator = ServiceLocator();
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MOEX Trading',
       theme: AppTheme.defaultTheme,
-      home: const CurrentPage(),
+      home: const AuthPage(),
 
       // const AuthPage(),
     );

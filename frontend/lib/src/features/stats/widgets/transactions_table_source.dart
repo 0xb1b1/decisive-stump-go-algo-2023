@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../common/strings.dart';
-import '../../features/transactions/models/transaction.dart';
+import '../../../common/strings.dart';
+import '../../transactions/models/transaction.dart';
 
 class TransactionsSource extends DataTableSource {
   final List<Transaction> transactions;

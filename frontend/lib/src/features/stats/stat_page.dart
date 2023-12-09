@@ -4,12 +4,11 @@ import 'package:frontend/src/common/theme/text/app_typography.dart';
 import 'package:frontend/src/features/stats/cubit/stats_cubit.dart';
 import 'package:frontend/src/features/stats/widgets/graph_stats.dart';
 import 'package:frontend/src/features/stats/widgets/news_block.dart';
-import 'package:frontend/src/widgets/graph_widget.dart';
 import 'package:frontend/src/widgets/info_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import '../../common/strings.dart';
-import '../../widgets/table/table.dart';
+import 'widgets/transactions_table.dart';
 import '../cases/cases_page.dart';
 import 'cubit/stats_cubit_state.dart';
 

@@ -66,6 +66,7 @@ class CaseDetails extends StatelessWidget {
                           ),
                           Expanded(
                             child: IncomeWidget(
+                              isColored: true,
                               title: Strings.currentIncome,
                               buttonTitle: Strings.withdrawMoney,
                               onButtonTap: () => Navigator.of(context).push(
@@ -117,6 +118,7 @@ class CaseDetails extends StatelessWidget {
                           ),
                           Expanded(
                             child: IncomeWidget(
+                              isColored: true,
                               title: Strings.currentIncome,
                               buttonTitle: Strings.withdrawMoney,
                               onButtonTap: () => Navigator.of(context).push(

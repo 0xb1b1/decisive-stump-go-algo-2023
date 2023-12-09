@@ -27,9 +27,6 @@ class ServiceLocator {
     final authManager = AuthCubit(repository: authRepository);
     _getIt.registerSingleton<Dio>(dio);
     _getIt.registerSingleton<AuthCubit>(authManager);
-    final appRepository = AppRepository(AppApi(dio));
-    final statCubit = StatsCubit(repository: appRepository);
-    _getIt.registerSingleton<StatsCubit>(statCubit);
   }
 
   void configureToken(String token) {

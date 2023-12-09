@@ -58,8 +58,8 @@ class UneditableTable extends StatelessWidget {
                         Text(company.title),
                         Text(
                           (company.income >= 0
-                              ? "+${company.income}%"
-                              : "${company.income}%"),
+                              ? "+${company.income} %"
+                              : "-${company.income} %"),
                           style: TextStyle(
                             color:
                                 company.income >= 0 ? Colors.green : Colors.red,

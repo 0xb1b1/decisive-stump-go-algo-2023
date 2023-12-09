@@ -56,6 +56,7 @@ class CompanyPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: IncomeWidget(
+                      isColored: isInCase,
                       title: isInCase
                           ? Strings.currentProfit
                           : Strings.currentCost,
