@@ -2,13 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 
-class SearchInput extends StatelessWidget {
+class SearchInput extends StatefulWidget {
   final Future<void> Function(String) onSearch;
 
   const SearchInput({
     required this.onSearch,
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<SearchInput> createState() => _SearchInputState();
+}
+
+class _SearchInputState extends State<SearchInput> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +34,23 @@ class SearchInput extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: TextField(
-        onSubmitted: (value) => onSearch(value),
+        controller: _controller,
+        onSubmitted: (value) {
+          widget.onSearch(value);
+          _controller.clear();
+        },
         decoration: InputDecoration(
           hintText: 'Поиск по компаниям',
           hintStyle:
               AppTypography.regularBlack.copyWith(color: AppPalette.greyText),
           border: InputBorder.none,
-          suffixIcon: const Icon(
-            Icons.search,
+          suffixIcon: IconButton(
+            icon: const Icon(Icons.search),
             color: AppPalette.greyText,
+            onPressed: () {
+              widget.onSearch(_controller.text);
+              _controller.clear();
+            },
           ),
         ),
       ),

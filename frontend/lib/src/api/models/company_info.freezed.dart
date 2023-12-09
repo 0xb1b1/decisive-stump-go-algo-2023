@@ -24,8 +24,12 @@ mixin _$CompanyInfo {
   String get ticker => throw _privateConstructorUsedError;
   String? get sector => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  num? get stockPrice => throw _privateConstructorUsedError;
-  num? get prognosisPercentage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'stock_price')
+  String get stockPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'prognosis_percentage')
+  String get prognosisPercentage => throw _privateConstructorUsedError;
+  StockActionRecommendation get recommendation =>
+      throw _privateConstructorUsedError;
   String? get portfolioId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,9 +49,12 @@ abstract class $CompanyInfoCopyWith<$Res> {
       String ticker,
       String? sector,
       String? description,
-      num? stockPrice,
-      num? prognosisPercentage,
+      @JsonKey(name: 'stock_price') String stockPrice,
+      @JsonKey(name: 'prognosis_percentage') String prognosisPercentage,
+      StockActionRecommendation recommendation,
       String? portfolioId});
+
+  $StockActionRecommendationCopyWith<$Res> get recommendation;
 }
 
 /// @nodoc
@@ -67,8 +74,9 @@ class _$CompanyInfoCopyWithImpl<$Res, $Val extends CompanyInfo>
     Object? ticker = null,
     Object? sector = freezed,
     Object? description = freezed,
-    Object? stockPrice = freezed,
-    Object? prognosisPercentage = freezed,
+    Object? stockPrice = null,
+    Object? prognosisPercentage = null,
+    Object? recommendation = null,
     Object? portfolioId = freezed,
   }) {
     return _then(_value.copyWith(
@@ -88,19 +96,32 @@ class _$CompanyInfoCopyWithImpl<$Res, $Val extends CompanyInfo>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      stockPrice: freezed == stockPrice
+      stockPrice: null == stockPrice
           ? _value.stockPrice
           : stockPrice // ignore: cast_nullable_to_non_nullable
-              as num?,
-      prognosisPercentage: freezed == prognosisPercentage
+              as String,
+      prognosisPercentage: null == prognosisPercentage
           ? _value.prognosisPercentage
           : prognosisPercentage // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as String,
+      recommendation: null == recommendation
+          ? _value.recommendation
+          : recommendation // ignore: cast_nullable_to_non_nullable
+              as StockActionRecommendation,
       portfolioId: freezed == portfolioId
           ? _value.portfolioId
           : portfolioId // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StockActionRecommendationCopyWith<$Res> get recommendation {
+    return $StockActionRecommendationCopyWith<$Res>(_value.recommendation,
+        (value) {
+      return _then(_value.copyWith(recommendation: value) as $Val);
+    });
   }
 }
 
@@ -117,9 +138,13 @@ abstract class _$$CompanyInfoImplCopyWith<$Res>
       String ticker,
       String? sector,
       String? description,
-      num? stockPrice,
-      num? prognosisPercentage,
+      @JsonKey(name: 'stock_price') String stockPrice,
+      @JsonKey(name: 'prognosis_percentage') String prognosisPercentage,
+      StockActionRecommendation recommendation,
       String? portfolioId});
+
+  @override
+  $StockActionRecommendationCopyWith<$Res> get recommendation;
 }
 
 /// @nodoc
@@ -137,8 +162,9 @@ class __$$CompanyInfoImplCopyWithImpl<$Res>
     Object? ticker = null,
     Object? sector = freezed,
     Object? description = freezed,
-    Object? stockPrice = freezed,
-    Object? prognosisPercentage = freezed,
+    Object? stockPrice = null,
+    Object? prognosisPercentage = null,
+    Object? recommendation = null,
     Object? portfolioId = freezed,
   }) {
     return _then(_$CompanyInfoImpl(
@@ -158,14 +184,18 @@ class __$$CompanyInfoImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      stockPrice: freezed == stockPrice
+      stockPrice: null == stockPrice
           ? _value.stockPrice
           : stockPrice // ignore: cast_nullable_to_non_nullable
-              as num?,
-      prognosisPercentage: freezed == prognosisPercentage
+              as String,
+      prognosisPercentage: null == prognosisPercentage
           ? _value.prognosisPercentage
           : prognosisPercentage // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as String,
+      recommendation: null == recommendation
+          ? _value.recommendation
+          : recommendation // ignore: cast_nullable_to_non_nullable
+              as StockActionRecommendation,
       portfolioId: freezed == portfolioId
           ? _value.portfolioId
           : portfolioId // ignore: cast_nullable_to_non_nullable
@@ -182,8 +212,9 @@ class _$CompanyInfoImpl implements _CompanyInfo {
       required this.ticker,
       this.sector,
       this.description,
-      required this.stockPrice,
-      required this.prognosisPercentage,
+      @JsonKey(name: 'stock_price') required this.stockPrice,
+      @JsonKey(name: 'prognosis_percentage') required this.prognosisPercentage,
+      required this.recommendation,
       this.portfolioId});
 
   factory _$CompanyInfoImpl.fromJson(Map<String, dynamic> json) =>
@@ -198,15 +229,19 @@ class _$CompanyInfoImpl implements _CompanyInfo {
   @override
   final String? description;
   @override
-  final num? stockPrice;
+  @JsonKey(name: 'stock_price')
+  final String stockPrice;
   @override
-  final num? prognosisPercentage;
+  @JsonKey(name: 'prognosis_percentage')
+  final String prognosisPercentage;
+  @override
+  final StockActionRecommendation recommendation;
   @override
   final String? portfolioId;
 
   @override
   String toString() {
-    return 'CompanyInfo(name: $name, ticker: $ticker, sector: $sector, description: $description, stockPrice: $stockPrice, prognosisPercentage: $prognosisPercentage, portfolioId: $portfolioId)';
+    return 'CompanyInfo(name: $name, ticker: $ticker, sector: $sector, description: $description, stockPrice: $stockPrice, prognosisPercentage: $prognosisPercentage, recommendation: $recommendation, portfolioId: $portfolioId)';
   }
 
   @override
@@ -223,14 +258,24 @@ class _$CompanyInfoImpl implements _CompanyInfo {
                 other.stockPrice == stockPrice) &&
             (identical(other.prognosisPercentage, prognosisPercentage) ||
                 other.prognosisPercentage == prognosisPercentage) &&
+            (identical(other.recommendation, recommendation) ||
+                other.recommendation == recommendation) &&
             (identical(other.portfolioId, portfolioId) ||
                 other.portfolioId == portfolioId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, ticker, sector,
-      description, stockPrice, prognosisPercentage, portfolioId);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      ticker,
+      sector,
+      description,
+      stockPrice,
+      prognosisPercentage,
+      recommendation,
+      portfolioId);
 
   @JsonKey(ignore: true)
   @override
@@ -252,8 +297,10 @@ abstract class _CompanyInfo implements CompanyInfo {
       required final String ticker,
       final String? sector,
       final String? description,
-      required final num? stockPrice,
-      required final num? prognosisPercentage,
+      @JsonKey(name: 'stock_price') required final String stockPrice,
+      @JsonKey(name: 'prognosis_percentage')
+      required final String prognosisPercentage,
+      required final StockActionRecommendation recommendation,
       final String? portfolioId}) = _$CompanyInfoImpl;
 
   factory _CompanyInfo.fromJson(Map<String, dynamic> json) =
@@ -268,9 +315,13 @@ abstract class _CompanyInfo implements CompanyInfo {
   @override
   String? get description;
   @override
-  num? get stockPrice;
+  @JsonKey(name: 'stock_price')
+  String get stockPrice;
   @override
-  num? get prognosisPercentage;
+  @JsonKey(name: 'prognosis_percentage')
+  String get prognosisPercentage;
+  @override
+  StockActionRecommendation get recommendation;
   @override
   String? get portfolioId;
   @override

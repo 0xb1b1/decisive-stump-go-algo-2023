@@ -83,7 +83,7 @@ class AppApi {
     CompanyInfo responseData;
 
     try {
-      final Map<String, dynamic> map = json.decode(response.data!.toString());
+      final Map<String, dynamic> map = jsonDecode(response.data!.toString());
       responseData = CompanyInfo.fromJson(map);
     } catch (error, stackTrace) {
       throw DioException(

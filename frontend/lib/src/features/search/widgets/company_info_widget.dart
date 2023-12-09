@@ -31,7 +31,7 @@ class CompanyInfoWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                company.name == null ? company.name! : "Название компании",
+                company.name != null ? company.name! : "Название компании",
                 overflow: TextOverflow.ellipsis,
                 style: AppTypography.caseTitle,
               ),
@@ -76,9 +76,9 @@ class CompanyInfoWidget extends StatelessWidget {
               Parameter(
                 title: "Рекомендация",
                 value: Text(
-                  // company.recommendation.recommendation,
-                  'dsdsd',
-                  style: AppTypography.sectionTitle,
+                  company.recommendation.recommendation,
+                  style: AppTypography.sectionTitle.copyWith(
+                      color: Color(int.parse(company.recommendation.color))),
                 ),
               ),
               Parameter(

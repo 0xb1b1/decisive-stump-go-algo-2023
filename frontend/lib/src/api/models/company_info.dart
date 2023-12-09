@@ -11,8 +11,9 @@ class CompanyInfo with _$CompanyInfo {
     required String ticker,
     String? sector,
     String? description,
-    required num? stockPrice,
-    required num? prognosisPercentage,
+    @JsonKey(name: 'stock_price') required String stockPrice,
+    @JsonKey(name: 'prognosis_percentage') required String prognosisPercentage,
+    required StockActionRecommendation recommendation,
     String? portfolioId,
   }) = _CompanyInfo;
 

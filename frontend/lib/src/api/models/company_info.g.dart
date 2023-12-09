@@ -12,8 +12,10 @@ _$CompanyInfoImpl _$$CompanyInfoImplFromJson(Map<String, dynamic> json) =>
       ticker: json['ticker'] as String,
       sector: json['sector'] as String?,
       description: json['description'] as String?,
-      stockPrice: json['stockPrice'] as num?,
-      prognosisPercentage: json['prognosisPercentage'] as num?,
+      stockPrice: json['stock_price'] as String,
+      prognosisPercentage: json['prognosis_percentage'] as String,
+      recommendation: StockActionRecommendation.fromJson(
+          json['recommendation'] as Map<String, dynamic>),
       portfolioId: json['portfolioId'] as String?,
     );
 
@@ -23,8 +25,9 @@ Map<String, dynamic> _$$CompanyInfoImplToJson(_$CompanyInfoImpl instance) =>
       'ticker': instance.ticker,
       'sector': instance.sector,
       'description': instance.description,
-      'stockPrice': instance.stockPrice,
-      'prognosisPercentage': instance.prognosisPercentage,
+      'stock_price': instance.stockPrice,
+      'prognosis_percentage': instance.prognosisPercentage,
+      'recommendation': instance.recommendation,
       'portfolioId': instance.portfolioId,
     };
 

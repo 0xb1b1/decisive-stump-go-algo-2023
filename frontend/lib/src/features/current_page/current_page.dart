@@ -155,4 +155,29 @@ class _CurrentPageState extends State<CurrentPage> {
       ),
     );
   }
+
+  Future<void> showLoadingDialog(BuildContext context) async {
+    await Future.delayed(
+      const Duration(seconds: 1),
+      await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const Dialog(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(width: 20),
+                  Text("Загружаем результаты поиска..."),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 }
