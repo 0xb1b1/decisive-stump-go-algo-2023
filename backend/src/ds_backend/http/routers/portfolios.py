@@ -152,7 +152,7 @@ requested portfolio (UUID: {uuid})"
     )
 
     # Check if the portfolio belongs to the user
-    portfolio = portfolio_repo.find_one_by_id(
+    portfolio = portfolio_repo.find_one_by(
         {"uuid": uuid}
     )
 
