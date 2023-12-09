@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MOEX',
+      title: 'MOEX Trading',
       theme: AppTheme.defaultTheme,
-      home: const CurrentPage(),
+      home: const AuthPage(),
     );
   }
 }

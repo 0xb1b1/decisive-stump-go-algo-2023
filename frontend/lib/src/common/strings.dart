@@ -1,6 +1,7 @@
 class Strings {
   Strings._();
 
+  static const errorMessage = 'Произошла ошибка, попробуйте еще раз';
   static const totalToday = 'Всего за сегодня';
   static const rurSymbol = '₽';
   static const transactions = 'Транзакции';
@@ -57,4 +58,5 @@ class Strings {
   static const withdrawMoney = "Вывести средства";
   static const upAccount = "Пополнить счёт";
   static const companies = "Компании";
+  static const edit = "Редактировать";
 }

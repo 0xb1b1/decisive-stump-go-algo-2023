@@ -50,7 +50,7 @@ class CaseDetails extends StatelessWidget {
                 ),
                 stats: (companies) => Column(
                   children: [
-                    Flexible(
+                    Expanded(
                       flex: 1,
                       child: Row(
                         children: [
@@ -63,7 +63,7 @@ class CaseDetails extends StatelessWidget {
                           const SizedBox(
                             width: 24,
                           ),
-                          const CaseIncome()
+                          const Expanded(child: CaseIncome())
                         ],
                       ),
                     ),
@@ -81,7 +81,8 @@ class CaseDetails extends StatelessWidget {
                           const SizedBox(
                             width: 24,
                           ),
-                          UneditableTable(companies: companies),
+                          Expanded(
+                              child: UneditableTable(companies: companies)),
                         ],
                       ),
                     ),

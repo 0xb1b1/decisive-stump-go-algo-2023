@@ -16,22 +16,21 @@ class AuthCubit extends Cubit<AuthState> {
     required String email,
     required String password,
   }) async {
-    // emit(const AuthState.loading());
-    // final result = await _repository.login(email: email, password: password);
-    // final value = result.value;
-    // if (result.succeed && value != null) {
-    //   emit(const AuthState.success());
-    //   return value;
-    // } else {
-    //   final result = await _repository.signUp(email: email, password: password);
-    //   final value = result.value;
-    //   if (result.succeed && value != null) {
-    //     emit(const AuthState.success());
-    //     return value;
-    //   }
-    //   emit(const AuthState.error());
-    //   return null;
-    // }
-    _repository.signUp(email: email, password: password);
+    emit(const AuthState.loading());
+    final result = await _repository.signUp(email: email, password: password);
+    final value = result.value;
+    if (result.succeed && value != null) {
+      emit(const AuthState.success());
+      return value;
+    } else {
+      final result = await _repository.login(email: email, password: password);
+      final value = result.value;
+      if (result.succeed && value != null) {
+        emit(const AuthState.success());
+        return value;
+      }
+    }
+    emit(const AuthState.success());
+    return null;
   }
 }

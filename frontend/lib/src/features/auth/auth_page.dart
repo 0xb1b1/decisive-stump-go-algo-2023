@@ -31,6 +31,43 @@ class _AuthPageState extends State<AuthPage> {
     super.dispose();
   }
 
+  void transition() => Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const CurrentPage(),
+        ),
+      );
+
+  void showToast() {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 50.0,
+        left: MediaQuery.of(context).size.width * 0.1,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            decoration: BoxDecoration(
+              color: AppPalette.mainBlue.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: const Text(
+              Strings.errorMessage,
+              style: TextStyle(color: AppPalette.white),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlay.insert(overlayEntry);
+
+    Future.delayed(const Duration(seconds: 2), () {
+      overlayEntry.remove();
+    });
+  }
+
   List<String> _getInputValues() => [_controller1.text, _controller2.text];
 
   @override
@@ -114,19 +151,19 @@ class _AuthPageState extends State<AuthPage> {
                           ElevatedButton(
                             onPressed: () async {
                               final values = _getInputValues();
-                              // final isSuccess =
-                              //     BlocProvider.of<AuthCubit>(context)
-                              //         .enterToApp(
-                              //             email: values[0],
-                              //             password: values[1]);
-                              // if (isSuccess != null) {
-                              //   Navigator.of(context).push(
-                              //     MaterialPageRoute(
-                              //       builder: (context) => const CurrentPage(),
-                              //     ),
-                              //   );
-                              // }
-                              AuthApi(GetIt.instance.get<Dio>()).signUp(email: values[0], password: values[1]);
+                              final isSuccess =
+                                  await BlocProvider.of<AuthCubit>(context)
+                                      .enterToApp(
+                                email: values[0],
+                                password: values[1],
+                              );
+                              if (isSuccess != null) {
+                                transition();
+                              } else {
+                                showToast();
+                                _controller1.clear();
+                                _controller2.clear();
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: AppPalette.white,

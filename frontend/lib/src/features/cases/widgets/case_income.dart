@@ -11,8 +11,6 @@ class CaseIncome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 177,
-      width: 347,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       decoration: BoxDecoration(
         color: AppPalette.white,
@@ -20,6 +18,7 @@ class CaseIncome extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(Strings.currentIncome),
           const Text(
@@ -29,10 +28,8 @@ class CaseIncome extends StatelessWidget {
                 fontSize: 40,
                 fontWeight: FontWeight.bold),
           ),
-          Expanded(
-            child: Container(
-              width: 20,
-            ),
+          const SizedBox(
+            height: 40,
           ),
           ElevatedButton(
             onPressed: () => Navigator.of(context).push(

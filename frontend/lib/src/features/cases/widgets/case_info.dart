@@ -34,12 +34,10 @@ class CaseInfo extends StatelessWidget {
               const SizedBox(
                 width: 16,
               ),
-              Flexible(
-                child: Text(
-                  overflow: TextOverflow.ellipsis,
-                  'Портфель\n"${portfolio.title}"',
-                  style: AppTypography.caseTitle,
-                ),
+              Text(
+                overflow: TextOverflow.ellipsis,
+                'Портфель\n«${portfolio.title}»',
+                style: AppTypography.caseTitle,
               ),
               Expanded(
                 child: Container(
@@ -62,12 +60,10 @@ class CaseInfo extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12), // Rounded edgesr
                   ),
                 ),
-                child: const Flexible(
-                  child: Text(
-                    overflow: TextOverflow.ellipsis,
-                    Strings.upAccount,
-                    style: AppTypography.sectionTitle,
-                  ),
+                child: const Text(
+                  overflow: TextOverflow.ellipsis,
+                  Strings.upAccount,
+                  style: AppTypography.sectionTitle,
                 ),
               ),
             ],
@@ -83,12 +79,12 @@ class CaseInfo extends StatelessWidget {
                 title: "Доходность за неделю",
                 value: RichText(
                   text: TextSpan(
-                    text: '+ ${parts[0]} %',
+                    text: '+ ${parts[0]}',
                     style: AppTypography.sectionTitle,
                     children: parts.length > 1
                         ? [
                             TextSpan(
-                              text: '.${parts[1]}',
+                              text: '.${parts[1]}%',
                               style: AppTypography.sectionTitle
                                   .copyWith(color: AppPalette.greyText),
                             )

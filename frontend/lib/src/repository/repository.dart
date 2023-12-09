@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:bcrypt/bcrypt.dart';
-import 'package:built_value/json_object.dart';
+
 import 'package:frontend/src/repository/client_result.dart';
 
 import '../api/auth_api.dart';
@@ -18,15 +16,7 @@ class AuthRepository {
     try {
       final String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
       final response = await _authApi.signUp(email: email, password: hashed);
-      // userSignupSchema: UserSignupSchema(
-      //   (b) => {
-      //     b.email = jsonDecode(email),
-      //     b.passwordHash = jsonDecode(hashed),
-      //     b.firstName = jsonDecode('dsdsd'),
-      //     b.lastName = jsonDecode('dsdsd'),
-      //   },
-      // ),
-      // );
+
       final data = response.data;
       if (data == null) {
         return ClientResult.failed(Exception());

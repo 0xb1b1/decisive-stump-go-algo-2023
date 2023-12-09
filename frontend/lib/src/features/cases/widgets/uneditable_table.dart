@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/src/features/cases/cubit/case_cubit.dart';
 
 import '../../../common/strings.dart';
 import '../../../common/theme/border_radius/border_radius.dart';
@@ -18,7 +20,6 @@ class UneditableTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 440,
-      width: 300,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppPalette.white,
