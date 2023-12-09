@@ -5,7 +5,7 @@ from enum import Enum
 # from ds_backend.http.schemas.stock_info import \
 #     StockInfoSchema
 from ds_backend.http.constants.stock_action_recommendation_colors import \
-    StockRecommendationColor
+    StockActionRecommendationColor
 
 
 class StockActionRecommendationEnum(str, Enum):
@@ -27,7 +27,7 @@ class StockActionRecommendation(BaseModel):
         description="Suggested stock action. Language: RU"
     )
 
-    color: StockRecommendationColor = Field(
+    color: StockActionRecommendationColor = Field(
         description="Stock action hex color"
     )  # Use enum in http.constants.stock_recommendation_colors to get color
 
