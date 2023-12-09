@@ -106,13 +106,6 @@ class CaseInfo extends StatelessWidget {
               const SizedBox(
                 width: 36,
               ),
-              // const Parameter(
-              //   title: "Сектор",
-              //   value: Text(
-              //     "Недвижимость",
-              //     style: AppTypography.sectionTitle,
-              //   ),
-              // ),
             ],
           ),
         ],

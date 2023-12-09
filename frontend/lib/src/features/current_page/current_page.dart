@@ -5,10 +5,12 @@ import 'package:frontend/src/features/account/account_page.dart';
 import 'package:frontend/src/features/cases/case_details.dart';
 import 'package:frontend/src/features/current_page/account_appbar.dart';
 import 'package:frontend/src/features/new_case/new_case_page.dart';
+import 'package:frontend/src/features/search/company_page.dart';
 import '../../common/strings.dart';
 import '../../common/theme/colors/app_palette.dart';
 import '../cases/cases_page.dart';
 import '../cases/models/case.dart';
+import '../cases/models/company.dart';
 import '../stats/stat_page.dart';
 
 class CurrentPage extends StatefulWidget {
@@ -28,6 +30,10 @@ class _CurrentPageState extends State<CurrentPage> {
     ),
     const NewCasePage(),
     const AccountPage(),
+    CompanyPage(
+      company: Company.mock(),
+      isInCase: false,
+    ),
   ];
 
   @override
@@ -89,6 +95,11 @@ class _CurrentPageState extends State<CurrentPage> {
                 icon: SvgPicture.asset('icons/deselected/account_d.svg'),
                 selectedIcon: SvgPicture.asset('icons/selected/account.svg'),
                 label: const Text(Strings.myAccount),
+              ),
+              NavigationDrawerDestination(
+                icon: SvgPicture.asset('icons/deselected/stats_d.svg'),
+                selectedIcon: SvgPicture.asset('icons/selected/stats.svg'),
+                label: const Text('О компании'),
               ),
             ],
           ),

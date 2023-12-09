@@ -116,7 +116,7 @@ class CurrencyBlock extends StatelessWidget {
       child: const Center(
         child: Text(
           Strings.rurSymbol,
-          style: AppTypography.ryrSymbol,
+          style: AppTypography.rurSymbol,
         ),
       ),
     );

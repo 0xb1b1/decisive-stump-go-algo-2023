@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 import 'package:frontend/src/widgets/table/paginated_data_table.dart';
-import 'package:frontend/src/widgets/table/table_source.dart';
+import 'package:frontend/src/features/stats/widgets/transactions_table_source.dart';
 
-import '../../common/strings.dart';
-import '../../features/transactions/models/transaction.dart';
+import '../../../common/strings.dart';
+import '../../transactions/models/transaction.dart';
 
 class TransactionTable extends StatelessWidget {
   final List<Transaction> transactions;
