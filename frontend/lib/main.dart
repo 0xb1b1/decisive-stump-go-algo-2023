@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'MOEX Trading',
       theme: AppTheme.defaultTheme,
       home: const AuthPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

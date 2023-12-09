@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend/src/features/account/account_page.dart';
 import 'package:frontend/src/features/cases/case_details.dart';
+import 'package:frontend/src/features/current_page/account_appbar.dart';
 import 'package:frontend/src/features/new_case/new_case_page.dart';
 import '../../common/strings.dart';
 import '../../common/theme/colors/app_palette.dart';
@@ -48,9 +49,6 @@ class _CurrentPageState extends State<CurrentPage> {
               const SizedBox(
                 height: 24,
               ),
-              const SizedBox(
-                height: 15,
-              ),
               Padding(
                 padding: const EdgeInsets.only(left: 24),
                 child: Align(
@@ -59,7 +57,18 @@ class _CurrentPageState extends State<CurrentPage> {
                 ),
               ),
               const SizedBox(
-                height: 24,
+                height: 15,
+              ),
+              Opacity(
+                opacity: 0.20,
+                child: Container(
+                  margin: const EdgeInsets.only(left: 24, right: 32),
+                  height: 1,
+                  decoration: const BoxDecoration(color: Color(0xFFF3F4F6)),
+                ),
+              ),
+              const SizedBox(
+                height: 33,
               ),
               NavigationDrawerDestination(
                 icon: SvgPicture.asset('icons/deselected/stats_d.svg'),
@@ -83,7 +92,13 @@ class _CurrentPageState extends State<CurrentPage> {
               ),
             ],
           ),
-          Expanded(child: pages[_selectedIndex]),
+          Expanded(
+              child: Column(
+            children: [
+              const AccountAppbar(),
+              Expanded(child: pages[_selectedIndex]),
+            ],
+          )),
         ],
       ),
     );

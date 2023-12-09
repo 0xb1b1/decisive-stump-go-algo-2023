@@ -17,6 +17,10 @@ class AuthCubit extends Cubit<AuthState> {
     required String email,
     required String password,
   }) async {
+    //TODO: remove hack
+    email = 'test@gmail.com';
+    password = 'qwerty123';
+
     emit(const AuthState.loading());
     final result = await _repository.signUp(email: email, password: password);
     final value = result.value;
