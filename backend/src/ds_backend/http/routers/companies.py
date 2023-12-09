@@ -2,6 +2,7 @@
 from fastapi import APIRouter, Security, HTTPException
 from fastapi_jwt import JwtAuthorizationCredentials
 from loguru import logger
+import re
 from pymongo.errors import DuplicateKeyError
 from datetime import datetime
 from urllib import parse as urlparse
@@ -9,7 +10,9 @@ from urllib import parse as urlparse
 from ds_backend.http.schemas.stock_info import \
     StockInfoParseRequestSchema, \
     StockInfoSchema, \
-    StocksInfoSchema
+    StocksInfoSchema, \
+    StockSearchSchema, \
+    StockSearchItemSchema
 
 from ds_backend.http.schemas.token import TokenSchema
 
@@ -63,4 +66,35 @@ def company_info(ticker: str):
         recommendation=gen_action_recommendation(recommendation),
         prognosis_percentage=123.01,
         portfolio_id="abcdefefwuifevuwifbn932409041",
+    )
+
+
+@router.get(
+    "/search",
+    response_model=StockSearchSchema,
+)
+def company_search(query: str):
+    reg = re.compile(
+        f".*{query}.*",
+        re.IGNORECASE,
+    )
+    cur = stock_info_repo.find_by(
+        {
+            "$or": [
+                {"symbol": reg},
+                {"company": reg},
+            ]
+        }
+    )
+
+    stock_search_items: list[StockSearchItemSchema] = []
+    for stock in cur:
+        stock_search_items.append(
+            StockSearchItemSchema(
+                ticker=stock.symbol,
+                company=stock.company,
+            )
+        )
+    return StockSearchSchema(
+        items=stock_search_items
     )

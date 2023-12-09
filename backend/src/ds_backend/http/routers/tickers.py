@@ -4,8 +4,6 @@ from fastapi_jwt import JwtAuthorizationCredentials
 from loguru import logger
 from pymongo.errors import DuplicateKeyError
 from datetime import datetime
-import requests
-import re
 from urllib import parse as urlparse
 
 from ds_backend.http.schemas.stock_info import \
@@ -52,37 +50,6 @@ def company_info(ticker: str):
         company=stock_info.company,
         description=stock_info.description,
         sector=stock_info.sector,
-    )
-
-
-@router.get(
-    "search",
-    response_model=StockSearchSchema,
-)
-def company_search(query: str):
-    reg = re.compile(
-        f".*{query}.*",
-        re.IGNORECASE,
-    )
-    cur = stock_info_repo.find_by(
-        {
-            "$or": [
-                {"symbol": reg},
-                {"company": reg},
-            ]
-        }
-    )
-
-    stock_search_items: list[StockSearchItemSchema] = []
-    for stock in cur:
-        stock_search_items.append(
-            StockSearchItemSchema(
-                ticker=stock.symbol,
-                company=stock.company,
-            )
-        )
-    return StockSearchSchema(
-        items=stock_search_items
     )
 
 
