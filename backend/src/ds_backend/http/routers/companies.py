@@ -52,12 +52,7 @@ stock_info_repo = StockInfoRepository(database=news_db)
     response_model=CompanyInfoSchema,
 )
 def company_info(
-    ticker: Annotated[
-        str,
-        Path(
-            title="Stock ticker. Example: YNDX",
-        )
-    ]
+    ticker: str
 ):
     uticker = ticker.upper()
     stock = stock_info_repo.find_one_by(
