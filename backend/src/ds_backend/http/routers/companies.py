@@ -48,7 +48,7 @@ stock_info_repo = StockInfoRepository(database=news_db)
 
 
 @router.get(
-    "/info",
+    "/cinfo",
     response_model=CompanyInfoSchema,
 )
 def company_info(ticker: str):
