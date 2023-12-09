@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
@@ -85,10 +87,18 @@ class CaseDetails extends StatelessWidget {
                       flex: 2,
                       child: Row(
                         children: [
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: GraphWidget(
                               title: Strings.caseStats,
+                              real: List.generate(
+                                  8,
+                                  (index) =>
+                                      StockData(pointX: 10.0 + index, pointY: Random().nextDouble() * 1000 + 300)),
+                              predicted: List.generate(
+                                  2,
+                                  (index) =>
+                                      StockData(pointX: 18.0 + index, pointY: Random().nextDouble() * 1000 + 300)),
                             ),
                           ),
                           const SizedBox(
@@ -137,12 +147,10 @@ class CaseDetails extends StatelessWidget {
                         tableTitle: Strings.companiesInCase,
                         buttonParameters: [
                           ButtonParameters(
-                              action: BlocProvider.of<CaseCubit>(context)
-                                  .stopSellFromInCase,
+                              action: BlocProvider.of<CaseCubit>(context).stopSellFromInCase,
                               title: Strings.stopStocks),
                           ButtonParameters(
-                              action: BlocProvider.of<CaseCubit>(context)
-                                  .makeInactiveFromInCase,
+                              action: BlocProvider.of<CaseCubit>(context).makeInactiveFromInCase,
                               title: Strings.makeInactiveStocks),
                         ],
                       ),
@@ -152,13 +160,11 @@ class CaseDetails extends StatelessWidget {
                         tableTitle: Strings.stoppedCompanies,
                         buttonParameters: [
                           ButtonParameters(
-                            action: BlocProvider.of<CaseCubit>(context)
-                                .resumeFromStopped,
+                            action: BlocProvider.of<CaseCubit>(context).resumeFromStopped,
                             title: Strings.resumeStocks,
                           ),
                           ButtonParameters(
-                            action: BlocProvider.of<CaseCubit>(context)
-                                .makeInactiveFromStopped,
+                            action: BlocProvider.of<CaseCubit>(context).makeInactiveFromStopped,
                             title: Strings.makeInactiveStocks,
                           ),
                         ],
@@ -169,8 +175,7 @@ class CaseDetails extends StatelessWidget {
                         companies: inactive,
                         buttonParameters: [
                           ButtonParameters(
-                            action: BlocProvider.of<CaseCubit>(context)
-                                .resumeFromInactive,
+                            action: BlocProvider.of<CaseCubit>(context).resumeFromInactive,
                             title: Strings.resumeStocks,
                           ),
                         ],

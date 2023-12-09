@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/src/features/search/widgets/company_about.dart';
 import 'package:frontend/src/widgets/graph_widget.dart';
@@ -57,12 +59,9 @@ class CompanyPage extends StatelessWidget {
                   Expanded(
                     child: IncomeWidget(
                       isColored: isInCase,
-                      title: isInCase
-                          ? Strings.currentProfit
-                          : Strings.currentCost,
+                      title: isInCase ? Strings.currentProfit : Strings.currentCost,
                       onButtonTap: () {},
-                      buttonTitle:
-                          isInCase ? Strings.caseTransition : Strings.addToCase,
+                      buttonTitle: isInCase ? Strings.caseTransition : Strings.addToCase,
                       income: company.amount,
                     ),
                   ),
@@ -76,10 +75,14 @@ class CompanyPage extends StatelessWidget {
               flex: 2,
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     flex: 2,
                     child: GraphWidget(
                       title: Strings.caseStats,
+                      real: List.generate(
+                          8, (index) => StockData(pointX: 10.0 + index, pointY: Random().nextDouble() * 1000 + 300)),
+                      predicted: List.generate(
+                          2, (index) => StockData(pointX: 18.0 + index, pointY: Random().nextDouble() * 1000 + 300)),
                     ),
                   ),
                   const SizedBox(
