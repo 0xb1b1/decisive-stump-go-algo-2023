@@ -79,9 +79,9 @@ async def login(credentials: UserLoginSchema):
         )
 
     # Check BCrypt hash
-    is_password_correct = bcrypt.check_password_hash(
-        user.password_hash,
-        credentials.password.encode("utf-8")
+    is_password_correct = bcrypt.checkpw(
+        credentials.password.encode("utf-8"),
+        user.password_hash.encode("utf-8"),
     )
 
     if not is_password_correct:
