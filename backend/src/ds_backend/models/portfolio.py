@@ -4,7 +4,6 @@ from pydantic_mongo import ObjectIdField
 
 
 class PortfolioStock(BaseModel):
-    id: ObjectIdField = None
     ticker: str = Field(
         description="Stock ticker. Example: YNDX.",
     )
