@@ -25,13 +25,17 @@ class PortfolioStockSchema(BaseModel):
 
 
 class PortfolioSchema(BaseModel):
+    id: str = Field(
+        description="Randomly generated identificator"
+    )
+
     sector: str = Field(
-        description="Portfolio name/sector."
+        description="Portfolio name/sector"
     )
 
     balance: float = Field(
         default=0.0,
-        description="Available money in the portfolio."
+        description="Available money in the portfolio"
     )
 
     # class Config:
