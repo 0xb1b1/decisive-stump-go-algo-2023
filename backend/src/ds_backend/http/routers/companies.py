@@ -59,10 +59,20 @@ def company_info(
         )
     ]
 ):
+    uticker = ticker.upper()
     stock = stock_info_repo.find_one_by(
-        {"symbol": ticker}
+        {"symbol": uticker}
+    )
+    logger.debug(
+        f"Searching company info by ticker {uticker}"
     )
     recommendation = StockActionRecommendationEnum.BUY
+
+    if stock is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Company not found"
+        )
 
     return CompanyInfoSchema(  # TODO: remove hard-coding
         name=stock.company,
