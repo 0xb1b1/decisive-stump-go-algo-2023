@@ -4,7 +4,7 @@ from enum import Enum
 
 # from ds_backend.http.schemas.stock_info import \
 #     StockInfoSchema
-from ds_backend.http.constants.stock_recommendation_colors import \
+from ds_backend.http.constants.stock_action_recommendation_colors import \
     StockRecommendationColor
 
 
