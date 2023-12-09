@@ -26,11 +26,10 @@ from ds_backend.db.repositories.news.stock_info import \
 
 from ds_backend.http.schemas.company import \
     CompanyInfoSchema, \
-    StockActionRecommendation, \
     StockActionRecommendationEnum
 
-from ds_backend.http.constants.stock_recommendation_colors import \
-    StockRecommendationColor
+from ds_backend.http.utils.generate_stock_action_recommendation import \
+    gen_action_recommendation
 
 
 router = APIRouter(
@@ -52,6 +51,7 @@ def company_info(ticker: str):
     stock = stock_info_repo.find_one_by(
         {"symbol": ticker}
     )
+    recommendation = StockActionRecommendationEnum.BUY
 
     return CompanyInfoSchema(  # TODO: remove hard-coding
         name=stock.company,
@@ -60,10 +60,7 @@ def company_info(ticker: str):
         description=stock.description,
         prediction=None,
         stock_price=1337.1234,
-        recommendation=StockActionRecommendation(
-            recommendation=StockActionRecommendationEnum.BUY,
-            color=StockRecommendationColor.BUY,
-        ),
+        recommendation=gen_action_recommendation(recommendation),
         prognosis_percentage=123.01,
         portfolio_id="abcdefefwuifevuwifbn932409041",
     )
