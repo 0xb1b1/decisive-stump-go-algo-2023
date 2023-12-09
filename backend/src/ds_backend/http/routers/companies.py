@@ -52,15 +52,21 @@ stock_info_repo = StockInfoRepository(database=news_db)
     response_model=CompanyInfoSchema,
 )
 def company_info(
-    ticker: str
+    ticker: Annotated[
+        str,
+        Path(
+            title="Stock ticker. Example: YNDX",
+        )
+    ]
 ):
     uticker = ticker.upper()
-    stock = stock_info_repo.find_one_by(
-        {"symbol": uticker}
-    )
     logger.debug(
         f"Searching company info by ticker {uticker}"
     )
+    stock = stock_info_repo.find_one_by(
+        {"symbol": uticker}
+    )
+    logger.debug(f"Stock search result: {stock}")
     recommendation = StockActionRecommendationEnum.BUY
 
     if stock is None:
