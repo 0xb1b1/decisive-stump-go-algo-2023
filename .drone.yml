@@ -24,10 +24,10 @@ steps:
       status: [success, changed]
       event:
         - push
-      # branch:    # TODO: restore after testing news_parser
-      #   - main
-      #   # yamllint disable-line rule:anchors
-      #   - "backend-master"
+      branch:
+        - main
+        # yamllint disable-line rule:anchors
+        - "backend-master"
 
   - name: build-frontend
     image: plugins/docker
@@ -64,10 +64,10 @@ steps:
       status: [success, changed]
       event:
         - push
-      # branch:  # TODO: restore after testing news_parser
-      #   - main
-      #   # yamllint disable-line rule:anchors
-      #   - "news-parser-master"
+      branch:
+        - main
+        # yamllint disable-line rule:anchors
+        - "news-parser-master"
 
   - name: build_notification
     image: appleboy/drone-discord
