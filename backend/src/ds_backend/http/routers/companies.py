@@ -38,7 +38,7 @@ from ds_backend.http.utils.generate_stock_action_recommendation import \
 
 router = APIRouter(
     prefix="/company",
-    tags=['Company', ],
+    tags=['Companies', ],
     # dependencies=[Depends(get_token_header)],
     responses={404: {"description": "Not found"}}
 )
