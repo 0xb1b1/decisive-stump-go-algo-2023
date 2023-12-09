@@ -10,18 +10,26 @@ from ds_backend.http.schemas.stock_info import \
     StockInfoParseRequestSchema, \
     StockInfoSchema, \
     StocksInfoSchema
+
 from ds_backend.http.schemas.token import TokenSchema
+
 from ds_backend import config
 
 from ds_backend.db.databases import backend_db, \
     news_db
+
 from ds_backend.db.repositories.news.article import \
     ArticleRepository
+
 from ds_backend.db.repositories.news.stock_info import \
     StockInfoRepository
+
 from ds_backend.http.schemas.company import \
     CompanyInfoSchema, \
     StockActionRecommendation
+
+from ds_backend.http.constants.stock_recommendation_colors import \
+    StockRecommendationColor, StockActionRecommendationEnum
 
 
 router = APIRouter(
@@ -51,7 +59,10 @@ def company_info(ticker: str):
         description=stock.description,
         prediction=None,
         stock_price=1337.1234,
-        recommendation=StockActionRecommendation.BUY,
+        recommendation=StockActionRecommendation(
+            recommendation=StockActionRecommendationEnum.BUY,
+            color=StockRecommendationColor.BUY,
+        ),
         prognosis_percentage=123.01,
         portfolio_id="abcdefefwuifevuwifbn932409041",
     )

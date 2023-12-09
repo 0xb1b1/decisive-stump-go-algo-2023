@@ -2,22 +2,34 @@
 from pydantic import BaseModel, Field
 from enum import Enum
 
-from ds_backend.http.schemas.stock_info import \
-    StockInfoSchema
+# from ds_backend.http.schemas.stock_info import \
+#     StockInfoSchema
+from ds_backend.http.constants.stock_recommendation_colors import \
+    StockRecommendationColor
 
 
-class StockActionRecommendation(str, Enum):
+class StockActionRecommendationEnum(str, Enum):
     """Suggested stock action.
     """
-    BUY = "buy"
-    SELL = "sell"
-    HOLD = "hold"
+    BUY = "Покупать"
+    SELL = "Продавать"
+    HOLD = "Удерживать"
 
 
 # class CompanyInfoRequestSchema(BaseModel):
 #     ticker: str = Field(
 #         description="Company's stock ticker name. Lang: EN"
 #     )
+
+
+class StockActionRecommendation(BaseModel):
+    recommendation: StockActionRecommendationEnum = Field(
+        description="Suggested stock action. Language: RU"
+    )
+
+    color: StockRecommendationColor = Field(
+        description="Stock action hex color"
+    )  # Use enum in http.constants.stock_recommendation_colors to get color
 
 
 class CompanyInfoSchema(BaseModel):
