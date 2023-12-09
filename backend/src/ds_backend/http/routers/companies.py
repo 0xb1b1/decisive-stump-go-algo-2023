@@ -70,9 +70,9 @@ def company_info(
         sector=stock.sector,
         description=stock.description,
         prediction=None,
-        stock_price=1337.1234,
+        stock_price=str(1337.1234),
         recommendation=gen_action_recommendation(recommendation),
-        prognosis_percentage=123.01,
+        prognosis_percentage=str(123.01),
         portfolio_id="abcdefefwuifevuwifbn932409041",
     )
 

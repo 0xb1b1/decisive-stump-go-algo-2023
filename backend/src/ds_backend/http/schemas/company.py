@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from pydantic import BaseModel, Field
 from enum import Enum
-from decimal import Decimal
 
 # from ds_backend.http.schemas.stock_info import \
 #     StockInfoSchema
@@ -54,7 +53,7 @@ class CompanyInfoSchema(BaseModel):
         description="Price prediction. TODO: create model"
     )
 
-    stock_price: Decimal = Field(
+    stock_price: str = Field(  # bruh
         description="Stock price in RUR, double decimal precision"
     )
 
@@ -62,7 +61,7 @@ class CompanyInfoSchema(BaseModel):
         description="Suggested stock action"
     )
 
-    prognosis_percentage: Decimal = Field(
+    prognosis_percentage: str = Field(  # bruh
         description="Price prognosis for the stock"
     )
 
