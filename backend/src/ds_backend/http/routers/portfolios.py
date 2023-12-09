@@ -52,7 +52,7 @@ portfolio_repo = PortfolioRepository(database=backend_db)
 
 @router.post(
     "/add_portfolio",
-    response_model=Portfolio,
+    response_model=PortfolioSchema,
 )
 def add_portfolio(
     portfolio: PortfolioSchema,
@@ -61,6 +61,11 @@ def add_portfolio(
     ),
 ):
     portfolio_uuid = str(uuid.uuid4())
+    portfolio_owner_email = credentials["email"]
+
+    portfolio.uuid = portfolio_uuid
+    portfolio.owner_email = portfolio_owner_email
+
     portfolio_stocks: list[PortfolioStock] = []
     for stock in portfolio.stocks:
         portfolio_stocks.append(
@@ -75,7 +80,7 @@ def add_portfolio(
     portfolio_repo.save(
         Portfolio(
             uuid=portfolio_uuid,
-            owner_email=credentials["email"],
+            owner_email=portfolio_owner_email,
             sector=portfolio.sector,
             balance=portfolio.balance,
             stocks=portfolio_stocks,
@@ -95,7 +100,7 @@ def add_portfolio(
             detail="Failed to find the portfolio in the database"
         )
 
-    return db_portfolio
+    return portfolio
 
 
 @router.get(
