@@ -51,7 +51,12 @@ stock_info_repo = StockInfoRepository(database=news_db)
     "/info_company",
     response_model=CompanyInfoSchema,
 )
-def company_info(ticker: str):
+def company_info(
+    ticker: str,
+    credentials: JwtAuthorizationCredentials = Security(
+        config.jwt_ac,
+    ),
+):
     uticker = ticker.upper()
     logger.debug(
         f"Searching company info by ticker {uticker}"
@@ -77,7 +82,7 @@ def company_info(ticker: str):
         stock_price=str(1337.1234),
         recommendation=gen_action_recommendation(recommendation),
         prognosis_percentage=str(123.01),
-        portfolio_id="abcdefefwuifevuwifbn932409041",
+        portfolio_uuid="abcdefefwuifevuwifbn932409041",  # TODO
     )
 
 
