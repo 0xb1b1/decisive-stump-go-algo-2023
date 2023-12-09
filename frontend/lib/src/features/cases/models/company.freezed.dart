@@ -22,10 +22,14 @@ Company _$CompanyFromJson(Map<String, dynamic> json) {
 mixin _$Company {
   String get title => throw _privateConstructorUsedError;
   double get income => throw _privateConstructorUsedError;
+  double get currentPrice => throw _privateConstructorUsedError;
+  String get recomendation => throw _privateConstructorUsedError;
+  String get sector => throw _privateConstructorUsedError;
   String get ticker => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
   double get amountSingle => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
+  String get about => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,10 +44,14 @@ abstract class $CompanyCopyWith<$Res> {
   $Res call(
       {String title,
       double income,
+      double currentPrice,
+      String recomendation,
+      String sector,
       String ticker,
       int count,
       double amountSingle,
-      double amount});
+      double amount,
+      String about});
 }
 
 /// @nodoc
@@ -61,10 +69,14 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
   $Res call({
     Object? title = null,
     Object? income = null,
+    Object? currentPrice = null,
+    Object? recomendation = null,
+    Object? sector = null,
     Object? ticker = null,
     Object? count = null,
     Object? amountSingle = null,
     Object? amount = null,
+    Object? about = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -75,6 +87,18 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
           ? _value.income
           : income // ignore: cast_nullable_to_non_nullable
               as double,
+      currentPrice: null == currentPrice
+          ? _value.currentPrice
+          : currentPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      recomendation: null == recomendation
+          ? _value.recomendation
+          : recomendation // ignore: cast_nullable_to_non_nullable
+              as String,
+      sector: null == sector
+          ? _value.sector
+          : sector // ignore: cast_nullable_to_non_nullable
+              as String,
       ticker: null == ticker
           ? _value.ticker
           : ticker // ignore: cast_nullable_to_non_nullable
@@ -91,6 +115,10 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
+      about: null == about
+          ? _value.about
+          : about // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -105,10 +133,14 @@ abstract class _$$CompanyImplCopyWith<$Res> implements $CompanyCopyWith<$Res> {
   $Res call(
       {String title,
       double income,
+      double currentPrice,
+      String recomendation,
+      String sector,
       String ticker,
       int count,
       double amountSingle,
-      double amount});
+      double amount,
+      String about});
 }
 
 /// @nodoc
@@ -124,10 +156,14 @@ class __$$CompanyImplCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? income = null,
+    Object? currentPrice = null,
+    Object? recomendation = null,
+    Object? sector = null,
     Object? ticker = null,
     Object? count = null,
     Object? amountSingle = null,
     Object? amount = null,
+    Object? about = null,
   }) {
     return _then(_$CompanyImpl(
       title: null == title
@@ -138,6 +174,18 @@ class __$$CompanyImplCopyWithImpl<$Res>
           ? _value.income
           : income // ignore: cast_nullable_to_non_nullable
               as double,
+      currentPrice: null == currentPrice
+          ? _value.currentPrice
+          : currentPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      recomendation: null == recomendation
+          ? _value.recomendation
+          : recomendation // ignore: cast_nullable_to_non_nullable
+              as String,
+      sector: null == sector
+          ? _value.sector
+          : sector // ignore: cast_nullable_to_non_nullable
+              as String,
       ticker: null == ticker
           ? _value.ticker
           : ticker // ignore: cast_nullable_to_non_nullable
@@ -154,6 +202,10 @@ class __$$CompanyImplCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
+      about: null == about
+          ? _value.about
+          : about // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -164,10 +216,14 @@ class _$CompanyImpl implements _Company {
   const _$CompanyImpl(
       {required this.title,
       required this.income,
+      required this.currentPrice,
+      required this.recomendation,
+      required this.sector,
       required this.ticker,
       required this.count,
       required this.amountSingle,
-      required this.amount});
+      required this.amount,
+      required this.about});
 
   factory _$CompanyImpl.fromJson(Map<String, dynamic> json) =>
       _$$CompanyImplFromJson(json);
@@ -177,6 +233,12 @@ class _$CompanyImpl implements _Company {
   @override
   final double income;
   @override
+  final double currentPrice;
+  @override
+  final String recomendation;
+  @override
+  final String sector;
+  @override
   final String ticker;
   @override
   final int count;
@@ -184,10 +246,12 @@ class _$CompanyImpl implements _Company {
   final double amountSingle;
   @override
   final double amount;
+  @override
+  final String about;
 
   @override
   String toString() {
-    return 'Company(title: $title, income: $income, ticker: $ticker, count: $count, amountSingle: $amountSingle, amount: $amount)';
+    return 'Company(title: $title, income: $income, currentPrice: $currentPrice, recomendation: $recomendation, sector: $sector, ticker: $ticker, count: $count, amountSingle: $amountSingle, amount: $amount, about: $about)';
   }
 
   @override
@@ -197,17 +261,23 @@ class _$CompanyImpl implements _Company {
             other is _$CompanyImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.income, income) || other.income == income) &&
+            (identical(other.currentPrice, currentPrice) ||
+                other.currentPrice == currentPrice) &&
+            (identical(other.recomendation, recomendation) ||
+                other.recomendation == recomendation) &&
+            (identical(other.sector, sector) || other.sector == sector) &&
             (identical(other.ticker, ticker) || other.ticker == ticker) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.amountSingle, amountSingle) ||
                 other.amountSingle == amountSingle) &&
-            (identical(other.amount, amount) || other.amount == amount));
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.about, about) || other.about == about));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, title, income, ticker, count, amountSingle, amount);
+  int get hashCode => Object.hash(runtimeType, title, income, currentPrice,
+      recomendation, sector, ticker, count, amountSingle, amount, about);
 
   @JsonKey(ignore: true)
   @override
@@ -227,10 +297,14 @@ abstract class _Company implements Company {
   const factory _Company(
       {required final String title,
       required final double income,
+      required final double currentPrice,
+      required final String recomendation,
+      required final String sector,
       required final String ticker,
       required final int count,
       required final double amountSingle,
-      required final double amount}) = _$CompanyImpl;
+      required final double amount,
+      required final String about}) = _$CompanyImpl;
 
   factory _Company.fromJson(Map<String, dynamic> json) = _$CompanyImpl.fromJson;
 
@@ -239,6 +313,12 @@ abstract class _Company implements Company {
   @override
   double get income;
   @override
+  double get currentPrice;
+  @override
+  String get recomendation;
+  @override
+  String get sector;
+  @override
   String get ticker;
   @override
   int get count;
@@ -246,6 +326,8 @@ abstract class _Company implements Company {
   double get amountSingle;
   @override
   double get amount;
+  @override
+  String get about;
   @override
   @JsonKey(ignore: true)
   _$$CompanyImplCopyWith<_$CompanyImpl> get copyWith =>

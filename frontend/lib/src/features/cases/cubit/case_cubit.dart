@@ -11,12 +11,17 @@ class CaseCubit extends Cubit<CaseState> {
     final companies = List.generate(
       10,
       (index) => Company(
-          title: 'недвиж $index',
-          income: 239392.23,
-          ticker: 'AAAA $index',
-          count: 20 + index,
-          amountSingle: 1239.03 + index,
-          amount: 1239.03 + index),
+        title: 'недвиж $index',
+        income: 239392.23,
+        ticker: 'AAAA $index',
+        count: 20 + index,
+        amountSingle: 1239.03 + index,
+        amount: 1239.03 + index,
+        currentPrice: 234234.23,
+        recomendation: "Покупать",
+        sector: "Недвижимость",
+        about: 'волвоалафыфа',
+      ),
     );
     await Future.delayed(
       const Duration(seconds: 1),
