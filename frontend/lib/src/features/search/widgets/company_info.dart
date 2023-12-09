@@ -22,7 +22,8 @@ class CompanyInfo extends StatelessWidget {
         borderRadius: BorderRadius.circular(largeRadius),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           Column(
@@ -37,13 +38,15 @@ class CompanyInfo extends StatelessWidget {
               Text(
                 company.ticker,
                 overflow: TextOverflow.ellipsis,
-                style: AppTypography.caseTitle,
               ),
             ],
           ),
+          const SizedBox(
+            height: 28,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Parameter(
                 title: "Прогноз на 8 часов",
@@ -54,7 +57,7 @@ class CompanyInfo extends StatelessWidget {
                     children: parts.length > 1
                         ? [
                             TextSpan(
-                              text: '.${parts[1]}%',
+                              text: '.${parts[1]} %',
                               style: AppTypography.sectionTitle
                                   .copyWith(color: AppPalette.greyText),
                             )
@@ -66,7 +69,7 @@ class CompanyInfo extends StatelessWidget {
               Parameter(
                 title: "Текущая стоимость",
                 value: Text(
-                  "+ ${company.currentPrice} ${Strings.rurSymbol}",
+                  "${company.currentPrice} ${Strings.rurSymbol}",
                   style: AppTypography.sectionTitle,
                 ),
               ),

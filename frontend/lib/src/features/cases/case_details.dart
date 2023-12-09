@@ -4,6 +4,7 @@ import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/features/cases/cubit/case_cubit.dart';
 import 'package:frontend/src/features/cases/models/button_parameters.dart';
 import 'package:frontend/src/features/cases/models/case.dart';
+import 'package:frontend/src/widgets/graph_widget.dart';
 import 'package:frontend/src/widgets/income_widget.dart';
 import 'package:frontend/src/features/cases/widgets/case_info.dart';
 import 'package:frontend/src/features/cases/widgets/table/companies_table.dart';
@@ -28,14 +29,13 @@ class CaseDetails extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppPalette.greyBg,
+          foregroundColor: AppPalette.greyBg,
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back,
               color: AppPalette.greyText,
             ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ),
         body: Padding(
@@ -79,15 +79,15 @@ class CaseDetails extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 18),
                     Expanded(
                       flex: 2,
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             flex: 2,
-                            child: CaseInfo(
-                              portfolio: portfolio,
+                            child: GraphWidget(
+                              title: Strings.caseStats,
                             ),
                           ),
                           const SizedBox(

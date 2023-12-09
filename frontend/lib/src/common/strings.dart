@@ -22,6 +22,7 @@ class Strings {
   static const cases = 'Портфели';
   static const newCase = 'Новый портфель';
   static const myAccount = 'Мой счет';
+  static const stats24Hours = 'Статистика за 24 часа';
 
 // страница авторизации
   static const authTitle =
@@ -59,4 +60,11 @@ class Strings {
   static const upAccount = "Пополнить счёт";
   static const companies = "Компании";
   static const edit = "Редактировать";
+
+  //поиск компании
+  static const aboutCompany = 'О компании';
+  static const currentCost = 'Текущая стоимость';
+  static const caseTransition = 'Перейти в портфель';
+  static const addToCase = 'Добавить в портфель';
+  static const currentProfit = 'Текущий доход';
 }

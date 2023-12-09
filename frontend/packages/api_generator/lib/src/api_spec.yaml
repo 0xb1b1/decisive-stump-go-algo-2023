@@ -117,7 +117,7 @@
         },
         "security": [
           {
-            "JwtAccessBearer": [ ]
+            "JwtAccessBearer": []
           }
         ]
       }
@@ -207,6 +207,96 @@
           }
         }
       }
+    },
+    "/tickers/company": {
+      "get": {
+        "tags": [
+          "Tickers"
+        ],
+        "summary": "Company Info",
+        "operationId": "company_info_tickers_company_get",
+        "parameters": [
+          {
+            "name": "ticker",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Ticker"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockInfoSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tickers/parse": {
+      "post": {
+        "tags": [
+          "Tickers"
+        ],
+        "summary": "Parse Stocks",
+        "description": "Gets a list of tickers from user,\nfetches information on them and saves to DB.\n\nArgs:\n    stocks (StockInfoParseRequestSchema): List of tickers to parse.",
+        "operationId": "parse_stocks_tickers_parse_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StockInfoParseRequestSchema"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StocksInfoSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -247,7 +337,7 @@
             },
             "type": "array",
             "title": "Stocks",
-            "default": [ ]
+            "default": []
           },
           "tags": {
             "items": {
@@ -255,7 +345,7 @@
             },
             "type": "array",
             "title": "Tags",
-            "default": [ ]
+            "default": []
           }
         },
         "type": "object",
@@ -341,6 +431,87 @@
         ],
         "title": "Stock"
       },
+      "StockInfoParseRequestSchema": {
+        "properties": {
+          "tickers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tickers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tickers"
+        ],
+        "title": "StockInfoParseRequestSchema"
+      },
+      "StockInfoSchema": {
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "Symbol"
+          },
+          "company": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "sector": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sector"
+          }
+        },
+        "type": "object",
+        "required": [
+          "symbol",
+          "company",
+          "description",
+          "sector"
+        ],
+        "title": "StockInfoSchema"
+      },
+      "StocksInfoSchema": {
+        "properties": {
+          "stocks": {
+            "items": {
+              "$ref": "#/components/schemas/StockInfoSchema"
+            },
+            "type": "array",
+            "title": "Stocks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "stocks"
+        ],
+        "title": "StocksInfoSchema"
+      },
       "Tag": {
         "properties": {
           "name": {
@@ -398,15 +569,15 @@
             "format": "email",
             "title": "Email"
           },
-          "password_hash": {
+          "password": {
             "type": "string",
-            "title": "Password Hash"
+            "title": "Password"
           }
         },
         "type": "object",
         "required": [
           "email",
-          "password_hash"
+          "password"
         ],
         "title": "UserLoginSchema"
       },

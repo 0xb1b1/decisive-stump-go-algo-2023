@@ -18,7 +18,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MOEX Trading',
       theme: AppTheme.defaultTheme,
-      home: const AuthPage(),
+      home: const CurrentPage(),
+
+      // const AuthPage(),
     );
   }
 }

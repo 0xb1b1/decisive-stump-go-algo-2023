@@ -11,7 +11,7 @@ class AuthApi {
     required String email,
     required String password,
   }) async {
-    const path = r'http://217.151.229.24:2280/auth/login';
+    const path = r'https://backend.ds.seizure.icu/auth/login';
 
     final postData = <String, dynamic>{
       r'email': email,
@@ -58,7 +58,7 @@ class AuthApi {
     required String email,
     required String password,
   }) async {
-    const path = r'http://217.151.229.24:2280/auth/signup';
+    const path = r'https://backend.ds.seizure.icu/auth/signup';
 
     final options = Options(
       method: r'POST',
