@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/src/features/cases/models/company.dart';
 
-import '../models/case.dart';
 import 'case_state.dart';
 
 class CaseCubit extends Cubit<CaseState> {

@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:frontend/src/api/models/article_list.dart';
-import 'package:frontend/src/api/models/stock_info.dart';
+
+import 'models/company_info.dart';
 
 class AppApi {
   final Dio _dio;
@@ -59,10 +60,10 @@ class AppApi {
     );
   }
 
-  Future<Response<StockInfo>> getStocks({
+  Future<Response<CompanyInfo>> getCompany({
     required String ticker,
   }) async {
-    const path = r'https://backend.ds.seizure.icu/news/get';
+    const path = r'https://backend.ds.seizure.icu/company/info_company';
 
     final queryParameters = <String, dynamic>{
       r'ticker': ticker,
@@ -79,11 +80,11 @@ class AppApi {
       queryParameters: queryParameters,
     );
 
-    StockInfo responseData;
+    CompanyInfo responseData;
 
     try {
-      final Map<String, dynamic> map = json.decode(response.data!.toString());
-      responseData = StockInfo.fromJson(map);
+      final Map<String, dynamic> map = jsonDecode(response.data!.toString());
+      responseData = CompanyInfo.fromJson(map);
     } catch (error, stackTrace) {
       throw DioException(
           requestOptions: response.requestOptions,
@@ -93,7 +94,7 @@ class AppApi {
           stackTrace: stackTrace);
     }
 
-    return Response<StockInfo>(
+    return Response<CompanyInfo>(
       data: responseData,
       headers: response.headers,
       isRedirect: response.isRedirect,
