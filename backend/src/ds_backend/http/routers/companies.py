@@ -20,11 +20,14 @@ from ds_backend.db.repositories.news.article import \
     ArticleRepository
 from ds_backend.db.repositories.news.stock_info import \
     StockInfoRepository
+from ds_backend.http.schemas.company import \
+    CompanyInfoSchema, CompanyInfoRequestSchema, \
+    StockActionRecommendation
 
 
 router = APIRouter(
-    prefix="/tickers",
-    tags=['Tickers', ],
+    prefix="/company",
+    tags=['Company', ],
     # dependencies=[Depends(get_token_header)],
     responses={404: {"description": "Not found"}}
 )
@@ -35,38 +38,21 @@ stock_info_repo = StockInfoRepository(database=news_db)
 
 @router.get(
     "/info",
-    response_model=StockInfoSchema,
+    response_model=CompanyInfoSchema,
 )
-def company_info(ticker: str):
-    stock_info = stock_info_repo.find_one_by(
-        {
-            "symbol": ticker,
-        }
+def company_info(request: CompanyInfoRequestSchema):
+    stock = stock_info_repo.find_one_by(
+        {"symbol": request.ticker}
     )
 
-    return StockInfoSchema(
-        symbol=stock_info.symbol,
-        company=stock_info.company,
-        description=stock_info.description,
-        sector=stock_info.sector,
+    return CompanyInfoSchema(  # TODO: remove hard-coding
+        name=stock.name,
+        ticker=stock.symbol,
+        sector=stock.sector,
+        decription=stock.description,
+        prediction=69.420,
+        stock_price=1337.1234,
+        recommendation=StockActionRecommendation.BUY,
+        prognosis_percentage=123.01,
+        portfolio_id="abcdefefwuifevuwifbn932409041",
     )
-
-
-@router.post(
-    "/parse",
-    response_model=StocksInfoSchema,
-)
-def parse_stocks(stocks: StockInfoParseRequestSchema):
-    """Gets a list of tickers from user,
-    fetches information on them and saves to DB.
-
-    Args:
-        stocks (StockInfoParseRequestSchema): List of tickers to parse.
-    """
-    pass
-    # requests.post(
-    #     urlparse.urljoin(
-    #         config.NEWS_PARSER_BASE_URL,
-    #         "",
-    #     )
-    # )

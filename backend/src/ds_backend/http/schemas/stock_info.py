@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class StockInfoParseRequestSchema(BaseModel):
@@ -7,10 +7,22 @@ class StockInfoParseRequestSchema(BaseModel):
 
 
 class StockInfoSchema(BaseModel):
-    symbol: str
-    company: str | None
-    description: str | None
-    sector: str | None
+    symbol: str = Field(
+        description="Stock ticker. Example: YNDX"
+    )
+
+    company: str | None = Field(
+        description="Company name. Example: ООО Яндекс"
+    )
+
+    description: str | None = Field(
+        description="Stock description, parsed. Lang: Russian"
+    )
+
+    sector: str | None = Field(
+        description="Economics industry name. Lang: Russian. \
+Example: Информационные технологии"
+    )
 
 
 class StocksInfoSchema(BaseModel):

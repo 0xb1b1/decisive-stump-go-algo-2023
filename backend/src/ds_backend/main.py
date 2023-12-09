@@ -31,6 +31,7 @@ def run() -> None:
     from ds_backend.http.routers.auth import router as auth_router
     from ds_backend.http.routers.news import router as news_router
     from ds_backend.http.routers.tickers import router as tickers_router
+    from ds_backend.http.routers.companies import router as companies_router
 
     from ds_backend.http.routers.signals import router as sig_router
 
@@ -52,6 +53,7 @@ def run() -> None:
     app.include_router(news_router)
     app.include_router(sig_router)
     app.include_router(tickers_router)
+    app.include_router(companies_router)
 
     logger.info(f"Starting FastAPI on port {config.WEBSERVER_PORT}.")
     if config.IS_WEBSERVER_PORT_DEFAULT:
