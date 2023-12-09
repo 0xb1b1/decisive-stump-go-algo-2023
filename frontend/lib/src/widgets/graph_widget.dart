@@ -8,6 +8,8 @@ import 'package:frontend/src/common/theme/text/app_typography.dart';
 import '../common/theme/border_radius/border_radius.dart';
 import '../common/theme/colors/app_palette.dart';
 
+import 'package:intl/intl.dart';
+
 enum GraphType { day, week, month, halfyear }
 
 class StockData {
@@ -21,14 +23,26 @@ class StockData {
 
 class GraphWidget extends StatefulWidget {
   final String title;
-  final List<StockData> real;
-  final List<StockData> predicted;
+  final List<StockData> realDay;
+  final List<StockData> predictedDay;
+  final List<StockData> realWeek;
+  final List<StockData> predictedWeek;
+  final List<StockData> realMonth;
+  final List<StockData> predictedMonth;
+  final List<StockData> realHalfYear;
+  final List<StockData> predictedHalfYear;
 
   const GraphWidget({
     Key? key,
     required this.title,
-    required this.real,
-    required this.predicted,
+    required this.realDay,
+    required this.predictedDay,
+    required this.realWeek,
+    required this.predictedWeek,
+    required this.realMonth,
+    required this.predictedMonth,
+    required this.realHalfYear,
+    required this.predictedHalfYear,
   }) : super(key: key);
 
   @override
@@ -37,6 +51,17 @@ class GraphWidget extends StatefulWidget {
 
 class _GraphWidgetState extends State<GraphWidget> {
   GraphType type = GraphType.day;
+
+  late List<StockData> real;
+  late List<StockData> predicted;
+
+  @override
+  void initState() {
+    real = widget.realDay;
+    predicted = widget.predictedDay;
+
+    super.initState();
+  }
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     // Customize your widget here for the Y-axis
@@ -54,11 +79,26 @@ class _GraphWidgetState extends State<GraphWidget> {
     return SizedBox.shrink();
   }
 
+  String getXTitle(double value) {
+    switch (type) {
+      case GraphType.day:
+        return '${value.toString()}:00';
+      case GraphType.week:
+        return DateFormat('EEE', 'ru').format(DateTime.utc(2023, 1, 2 + value.toInt()));
+      case GraphType.month:
+        return DateFormat('MMM d', 'ru').format(DateTime.utc(2023, 1, 0 + value.toInt()));
+      case GraphType.halfyear:
+        return DateFormat('MMM', 'ru').format(DateTime(2020, value.toInt() + 1, 1));
+      default:
+        return value.toString();
+    }
+  }
+
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     // Customize your widget here for the X-axis
     if (value - value.floor() < 0.01)
       return Text(
-        '${value.toString()}:00',
+        getXTitle(value),
         textAlign: TextAlign.right,
         style: TextStyle(
           color: Color(0xFF14161C),
@@ -71,12 +111,12 @@ class _GraphWidgetState extends State<GraphWidget> {
 
   double getMinY() {
     double min = double.infinity;
-    for (var element in widget.real) {
+    for (var element in real) {
       if (element.pointY < min) {
         min = element.pointY;
       }
     }
-    for (var element in widget.predicted) {
+    for (var element in predicted) {
       if (element.pointY < min) {
         min = element.pointY;
       }
@@ -87,12 +127,12 @@ class _GraphWidgetState extends State<GraphWidget> {
 
   double getMaxY() {
     double max = 0;
-    for (var element in widget.real) {
+    for (var element in real) {
       if (element.pointY > max) {
         max = element.pointY;
       }
     }
-    for (var element in widget.predicted) {
+    for (var element in predicted) {
       if (element.pointY > max) {
         max = element.pointY;
       }
@@ -103,12 +143,12 @@ class _GraphWidgetState extends State<GraphWidget> {
 
   double getMinX() {
     double min = double.infinity;
-    for (var element in widget.real) {
+    for (var element in real) {
       if (element.pointX < min) {
         min = element.pointX;
       }
     }
-    for (var element in widget.predicted) {
+    for (var element in predicted) {
       if (element.pointX < min) {
         min = element.pointX;
       }
@@ -119,12 +159,12 @@ class _GraphWidgetState extends State<GraphWidget> {
 
   double getMaxX() {
     double max = 0;
-    for (var element in widget.real) {
+    for (var element in real) {
       if (element.pointX > max) {
         max = element.pointX;
       }
     }
-    for (var element in widget.predicted) {
+    for (var element in predicted) {
       if (element.pointX > max) {
         max = element.pointX;
       }
@@ -160,6 +200,8 @@ class _GraphWidgetState extends State<GraphWidget> {
                     onTap: () {
                       setState(() {
                         type = GraphType.day;
+                        real = widget.realDay;
+                        predicted = widget.predictedDay;
                       });
                     },
                     child: Container(
@@ -187,6 +229,8 @@ class _GraphWidgetState extends State<GraphWidget> {
                     onTap: () {
                       setState(() {
                         type = GraphType.week;
+                        real = widget.realWeek;
+                        predicted = widget.predictedWeek;
                       });
                     },
                     child: Container(
@@ -208,6 +252,8 @@ class _GraphWidgetState extends State<GraphWidget> {
                     onTap: () {
                       setState(() {
                         type = GraphType.month;
+                        real = widget.realMonth;
+                        predicted = widget.predictedMonth;
                       });
                     },
                     child: Container(
@@ -229,6 +275,8 @@ class _GraphWidgetState extends State<GraphWidget> {
                     onTap: () {
                       setState(() {
                         type = GraphType.halfyear;
+                        real = widget.realHalfYear;
+                        predicted = widget.predictedHalfYear;
                       });
                     },
                     child: Container(
@@ -307,7 +355,7 @@ class _GraphWidgetState extends State<GraphWidget> {
                 maxY: getMaxY(),
                 lineBarsData: [
                   LineChartBarData(
-                    spots: widget.real.map((e) => FlSpot(e.pointX, e.pointY)).toList(),
+                    spots: real.map((e) => FlSpot(e.pointX, e.pointY)).toList(),
                     color: Colors.blue,
                     barWidth: 4,
                     isStrokeCapRound: true,
@@ -316,8 +364,8 @@ class _GraphWidgetState extends State<GraphWidget> {
                   ),
                   LineChartBarData(
                     spots: [
-                      FlSpot(widget.real.last.pointX, widget.real.last.pointY),
-                      ...widget.predicted.map((e) => FlSpot(e.pointX, e.pointY)).toList()
+                      FlSpot(real.last.pointX, real.last.pointY),
+                      ...predicted.map((e) => FlSpot(e.pointX, e.pointY)).toList()
                     ],
                     color: Colors.blue,
                     barWidth: 4,
