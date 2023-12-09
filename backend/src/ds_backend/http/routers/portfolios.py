@@ -192,7 +192,7 @@ requested portfolio (UUID: {uuid})"
     return PortfolioSchema(
         uuid=portfolio.uuid,
         sector=portfolio.sector,
-        balance=portfolio.balance,
+        balance=str(portfolio.balance),
         profit_weekly_percent="69.420",
         profit="123.45",
         stocks=portfolio_stocks,
