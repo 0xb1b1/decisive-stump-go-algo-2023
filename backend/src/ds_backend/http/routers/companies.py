@@ -4,7 +4,6 @@ from fastapi_jwt import JwtAuthorizationCredentials
 from loguru import logger
 from pymongo.errors import DuplicateKeyError
 from datetime import datetime
-import requests
 from urllib import parse as urlparse
 
 from ds_backend.http.schemas.stock_info import \
@@ -40,9 +39,9 @@ stock_info_repo = StockInfoRepository(database=news_db)
     "/info",
     response_model=CompanyInfoSchema,
 )
-def company_info(request: CompanyInfoRequestSchema):
+def company_info(ticker: str):
     stock = stock_info_repo.find_one_by(
-        {"symbol": request.ticker}
+        {"symbol": ticker}
     )
 
     return CompanyInfoSchema(  # TODO: remove hard-coding

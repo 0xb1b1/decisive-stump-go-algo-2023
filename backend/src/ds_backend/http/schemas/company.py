@@ -14,10 +14,10 @@ class StockActionRecommendation(str, Enum):
     HOLD = "hold"
 
 
-class CompanyInfoRequestSchema(BaseModel):
-    ticker: str = Field(
-        description="Company's stock ticker name. Lang: EN"
-    )
+# class CompanyInfoRequestSchema(BaseModel):
+#     ticker: str = Field(
+#         description="Company's stock ticker name. Lang: EN"
+#     )
 
 
 class CompanyInfoSchema(BaseModel):
