@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/src/features/account/account_cubit.dart';
 import 'package:frontend/src/features/account/widgets/account_sum.dart';
 import 'package:frontend/src/features/account/widgets/account_widget.dart';
 
@@ -9,38 +11,43 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 48,
-          vertical: 36,
-        ),
-        child: Center(
-          child: Row(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (c, i) {
-                    return AccountWidget(
-                      money: i * 1000,
-                      name: 'Счет аккаунта $i',
-                      numberEnd: i * 1000,
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(
-                width: 24,
-              ),
-              Column(
+    return BlocProvider(
+      create: (context) => AccountCubit(),
+      child: Scaffold(
+        body: BlocBuilder<AccountCubit, AccountState>(builder: (BuildContext context, state) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 48,
+              vertical: 36,
+            ),
+            child: Center(
+              child: Row(
                 children: [
-                  const AccountSum(),
+                  Expanded(
+                    child: (state is AccountLoaded)
+                        ? ListView.builder(
+                            itemCount: state.cases.length,
+                            itemBuilder: (c, i) {
+                              return AccountWidget(
+                                accountcase: state.cases[i],
+                              );
+                            },
+                          )
+                        : CircularProgressIndicator(),
+                  ),
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  Column(
+                    children: [
+                      const AccountSum(),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        }),
       ),
     );
   }

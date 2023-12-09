@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
+import 'package:frontend/src/features/account/account_cubit.dart';
 
 class AccountWidget extends StatelessWidget {
   const AccountWidget({
     Key? key,
-    required this.name,
-    required this.numberEnd,
-    required this.money,
+    required this.accountcase,
   }) : super(key: key);
 
-  final String name;
-  final int numberEnd;
-  final int money;
+  final AccountCase accountcase;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +25,7 @@ class AccountWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                name,
+                accountcase.name,
                 style: const TextStyle(
                   color: AppPalette.black,
                   fontSize: 24,
@@ -38,7 +35,7 @@ class AccountWidget extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '₽$money',
+                '${accountcase.money} ₽',
                 style: const TextStyle(
                   color: AppPalette.black,
                   fontSize: 24,
@@ -52,7 +49,7 @@ class AccountWidget extends StatelessWidget {
           //   height: 12,
           // ),
           Text(
-            '*$numberEnd',
+            '*${accountcase.numberEnd}',
             style: const TextStyle(
               color: AppPalette.greyText,
               fontSize: 14,
