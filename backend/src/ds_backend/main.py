@@ -8,6 +8,26 @@ import sys
 from ds_backend import config
 
 
+fastapi_tags_metadata = [
+    {
+        "name": "Authentication",
+        "description": "Operations regarding user identity.",
+    },
+    {
+        "name": "News",
+        "description": "Get data related to parsed news.",
+    },
+    {
+        "name": "Tickers",
+        "description": "Operations with individual tickers.",
+    },
+    {
+        "name": "Companies",
+        "description": "Operations related to companies.",
+    },
+]
+
+
 def run() -> None:
     # Set up Loguru
     logger.remove()
@@ -35,7 +55,9 @@ def run() -> None:
 
     from ds_backend.http.routers.signals import router as sig_router
 
-    app = FastAPI()
+    app = FastAPI(
+        openapi_tags=fastapi_tags_metadata,
+    )
 
     # CORS Policy
     origins = ["*"]

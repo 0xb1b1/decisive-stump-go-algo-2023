@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-from fastapi import APIRouter, Security, HTTPException
+from typing import Annotated
+from fastapi import APIRouter, Security, HTTPException, Path
 from fastapi_jwt import JwtAuthorizationCredentials
 from loguru import logger
 import re
@@ -50,7 +51,14 @@ stock_info_repo = StockInfoRepository(database=news_db)
     "/info",
     response_model=CompanyInfoSchema,
 )
-def company_info(ticker: str):
+def company_info(
+    ticker: Annotated[
+        str,
+        Path(
+            title="Stock ticker. Example: YNDX",
+        )
+    ]
+):
     stock = stock_info_repo.find_one_by(
         {"symbol": ticker}
     )
