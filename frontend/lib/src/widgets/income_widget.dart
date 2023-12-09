@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/common/strings.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
-import '../../../common/theme/border_radius/border_radius.dart';
-import '../../../common/theme/text/app_typography.dart';
-import '../../account/account_page.dart';
+import '../common/theme/border_radius/border_radius.dart';
+import '../common/theme/text/app_typography.dart';
+import '../features/account/account_page.dart';
 
-class CaseIncome extends StatelessWidget {
-  const CaseIncome({super.key});
+class IncomeWidget extends StatelessWidget {
+  final String title;
+  final VoidCallback onButtonTap;
+  final String buttonTitle;
+  final double income;
+
+  const IncomeWidget(
+      {required this.title,
+      required this.onButtonTap,
+      required this.buttonTitle,
+      required this.income,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +30,7 @@ class CaseIncome extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(Strings.currentIncome),
+          Text(title),
           const Text(
             "500.44 ${Strings.rurSymbol}",
             style: TextStyle(
@@ -32,11 +42,7 @@ class CaseIncome extends StatelessWidget {
             height: 40,
           ),
           ElevatedButton(
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const AccountPage(),
-              ),
-            ),
+            onPressed: onButtonTap,
             style: ElevatedButton.styleFrom(
               elevation: 0,
               backgroundColor: AppPalette.greyBg,
@@ -46,8 +52,8 @@ class CaseIncome extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text(
-              Strings.withdrawMoney,
+            child: Text(
+              buttonTitle,
               style: AppTypography.sectionTitle,
             ),
           ),

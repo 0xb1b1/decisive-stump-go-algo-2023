@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/src/repository/repository.dart';
+import 'package:frontend/src/repository/auth_repository.dart';
 
+import '../../common/di/service_locator.dart';
 import 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -12,7 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   final AuthRepository _repository;
 
-  Future<String?> enterToApp({
+  Future<bool> enterToApp({
     required String email,
     required String password,
   }) async {
@@ -21,16 +22,20 @@ class AuthCubit extends Cubit<AuthState> {
     final value = result.value;
     if (result.succeed && value != null) {
       emit(const AuthState.success());
-      return value;
+      final locator = ServiceLocator();
+      locator.configureToken(value);
+      return true;
     } else {
       final result = await _repository.login(email: email, password: password);
       final value = result.value;
       if (result.succeed && value != null) {
         emit(const AuthState.success());
-        return value;
+        final locator = ServiceLocator();
+        locator.configureToken(value);
+        return true;
       }
     }
     emit(const AuthState.success());
-    return null;
+    return false;
   }
 }

@@ -4,12 +4,13 @@ import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/features/cases/cubit/case_cubit.dart';
 import 'package:frontend/src/features/cases/models/button_parameters.dart';
 import 'package:frontend/src/features/cases/models/case.dart';
-import 'package:frontend/src/features/cases/widgets/case_income.dart';
+import 'package:frontend/src/widgets/income_widget.dart';
 import 'package:frontend/src/features/cases/widgets/case_info.dart';
 import 'package:frontend/src/features/cases/widgets/table/companies_table.dart';
 import 'package:frontend/src/features/cases/widgets/uneditable_table.dart';
 
 import '../../common/strings.dart';
+import '../account/account_page.dart';
 import 'cubit/case_state.dart';
 
 class CaseDetails extends StatelessWidget {
@@ -63,7 +64,18 @@ class CaseDetails extends StatelessWidget {
                           const SizedBox(
                             width: 24,
                           ),
-                          const Expanded(child: CaseIncome())
+                          Expanded(
+                            child: IncomeWidget(
+                              title: Strings.currentIncome,
+                              buttonTitle: Strings.withdrawMoney,
+                              onButtonTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const AccountPage(),
+                                ),
+                              ),
+                              income: portfolio.account,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -82,7 +94,8 @@ class CaseDetails extends StatelessWidget {
                             width: 24,
                           ),
                           Expanded(
-                              child: UneditableTable(companies: companies)),
+                            child: UneditableTable(companies: companies),
+                          ),
                         ],
                       ),
                     ),
@@ -102,7 +115,18 @@ class CaseDetails extends StatelessWidget {
                           const SizedBox(
                             width: 24,
                           ),
-                          const CaseIncome()
+                          Expanded(
+                            child: IncomeWidget(
+                              title: Strings.currentIncome,
+                              buttonTitle: Strings.withdrawMoney,
+                              onButtonTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const AccountPage(),
+                                ),
+                              ),
+                              income: portfolio.account,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 24),
@@ -126,13 +150,15 @@ class CaseDetails extends StatelessWidget {
                         tableTitle: Strings.stoppedCompanies,
                         buttonParameters: [
                           ButtonParameters(
-                              action: BlocProvider.of<CaseCubit>(context)
-                                  .resumeFromStopped,
-                              title: Strings.resumeStocks),
+                            action: BlocProvider.of<CaseCubit>(context)
+                                .resumeFromStopped,
+                            title: Strings.resumeStocks,
+                          ),
                           ButtonParameters(
-                              action: BlocProvider.of<CaseCubit>(context)
-                                  .makeInactiveFromStopped,
-                              title: Strings.makeInactiveStocks),
+                            action: BlocProvider.of<CaseCubit>(context)
+                                .makeInactiveFromStopped,
+                            title: Strings.makeInactiveStocks,
+                          ),
                         ],
                       ),
                       const SizedBox(height: 24),
@@ -141,9 +167,10 @@ class CaseDetails extends StatelessWidget {
                         companies: inactive,
                         buttonParameters: [
                           ButtonParameters(
-                              action: BlocProvider.of<CaseCubit>(context)
-                                  .resumeFromInactive,
-                              title: Strings.resumeStocks),
+                            action: BlocProvider.of<CaseCubit>(context)
+                                .resumeFromInactive,
+                            title: Strings.resumeStocks,
+                          ),
                         ],
                       ),
                     ],

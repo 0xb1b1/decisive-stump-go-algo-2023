@@ -83,7 +83,7 @@ class AllCasesBlock extends StatelessWidget {
                       ),
                     ),
                     child: InfoCard(
-                      title: Strings.singleCase,
+                      title: '${Strings.singleCase}\n ${e.title}',
                       rewardAmount: e.weeklyProfitability,
                     ),
                   ),

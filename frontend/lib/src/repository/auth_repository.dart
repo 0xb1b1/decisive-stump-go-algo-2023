@@ -33,8 +33,7 @@ class AuthRepository {
     required String password,
   }) async {
     try {
-      final String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-      final response = await _authApi.login(email: email, password: hashed);
+      final response = await _authApi.login(email: email, password: password);
       final data = response.data;
       if (data == null) {
         return ClientResult.failed(Exception());

@@ -15,7 +15,7 @@ class AuthApi {
 
     final postData = <String, dynamic>{
       r'email': email,
-      r'password_hash': password,
+      r'password': password,
     };
 
     final options = Options(
@@ -32,7 +32,6 @@ class AuthApi {
 
     try {
       final Map<String, dynamic> map = jsonDecode(response.data!.toString());
-      print(map.toString());
       responseData = map["access_token"];
     } catch (error, stackTrace) {
       throw DioException(

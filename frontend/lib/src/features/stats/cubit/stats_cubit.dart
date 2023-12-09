@@ -17,22 +17,32 @@ class StatsCubit extends Cubit<StatsCubitState> {
         super(const StatsCubitState.loading());
 
   Future<void> initialFetch() async {
-    // final news = await _repository.getNews();
-    final news = List.generate(
-      30,
-      (index) => Article.mock(),
-    );
+    final response = await _repository.getNews();
+    final ArticleList resultNews;
+    final value = response.value;
+    if (!response.succeed || value == null) {
+      resultNews = ArticleList(
+        articles: List.generate(
+          30,
+          (index) => Article.mock(),
+        ),
+      );
+    } else {
+      resultNews = value;
+    }
+
     final transactions = mockedTransactions;
     final cases = List.generate(
       8,
       (index) => Case.mock(),
     );
-    await Future.delayed(const Duration(seconds: 1), () {});
-    emit(StatsCubitState.success(
-      news: ArticleList(articles: news),
-      transactions: transactions,
-      cases: cases,
-    ));
+    emit(
+      StatsCubitState.success(
+        news: resultNews,
+        transactions: transactions,
+        cases: cases,
+      ),
+    );
   }
 
   Future<void> onNewsTap(String url) async {

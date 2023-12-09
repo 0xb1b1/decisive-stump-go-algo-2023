@@ -49,7 +49,7 @@ class NewsCard extends StatelessWidget {
             style: AppTypography.regularBlack.copyWith(
               color: AppPalette.greyText,
             ),
-          )
+          ),
         ],
       ),
     );

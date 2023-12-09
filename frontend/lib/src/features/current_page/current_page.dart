@@ -25,9 +25,8 @@ class _CurrentPageState extends State<CurrentPage> {
       cases: List.generate(8, (index) => Case.mock()),
       onCaseTap: () {},
     ),
-    NewCasePage(),
-    AccountPage(),
-
+    const NewCasePage(),
+    const AccountPage(),
   ];
 
   @override
@@ -52,7 +51,16 @@ class _CurrentPageState extends State<CurrentPage> {
               const SizedBox(
                 height: 15,
               ),
-              SvgPicture.asset('img/divider.svg'),
+              Padding(
+                padding: const EdgeInsets.only(left: 24),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: SvgPicture.asset('img/Logo.svg'),
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
               NavigationDrawerDestination(
                 icon: SvgPicture.asset('icons/deselected/stats_d.svg'),
                 selectedIcon: SvgPicture.asset('icons/selected/stats.svg'),

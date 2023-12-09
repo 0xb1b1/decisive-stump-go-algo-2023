@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:frontend/src/api/app_api.dart';
+import 'package:frontend/src/common/di/dio_token_interceptor.dart';
 import 'package:frontend/src/features/stats/cubit/stats_cubit.dart';
 import 'package:frontend/src/repository/app_repository.dart';
-import 'package:frontend/src/repository/repository.dart';
+import 'package:frontend/src/repository/auth_repository.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../api/auth_api.dart';
@@ -23,15 +24,20 @@ class ServiceLocator {
     final authRepository = AuthRepository(
       authApi: AuthApi(dio),
     );
-    final appRepository = AppRepository(AppApi(dio));
     final authManager = AuthCubit(repository: authRepository);
-    final statCubit = StatsCubit(repository: appRepository);
-    // dio.interceptors.add(DioTokenInterceptor());
     _getIt.registerSingleton<Dio>(dio);
     _getIt.registerSingleton<AuthCubit>(authManager);
-    _getIt.registerSingleton<StatsCubit>(statCubit);
-    // _getIt.registerSingleton<AuthRepository>(authRepository);
   }
 
-  void configureToken(String token) {}
+  void configureToken(String token) {
+    final dio = Dio();
+    dio.options
+      ..contentType = 'application/json'
+      ..connectTimeout = const Duration(seconds: 10)
+      ..receiveTimeout = const Duration(seconds: 10);
+    dio.interceptors.add(DioTokenInterceptor(token: token));
+    final appRepository = AppRepository(AppApi(dio));
+    final statCubit = StatsCubit(repository: appRepository);
+    _getIt.registerSingleton<StatsCubit>(statCubit);
+  }
 }

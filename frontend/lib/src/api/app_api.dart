@@ -23,6 +23,7 @@ class AppApi {
 
     final options = Options(
       method: r'GET',
+      responseType: ResponseType.plain,
     );
 
     final response = await _dio.request(
@@ -34,7 +35,7 @@ class AppApi {
     ArticleList responseData;
 
     try {
-      final Map<String, dynamic> map = jsonDecode(response.data!.toString());
+      final Map<String, dynamic> map = json.decode(response.data!.toString());
       responseData = ArticleList.fromJson(map);
     } catch (error, stackTrace) {
       throw DioException(

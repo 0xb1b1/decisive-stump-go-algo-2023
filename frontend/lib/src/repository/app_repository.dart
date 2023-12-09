@@ -18,6 +18,7 @@ class AppRepository {
       if (data == null) {
         return ClientResult.failed(Exception());
       } else {
+        print('succeed');
         return ClientResult.succeed(data);
       }
     } catch (e, s) {

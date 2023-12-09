@@ -1,13 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/src/api/auth_api.dart';
 import 'package:frontend/src/common/theme/border_radius/border_radius.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 import 'package:frontend/src/features/auth/auth_state.dart';
 import 'package:frontend/src/features/current_page/current_page.dart';
-import 'package:frontend/src/repository/repository.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../common/strings.dart';
@@ -157,7 +154,7 @@ class _AuthPageState extends State<AuthPage> {
                                 email: values[0],
                                 password: values[1],
                               );
-                              if (isSuccess != null) {
+                              if (isSuccess) {
                                 transition();
                               } else {
                                 showToast();
