@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from loguru import logger
 import uvicorn
 import sys
@@ -58,6 +60,22 @@ def run() -> None:
     app = FastAPI(
         openapi_tags=fastapi_tags_metadata,
     )
+
+    def register_exception(app: FastAPI):
+        @app.exception_handler(RequestValidationError)
+        async def validation_exception_handler(
+            request: Request,
+            exc: RequestValidationError
+        ):
+
+            exc_str = f'{exc}'.replace('\n', ' ').replace('   ', ' ')
+            # or logger.error(f'{exc}')
+            logger.error(request, exc_str)
+            content = {'status_code': 10422, 'message': exc_str, 'data': None}
+            return JSONResponse(
+                content=content,
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY
+            )
 
     # CORS Policy
     origins = ["*"]
