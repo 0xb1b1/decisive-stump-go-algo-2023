@@ -35,7 +35,7 @@ repo = UserRepository(database=backend_db)
 )
 async def signup(credentials: UserSignupSchema):
     logger.debug(
-        f"A user tries to sign up (email: {credentials.email}")
+        f"A user tries to sign up (email: {credentials.email})")
     user = user_signup_schema_to_user(credentials)
 
     try:

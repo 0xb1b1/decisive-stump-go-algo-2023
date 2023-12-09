@@ -49,7 +49,7 @@ def company_info(ticker: str):
         ticker=stock.symbol,
         sector=stock.sector,
         decription=stock.description,
-        prediction=69.420,
+        prediction=None,
         stock_price=1337.1234,
         recommendation=StockActionRecommendation.BUY,
         prognosis_percentage=123.01,
