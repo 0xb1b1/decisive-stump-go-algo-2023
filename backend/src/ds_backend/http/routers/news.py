@@ -35,7 +35,7 @@ stock_info_repo = StockInfoRepository(database=news_db)
 
 
 @router.get(
-    "/get",
+    "/get_news",
     response_model=ArticlesSchema,
 )
 def get_articles(

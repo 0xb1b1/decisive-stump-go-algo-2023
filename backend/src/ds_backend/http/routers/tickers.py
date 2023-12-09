@@ -35,7 +35,7 @@ stock_info_repo = StockInfoRepository(database=news_db)
 
 
 @router.get(
-    "/info",
+    "/info_ticker",
     response_model=StockInfoSchema,
 )
 def ticker_info(ticker: str):
@@ -54,7 +54,7 @@ def ticker_info(ticker: str):
 
 
 @router.post(
-    "/parse",
+    "/parse_ticker",
     response_model=StocksInfoSchema,
 )
 def parse_stocks(stocks: StockInfoParseRequestSchema):
