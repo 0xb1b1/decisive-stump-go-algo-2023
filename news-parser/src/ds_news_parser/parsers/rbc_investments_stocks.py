@@ -61,8 +61,9 @@ class RBCInvestmentsStocksParser:
                     logger.info(f"Stock's ({stock.symbol}) description is already in the db.")
                     continue
                 page = requests.get(stock.link)
-                soup = bs(page.text, features="html.parser")
-                description = soup.find(
+                rbc_soup = bs(page.text, features="html.parser")
+                tcs_soup = None
+                description = rbc_soup.find(
                     "div",
                     {"class": "MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-grid-xs-12 quote-style-iw9t5x"}
                 )
@@ -90,17 +91,17 @@ class RBCInvestmentsStocksParser:
                     # h1 ErrorPageDesktop-module__title_x1q0O
                     # TODO: Check if this h1 sappears elsewhere
 
-                    soup = bs(drv.page_source, features="html.parser")
-                    is_404 = soup.find(
+                    tcs_soup = bs(drv.page_source, features="html.parser")
+                    tcs_is_404 = tcs_soup.find(
                         "h1",
                         {"class": "ErrorPageDesktop-module__title_x1q0O"}
                     ) is not None
-                    if is_404:
+                    if tcs_is_404:
                         logger.warning(f"Tinkoff 404'd for stock {stock.symbol}")
                     else:
                         if description_text is None:
                             logger.info(f"Getting stock info for {stock.symbol} on Tinkoff")
-                            description = soup.find(
+                            description = tcs_soup.find(
                                 "div",
                                 {"class": "TruncateHTML__lineClamp_dx9Qy"}
                             )
@@ -111,7 +112,7 @@ class RBCInvestmentsStocksParser:
                             else:
                                 logger.warning(f"Not found description for {stock.symbol} on Tinkoff")
 
-                        sector = soup.find(
+                        sector = tcs_soup.find(
                             "div",
                             {"class": "SecurityHeader__panel_itBzT SecurityHeader__desktop_dL7RD"}
                         )
@@ -122,9 +123,29 @@ class RBCInvestmentsStocksParser:
                             )
                             sector_text = sector.text.strip()
 
+                # Company name
+                company_text: str | None = None
+                if tcs_soup is not None and not tcs_is_404:
+                    # Get name from Tinkoff first; its naming is better
+                    company = tcs_soup.find(
+                        "span",
+                        {"class": "SecurityHeader__showName_iw6qC"}
+                    )
+                    if company is not None:
+                        company_text = company.text.strip()
+
+                if company_text is None:
+                    company = rbc_soup.find(
+                        "h1",
+                        {"class": "MuiTypography-root MuiTypography-h1 quote-style-j89rq3"}
+                    )
+                    if company is not None:
+                        company_text = company.text.strip()
+
                 try:
                     self.repo.save(StockInfo(
                         symbol=stock.symbol,
+                        company=company_text,
                         description=description_text,
                         sector=sector_text,
                     ))

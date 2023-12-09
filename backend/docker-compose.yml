@@ -22,6 +22,7 @@ services:
       DS_BACKEND_MONGO_BACKEND_DB: "ds_backend"
       DS_BACKEND_MONGO_NEWS_DB: "ds_news_parser"
       DS_BACKEND_JWT_ACCESS_EXPIRATION_MINUTES: 300
+      DS_BACKEND_NEWS_PARSER_BASE_URL: "http://news-parser"
     env_file:
       - secrets.env
     depends_on:
