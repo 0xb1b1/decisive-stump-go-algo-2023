@@ -51,14 +51,7 @@ stock_info_repo = StockInfoRepository(database=news_db)
     "/info",
     response_model=CompanyInfoSchema,
 )
-def company_info(
-    ticker: Annotated[
-        str,
-        Path(
-            title="Stock ticker. Example: YNDX",
-        )
-    ]
-):
+def company_info(ticker: str):
     uticker = ticker.upper()
     logger.debug(
         f"Searching company info by ticker {uticker}"

@@ -38,7 +38,7 @@ stock_info_repo = StockInfoRepository(database=news_db)
     "/info",
     response_model=StockInfoSchema,
 )
-def company_info(ticker: str):
+def ticker_info(ticker: str):
     stock_info = stock_info_repo.find_one_by(
         {
             "symbol": ticker.upper(),
