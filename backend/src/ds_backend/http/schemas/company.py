@@ -65,6 +65,6 @@ class CompanyInfoSchema(BaseModel):
         description="Price prognosis for the stock"
     )
 
-    portfolio_id: str | None = Field(
+    portfolio_uuid: str | None = Field(
         description="Portfolio ID which contains the stock. null if not in portfolio"  # noqa: E501
     )
