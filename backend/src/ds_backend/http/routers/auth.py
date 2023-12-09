@@ -2,6 +2,7 @@
 from fastapi import APIRouter, Security, HTTPException
 from fastapi_jwt import JwtAuthorizationCredentials
 from loguru import logger
+import bcrypt
 from pymongo.errors import DuplicateKeyError
 
 from ds_backend.http.schemas.user import UserSignupSchema, \
@@ -76,7 +77,14 @@ async def login(credentials: UserLoginSchema):
             status_code=400,
             detail="Invalid credentials",
         )
-    if user.password_hash != credentials.password_hash:
+
+    # Check BCrypt hash
+    is_password_correct = bcrypt.check_password_hash(
+        user.password_hash,
+        credentials.password.encode("utf-8")
+    )
+
+    if not is_password_correct:
         raise HTTPException(
             status_code=400,
             detail="Invalid credentials",

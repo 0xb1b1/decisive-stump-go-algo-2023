@@ -19,7 +19,7 @@ class UserResponseSchema(UserBaseSchema):
 
 class UserLoginSchema(BaseModel):
     email: EmailStr
-    password_hash: str
+    password: str
 
 
 class UserInfoSchema(BaseModel):
