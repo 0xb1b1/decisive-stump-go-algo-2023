@@ -45,7 +45,7 @@ def company_info(ticker: str):
     )
 
     return CompanyInfoSchema(  # TODO: remove hard-coding
-        name=stock.name,
+        name=stock.company,
         ticker=stock.symbol,
         sector=stock.sector,
         decription=stock.description,
