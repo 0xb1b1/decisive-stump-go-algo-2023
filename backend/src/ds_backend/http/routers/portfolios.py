@@ -64,7 +64,6 @@ def add_portfolio(
     portfolio_owner_email = credentials["email"]
 
     portfolio.uuid = portfolio_uuid
-    portfolio.owner_email = portfolio_owner_email
 
     portfolio_stocks: list[PortfolioStock] = []
     for stock in portfolio.stocks:
@@ -82,7 +81,7 @@ def add_portfolio(
             uuid=portfolio_uuid,
             owner_email=portfolio_owner_email,
             sector=portfolio.sector,
-            balance=portfolio.balance,
+            balance=float(portfolio.balance),
             stocks=portfolio_stocks,
         )
     )

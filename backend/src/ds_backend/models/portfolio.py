@@ -39,8 +39,8 @@ class Portfolio(BaseModel):
         description="Portfolio name/sector",
     )
 
-    balance: str = Field(
-        default="0.00",
+    balance: float = Field(
+        default=0.00,
         description="Available money in the portfolio in RUR",
     )
 
