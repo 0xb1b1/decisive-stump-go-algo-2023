@@ -184,6 +184,8 @@ requested portfolio (UUID: {uuid})"
                 company=company,
                 profit_daily_percent="0.00",
                 amount=stock.amount,
+                price_per_share="12",
+                price_sum="83771",
                 is_paused=stock.is_paused,
                 is_disabled=stock.is_disabled,
             )

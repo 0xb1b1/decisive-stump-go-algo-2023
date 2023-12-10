@@ -43,6 +43,16 @@ class PortfolioStockSchema(BaseModel):
         description="Amount of this stock in the portfolio.",
     )
 
+    price_per_share: str = Field(
+        default="0.00",
+        description="Price of one share in RUR",
+    )
+
+    price_sum: str = Field(
+        default="0.00",
+        description="Price of all purchased instances of the share in RUR",
+    )
+
     is_paused: bool = Field(
         default=False,
         description="Stock is frozen (do not sell it)",
