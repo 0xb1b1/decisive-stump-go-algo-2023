@@ -127,3 +127,4 @@ steps:
       - build-backend
       - build-frontend
       - build-news-parser
+      - build-ml
