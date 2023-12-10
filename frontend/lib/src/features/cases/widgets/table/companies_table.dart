@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/api/models/portfolio_stock.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 import 'package:frontend/src/features/cases/widgets/table/button_table.dart';
 import 'package:frontend/src/features/cases/widgets/table/companies_source.dart';
@@ -7,10 +8,9 @@ import 'package:frontend/src/widgets/table/paginated_data_table.dart';
 import '../../../../common/strings.dart';
 
 import '../../models/button_parameters.dart';
-import '../../models/company.dart';
 
 class CompaniesTable extends StatefulWidget {
-  final List<Company> companies;
+  final List<PortfolioStock> companies;
   final String tableTitle;
   final List<ButtonParameters> buttonParameters;
 
@@ -96,14 +96,14 @@ class _CompaniesTableState extends State<CompaniesTable> {
     });
   }
 
-  List<Company> getSelectedIndexes() {
+  List<PortfolioStock> getSelectedIndexes() {
     final trueIndices = selected
         .asMap()
         .entries
         .where((entry) => entry.value == true)
         .map((entry) => entry.key)
         .toList();
-    List<Company> selectedCompanies =
+    List<PortfolioStock> selectedCompanies =
         trueIndices.map((index) => widget.companies[index]).toList();
     updateSelected();
     return selectedCompanies;

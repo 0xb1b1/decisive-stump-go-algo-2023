@@ -4,6 +4,8 @@ import 'package:frontend/src/features/account/account_cubit.dart';
 import 'package:frontend/src/features/account/widgets/account_sum.dart';
 import 'package:frontend/src/features/account/widgets/account_widget.dart';
 
+import '../../common/theme/colors/app_palette.dart';
+
 class AccountPage extends StatelessWidget {
   const AccountPage({
     super.key,
@@ -14,7 +16,19 @@ class AccountPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => AccountCubit(),
       child: Scaffold(
-        body: BlocBuilder<AccountCubit, AccountState>(builder: (BuildContext context, state) {
+        appBar: AppBar(
+          backgroundColor: AppPalette.greyBg,
+          foregroundColor: AppPalette.greyBg,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: AppPalette.greyText,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        body: BlocBuilder<AccountCubit, AccountState>(
+            builder: (BuildContext context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 48,

@@ -1,33 +1,23 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/src/features/cases/models/company.dart';
+import 'package:frontend/src/api/models/portfolio_stock.dart';
 
+import '../../../repository/app_repository.dart';
 import 'case_state.dart';
 
 class CaseCubit extends Cubit<CaseState> {
-  CaseCubit() : super(const CaseState.loading());
+  final AppRepository _repository;
 
-  Future<void> initialFetch(String id) async {
-    final companies = List.generate(
-      10,
-      (index) => Company(
-        title: 'недвиж $index',
-        income: 239392.23,
-        ticker: 'AAAA $index',
-        count: 20 + index,
-        amountSingle: 1239.03 + index,
-        amount: 1239.03 + index,
-        currentPrice: 234234.23,
-        recomendation: "Покупать",
-        sector: "Недвижимость",
-        about: 'волвоалафыфа',
-      ),
-    );
-    await Future.delayed(
-      const Duration(seconds: 1),
-      () {},
-    );
+  CaseCubit({required AppRepository repository})
+      : _repository = repository,
+        super(const CaseState.loading());
+
+  Future<void> initialFetch(String uuid) async {
+    final response = await _repository.getPortfolio(uuid);
+    final value = response.value!;
+    final companies = value.stocks;
     emit(
       CaseState.stats(
+        portfolio: value,
         companies: companies,
       ),
     );
@@ -38,18 +28,29 @@ class CaseCubit extends Cubit<CaseState> {
       orElse: () => null,
       stats: (data) => data.companies,
     );
-    if (companies != null) {
+    final portfolio = state.maybeMap(
+      orElse: () => null,
+      stats: (data) => data.portfolio,
+    );
+    if (companies != null && portfolio != null) {
+      final stopped = companies.where((element) => element.isPaused).toList();
+      final inActive =
+          companies.where((element) => element.isDisabled).toList();
+      final inCase = companies
+          .where((element) => !element.isDisabled && !element.isPaused)
+          .toList();
       emit(
         CaseState.editing(
-          inCase: companies,
-          stopped: [],
-          inActive: [],
+          portfolio: portfolio,
+          inCase: inCase,
+          stopped: stopped,
+          inActive: inActive,
         ),
       );
     }
   }
 
-  void stopSellFromInCase(List<Company> companiesToStop) {
+  void stopSellFromInCase(List<PortfolioStock> companiesToStop) {
     final currentState = state.maybeMap(
       orElse: () => null,
       editing: (data) => data,
@@ -70,7 +71,7 @@ class CaseCubit extends Cubit<CaseState> {
     }
   }
 
-  void makeInactiveFromInCase(List<Company> companiesToInactivate) {
+  void makeInactiveFromInCase(List<PortfolioStock> companiesToInactivate) {
     final currentState = state.maybeMap(
       orElse: () => null,
       editing: (data) => data,
@@ -91,7 +92,7 @@ class CaseCubit extends Cubit<CaseState> {
     }
   }
 
-  void makeInactiveFromStopped(List<Company> companiesToInactivate) {
+  void makeInactiveFromStopped(List<PortfolioStock> companiesToInactivate) {
     final currentState = state.maybeMap(
       orElse: () => null,
       editing: (data) => data,
@@ -112,7 +113,7 @@ class CaseCubit extends Cubit<CaseState> {
     }
   }
 
-  void resumeFromStopped(List<Company> companiesToMakeInCase) {
+  void resumeFromStopped(List<PortfolioStock> companiesToMakeInCase) {
     final currentState = state.maybeMap(
       orElse: () => null,
       editing: (data) => data,
@@ -133,7 +134,7 @@ class CaseCubit extends Cubit<CaseState> {
     }
   }
 
-  void resumeFromInactive(List<Company> companiesToMakeInCase) {
+  void resumeFromInactive(List<PortfolioStock> companiesToMakeInCase) {
     final currentState = state.maybeMap(
       orElse: () => null,
       editing: (data) => data,

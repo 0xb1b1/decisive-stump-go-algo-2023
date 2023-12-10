@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/api/models/portfolio_stock.dart';
 
 import '../../../../common/strings.dart';
-import '../../models/company.dart';
 
 class CompaniesSource extends DataTableSource {
-  final List<Company> companyList;
+  final List<PortfolioStock> companyList;
   final List<bool> selectedList;
   final void Function(bool, int) onSelectChanged;
 
@@ -21,15 +21,16 @@ class CompaniesSource extends DataTableSource {
       selected: selectedList[index],
       onSelectChanged: (value) => onSelectChanged(value!, index),
       cells: [
-        DataCell(Text(company.title)),
+        DataCell(Text(company.company)),
         DataCell(Text(company.ticker)),
-        DataCell(Text(company.count.toString())),
+        DataCell(Text(company.amount.toString())),
         DataCell(
           Text(
-              '${company.amountSingle.toStringAsFixed(2)} ${Strings.rurSymbol}'),
+              '${double.parse(company.pricePerShare).toStringAsFixed(2)} ${Strings.rurSymbol}'),
         ),
         DataCell(
-          Text('${company.amount.toStringAsFixed(2)} ${Strings.rurSymbol}'),
+          Text(
+              '${double.parse(company.priceSum).toStringAsFixed(2)} ${Strings.rurSymbol}'),
         ),
       ],
     );

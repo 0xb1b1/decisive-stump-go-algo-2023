@@ -35,6 +35,7 @@ dependencies:
 #    path: packages/app_api
   bcrypt: ^1.1.3
   json_serializable: ^6.7.1
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:

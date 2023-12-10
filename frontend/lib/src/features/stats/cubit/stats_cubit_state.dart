@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frontend/src/api/models/article_list.dart';
+import 'package:frontend/src/api/models/portfolios_dashboard.dart';
 
-import '../../cases/models/case.dart';
 import '../../transactions/models/transaction.dart';
 
 part 'stats_cubit_state.freezed.dart';
@@ -15,6 +15,6 @@ class StatsCubitState with _$StatsCubitState {
   const factory StatsCubitState.success({
     required ArticleList news,
     required List<Transaction> transactions,
-    required List<Case> cases,
+    required PortfoliosDashboard cases,
   }) = _Success;
 }

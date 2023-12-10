@@ -122,13 +122,13 @@
         ]
       }
     },
-    "/news/get": {
+    "/news/get_news": {
       "get": {
         "tags": [
           "News"
         ],
         "summary": "Get Articles",
-        "operationId": "get_articles_news_get_get",
+        "operationId": "get_articles_news_get_news_get",
         "parameters": [
           {
             "name": "from_timestamp",
@@ -208,13 +208,13 @@
         }
       }
     },
-    "/tickers/info": {
+    "/tickers/info_ticker": {
       "get": {
         "tags": [
           "Tickers"
         ],
-        "summary": "Company Info",
-        "operationId": "company_info_tickers_info_get",
+        "summary": "Ticker Info",
+        "operationId": "ticker_info_tickers_info_ticker_get",
         "parameters": [
           {
             "name": "ticker",
@@ -253,14 +253,14 @@
         }
       }
     },
-    "/tickers/parse": {
+    "/tickers/parse_ticker": {
       "post": {
         "tags": [
           "Tickers"
         ],
         "summary": "Parse Stocks",
         "description": "Gets a list of tickers from user,\nfetches information on them and saves to DB.\n\nArgs:\n    stocks (StockInfoParseRequestSchema): List of tickers to parse.",
-        "operationId": "parse_stocks_tickers_parse_post",
+        "operationId": "parse_stocks_tickers_parse_ticker_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -298,13 +298,18 @@
         }
       }
     },
-    "/company/info": {
+    "/company/info_company": {
       "get": {
         "tags": [
-          "Company"
+          "Companies"
         ],
         "summary": "Company Info",
-        "operationId": "company_info_company_info_get",
+        "operationId": "company_info_company_info_company_get",
+        "security": [
+          {
+            "JwtAccessBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "ticker",
@@ -323,6 +328,179 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CompanyInfoSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company/search_company": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Company Search",
+        "operationId": "company_search_company_search_company_get",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Query"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockSearchSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/portfolio/add_portfolio": {
+      "post": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "Add Portfolio",
+        "operationId": "add_portfolio_portfolio_add_portfolio_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioSchema"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JwtAccessBearer": []
+          }
+        ]
+      }
+    },
+    "/portfolio/get_all_portfolios": {
+      "get": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "Get All Portfolios",
+        "operationId": "get_all_portfolios_portfolio_get_all_portfolios_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfoliosDashboardSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "JwtAccessBearer": []
+          }
+        ]
+      }
+    },
+    "/portfolio/get_portfolio": {
+      "get": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "Get Portfolio",
+        "operationId": "get_portfolio_portfolio_get_portfolio_get",
+        "security": [
+          {
+            "JwtAccessBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioSchema"
                 }
               }
             }
@@ -494,7 +672,7 @@
             "description": "Price prediction. TODO: create model"
           },
           "stock_price": {
-            "type": "number",
+            "type": "string",
             "title": "Stock Price",
             "description": "Stock price in RUR, double decimal precision"
           },
@@ -507,11 +685,11 @@
             "description": "Suggested stock action"
           },
           "prognosis_percentage": {
-            "type": "number",
+            "type": "string",
             "title": "Prognosis Percentage",
             "description": "Price prognosis for the stock"
           },
-          "portfolio_id": {
+          "portfolio_uuid": {
             "anyOf": [
               {
                 "type": "string"
@@ -520,7 +698,7 @@
                 "type": "null"
               }
             ],
-            "title": "Portfolio Id",
+            "title": "Portfolio Uuid",
             "description": "Portfolio ID which contains the stock. null if not in portfolio"
           }
         },
@@ -534,7 +712,7 @@
           "stock_price",
           "recommendation",
           "prognosis_percentage",
-          "portfolio_id"
+          "portfolio_uuid"
         ],
         "title": "CompanyInfoSchema"
       },
@@ -550,6 +728,152 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "PortfolioSchema": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid",
+            "description": "Randomly generated identificator"
+          },
+          "sector": {
+            "type": "string",
+            "title": "Sector",
+            "description": "Portfolio name/sector"
+          },
+          "balance": {
+            "type": "string",
+            "title": "Balance",
+            "description": "Available money in the portfolio in RUR",
+            "default": "0.00"
+          },
+          "profit_weekly_percent": {
+            "type": "string",
+            "title": "Profit Weekly Percent",
+            "description": "This week's profit value in RUR. Can be negative",
+            "default": "0.00"
+          },
+          "profit": {
+            "type": "string",
+            "title": "Profit",
+            "description": "Overall profit value in RUR. Can be negative",
+            "default": "0.00"
+          },
+          "stocks": {
+            "items": {
+              "$ref": "#/components/schemas/PortfolioStockSchema"
+            },
+            "type": "array",
+            "title": "Stocks",
+            "description": "List of stocks and portfolio-related values."
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid",
+          "sector",
+          "stocks"
+        ],
+        "title": "PortfolioSchema"
+      },
+      "PortfolioStockSchema": {
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "title": "Ticker",
+            "description": "Stock ticker. Example: YNDX."
+          },
+          "company": {
+            "type": "string",
+            "title": "Company",
+            "description": "Company name. Lang: RU/EN"
+          },
+          "profit_daily_percent": {
+            "type": "string",
+            "title": "Profit Daily Percent",
+            "description": "Daily profit in decimal percents. Can be negative",
+            "default": "0.000"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "Amount of this stock in the portfolio.",
+            "default": 0
+          },
+          "price_per_share": {
+            "type": "string",
+            "title": "Price Per Share",
+            "description": "Price of one share in RUR",
+            "default": "0.00"
+          },
+          "price_sum": {
+            "type": "string",
+            "title": "Price Sum",
+            "description": "Price of all purchased instances of the share in RUR",
+            "default": "0.00"
+          },
+          "is_paused": {
+            "type": "boolean",
+            "title": "Is Paused",
+            "description": "Stock is frozen (do not sell it)",
+            "default": false
+          },
+          "is_disabled": {
+            "type": "boolean",
+            "title": "Is Disabled",
+            "description": "Stock is disabled (sell everything and do not buy)",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "ticker",
+          "company"
+        ],
+        "title": "PortfolioStockSchema"
+      },
+      "PortfolioStrippedSchema": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid",
+            "description": "Randomly generated identificator"
+          },
+          "sector": {
+            "type": "string",
+            "title": "Sector",
+            "description": "Portfolio name/sector"
+          },
+          "profit": {
+            "type": "string",
+            "title": "Profit",
+            "description": "Overall profit value in RUR. Can be negative",
+            "default": "0.00"
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid",
+          "sector"
+        ],
+        "title": "PortfolioStrippedSchema"
+      },
+      "PortfoliosDashboardSchema": {
+        "properties": {
+          "stripped_portfolios": {
+            "items": {
+              "$ref": "#/components/schemas/PortfolioStrippedSchema"
+            },
+            "type": "array",
+            "title": "Stripped Portfolios",
+            "description": "List of stripped portfolios (for smol components)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "stripped_portfolios"
+        ],
+        "title": "PortfoliosDashboardSchema"
       },
       "Stock": {
         "properties": {
@@ -570,13 +894,48 @@
         "title": "Stock"
       },
       "StockActionRecommendation": {
+        "properties": {
+          "recommendation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StockActionRecommendationEnum"
+              }
+            ],
+            "description": "Suggested stock action. Language: RU"
+          },
+          "color": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StockActionRecommendationColor"
+              }
+            ],
+            "description": "Stock action hex color"
+          }
+        },
+        "type": "object",
+        "required": [
+          "recommendation",
+          "color"
+        ],
+        "title": "StockActionRecommendation"
+      },
+      "StockActionRecommendationColor": {
         "type": "string",
         "enum": [
-          "buy",
-          "sell",
-          "hold"
+          "0xFF1E833E",
+          "0xFFBE0000",
+          "0xFF14161C"
         ],
-        "title": "StockActionRecommendation",
+        "title": "StockActionRecommendationColor"
+      },
+      "StockActionRecommendationEnum": {
+        "type": "string",
+        "enum": [
+          "ÐŸÐ¾ÐºÑƒÐ¿Ð°Ñ‚ÑŒ",
+          "ÐŸÑ€Ð¾Ð´Ð°Ð²Ð°Ñ‚ÑŒ",
+          "Ð£Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°Ñ‚ÑŒ"
+        ],
+        "title": "StockActionRecommendationEnum",
         "description": "Suggested stock action.\n    "
       },
       "StockInfoParseRequestSchema": {
@@ -647,6 +1006,50 @@
           "sector"
         ],
         "title": "StockInfoSchema"
+      },
+      "StockSearchItemSchema": {
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "title": "Ticker",
+            "description": "Stock ticker. Example: YNDX"
+          },
+          "company": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company",
+            "description": "Company name. Example: ÐžÐžÐž Ð¯Ð½Ð´ÐµÐºÑ"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ticker",
+          "company"
+        ],
+        "title": "StockSearchItemSchema"
+      },
+      "StockSearchSchema": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/StockSearchItemSchema"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "List of company names and their tickers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "StockSearchSchema"
       },
       "StocksInfoSchema": {
         "properties": {
@@ -808,5 +1211,27 @@
         "scheme": "bearer"
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Operations regarding user identity."
+    },
+    {
+      "name": "News",
+      "description": "Get data related to parsed news."
+    },
+    {
+      "name": "Tickers",
+      "description": "Operations with individual tickers."
+    },
+    {
+      "name": "Companies",
+      "description": "Operations related to companies."
+    },
+    {
+      "name": "Portfolios",
+      "description": "Operations related to portfolios. Authentication is required."
+    }
+  ]
 }

@@ -16,7 +16,7 @@ _$CompanyInfoImpl _$$CompanyInfoImplFromJson(Map<String, dynamic> json) =>
       prognosisPercentage: json['prognosis_percentage'] as String,
       recommendation: StockActionRecommendation.fromJson(
           json['recommendation'] as Map<String, dynamic>),
-      portfolioId: json['portfolioId'] as String?,
+      portfolioUuid: json['portfolio_uuid'] as String?,
     );
 
 Map<String, dynamic> _$$CompanyInfoImplToJson(_$CompanyInfoImpl instance) =>
@@ -28,7 +28,7 @@ Map<String, dynamic> _$$CompanyInfoImplToJson(_$CompanyInfoImpl instance) =>
       'stock_price': instance.stockPrice,
       'prognosis_percentage': instance.prognosisPercentage,
       'recommendation': instance.recommendation,
-      'portfolioId': instance.portfolioId,
+      'portfolio_uuid': instance.portfolioUuid,
     };
 
 _$StockActionRecommendationImpl _$$StockActionRecommendationImplFromJson(

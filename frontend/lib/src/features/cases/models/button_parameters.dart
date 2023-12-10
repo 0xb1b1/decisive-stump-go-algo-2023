@@ -1,9 +1,7 @@
-import 'dart:html';
-
-import 'company.dart';
+import 'package:frontend/src/api/models/portfolio_stock.dart';
 
 class ButtonParameters {
-  final void Function(List<Company> companyList) action;
+  final void Function(List<PortfolioStock> companyList) action;
   final String title;
 
   ButtonParameters({

@@ -19,27 +19,31 @@ mixin _$CaseState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Company> companies) stats,
     required TResult Function(
-            List<Company> inCase, List<Company> stopped, List<Company> inActive)
+            Portfolio portfolio, List<PortfolioStock> companies)
+        stats,
+    required TResult Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)
         editing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Company> companies)? stats,
-    TResult? Function(List<Company> inCase, List<Company> stopped,
-            List<Company> inActive)?
+    TResult? Function(Portfolio portfolio, List<PortfolioStock> companies)?
+        stats,
+    TResult? Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)?
         editing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Company> companies)? stats,
-    TResult Function(List<Company> inCase, List<Company> stopped,
-            List<Company> inActive)?
+    TResult Function(Portfolio portfolio, List<PortfolioStock> companies)?
+        stats,
+    TResult Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)?
         editing,
     required TResult orElse(),
   }) =>
@@ -124,9 +128,11 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Company> companies) stats,
     required TResult Function(
-            List<Company> inCase, List<Company> stopped, List<Company> inActive)
+            Portfolio portfolio, List<PortfolioStock> companies)
+        stats,
+    required TResult Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)
         editing,
   }) {
     return loading();
@@ -136,9 +142,10 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Company> companies)? stats,
-    TResult? Function(List<Company> inCase, List<Company> stopped,
-            List<Company> inActive)?
+    TResult? Function(Portfolio portfolio, List<PortfolioStock> companies)?
+        stats,
+    TResult? Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)?
         editing,
   }) {
     return loading?.call();
@@ -148,9 +155,10 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Company> companies)? stats,
-    TResult Function(List<Company> inCase, List<Company> stopped,
-            List<Company> inActive)?
+    TResult Function(Portfolio portfolio, List<PortfolioStock> companies)?
+        stats,
+    TResult Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)?
         editing,
     required TResult orElse(),
   }) {
@@ -205,7 +213,9 @@ abstract class _$$StatsImplCopyWith<$Res> {
           _$StatsImpl value, $Res Function(_$StatsImpl) then) =
       __$$StatsImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Company> companies});
+  $Res call({Portfolio portfolio, List<PortfolioStock> companies});
+
+  $PortfolioCopyWith<$Res> get portfolio;
 }
 
 /// @nodoc
@@ -219,26 +229,42 @@ class __$$StatsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? portfolio = null,
     Object? companies = null,
   }) {
     return _then(_$StatsImpl(
+      portfolio: null == portfolio
+          ? _value.portfolio
+          : portfolio // ignore: cast_nullable_to_non_nullable
+              as Portfolio,
       companies: null == companies
           ? _value._companies
           : companies // ignore: cast_nullable_to_non_nullable
-              as List<Company>,
+              as List<PortfolioStock>,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PortfolioCopyWith<$Res> get portfolio {
+    return $PortfolioCopyWith<$Res>(_value.portfolio, (value) {
+      return _then(_value.copyWith(portfolio: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$StatsImpl implements _Stats {
-  const _$StatsImpl({required final List<Company> companies})
+  const _$StatsImpl(
+      {required this.portfolio, required final List<PortfolioStock> companies})
       : _companies = companies;
 
-  final List<Company> _companies;
   @override
-  List<Company> get companies {
+  final Portfolio portfolio;
+  final List<PortfolioStock> _companies;
+  @override
+  List<PortfolioStock> get companies {
     if (_companies is EqualUnmodifiableListView) return _companies;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_companies);
@@ -246,7 +272,7 @@ class _$StatsImpl implements _Stats {
 
   @override
   String toString() {
-    return 'CaseState.stats(companies: $companies)';
+    return 'CaseState.stats(portfolio: $portfolio, companies: $companies)';
   }
 
   @override
@@ -254,13 +280,15 @@ class _$StatsImpl implements _Stats {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StatsImpl &&
+            (identical(other.portfolio, portfolio) ||
+                other.portfolio == portfolio) &&
             const DeepCollectionEquality()
                 .equals(other._companies, _companies));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_companies));
+  int get hashCode => Object.hash(
+      runtimeType, portfolio, const DeepCollectionEquality().hash(_companies));
 
   @JsonKey(ignore: true)
   @override
@@ -272,38 +300,42 @@ class _$StatsImpl implements _Stats {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Company> companies) stats,
     required TResult Function(
-            List<Company> inCase, List<Company> stopped, List<Company> inActive)
+            Portfolio portfolio, List<PortfolioStock> companies)
+        stats,
+    required TResult Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)
         editing,
   }) {
-    return stats(companies);
+    return stats(portfolio, companies);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Company> companies)? stats,
-    TResult? Function(List<Company> inCase, List<Company> stopped,
-            List<Company> inActive)?
+    TResult? Function(Portfolio portfolio, List<PortfolioStock> companies)?
+        stats,
+    TResult? Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)?
         editing,
   }) {
-    return stats?.call(companies);
+    return stats?.call(portfolio, companies);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Company> companies)? stats,
-    TResult Function(List<Company> inCase, List<Company> stopped,
-            List<Company> inActive)?
+    TResult Function(Portfolio portfolio, List<PortfolioStock> companies)?
+        stats,
+    TResult Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)?
         editing,
     required TResult orElse(),
   }) {
     if (stats != null) {
-      return stats(companies);
+      return stats(portfolio, companies);
     }
     return orElse();
   }
@@ -344,9 +376,12 @@ class _$StatsImpl implements _Stats {
 }
 
 abstract class _Stats implements CaseState {
-  const factory _Stats({required final List<Company> companies}) = _$StatsImpl;
+  const factory _Stats(
+      {required final Portfolio portfolio,
+      required final List<PortfolioStock> companies}) = _$StatsImpl;
 
-  List<Company> get companies;
+  Portfolio get portfolio;
+  List<PortfolioStock> get companies;
   @JsonKey(ignore: true)
   _$$StatsImplCopyWith<_$StatsImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -359,7 +394,12 @@ abstract class _$$EditingImplCopyWith<$Res> {
       __$$EditingImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {List<Company> inCase, List<Company> stopped, List<Company> inActive});
+      {Portfolio portfolio,
+      List<PortfolioStock> inCase,
+      List<PortfolioStock> stopped,
+      List<PortfolioStock> inActive});
+
+  $PortfolioCopyWith<$Res> get portfolio;
 }
 
 /// @nodoc
@@ -373,24 +413,37 @@ class __$$EditingImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? portfolio = null,
     Object? inCase = null,
     Object? stopped = null,
     Object? inActive = null,
   }) {
     return _then(_$EditingImpl(
+      portfolio: null == portfolio
+          ? _value.portfolio
+          : portfolio // ignore: cast_nullable_to_non_nullable
+              as Portfolio,
       inCase: null == inCase
           ? _value._inCase
           : inCase // ignore: cast_nullable_to_non_nullable
-              as List<Company>,
+              as List<PortfolioStock>,
       stopped: null == stopped
           ? _value._stopped
           : stopped // ignore: cast_nullable_to_non_nullable
-              as List<Company>,
+              as List<PortfolioStock>,
       inActive: null == inActive
           ? _value._inActive
           : inActive // ignore: cast_nullable_to_non_nullable
-              as List<Company>,
+              as List<PortfolioStock>,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PortfolioCopyWith<$Res> get portfolio {
+    return $PortfolioCopyWith<$Res>(_value.portfolio, (value) {
+      return _then(_value.copyWith(portfolio: value));
+    });
   }
 }
 
@@ -398,32 +451,35 @@ class __$$EditingImplCopyWithImpl<$Res>
 
 class _$EditingImpl implements _Editing {
   const _$EditingImpl(
-      {required final List<Company> inCase,
-      required final List<Company> stopped,
-      required final List<Company> inActive})
+      {required this.portfolio,
+      required final List<PortfolioStock> inCase,
+      required final List<PortfolioStock> stopped,
+      required final List<PortfolioStock> inActive})
       : _inCase = inCase,
         _stopped = stopped,
         _inActive = inActive;
 
-  final List<Company> _inCase;
   @override
-  List<Company> get inCase {
+  final Portfolio portfolio;
+  final List<PortfolioStock> _inCase;
+  @override
+  List<PortfolioStock> get inCase {
     if (_inCase is EqualUnmodifiableListView) return _inCase;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_inCase);
   }
 
-  final List<Company> _stopped;
+  final List<PortfolioStock> _stopped;
   @override
-  List<Company> get stopped {
+  List<PortfolioStock> get stopped {
     if (_stopped is EqualUnmodifiableListView) return _stopped;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_stopped);
   }
 
-  final List<Company> _inActive;
+  final List<PortfolioStock> _inActive;
   @override
-  List<Company> get inActive {
+  List<PortfolioStock> get inActive {
     if (_inActive is EqualUnmodifiableListView) return _inActive;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_inActive);
@@ -431,7 +487,7 @@ class _$EditingImpl implements _Editing {
 
   @override
   String toString() {
-    return 'CaseState.editing(inCase: $inCase, stopped: $stopped, inActive: $inActive)';
+    return 'CaseState.editing(portfolio: $portfolio, inCase: $inCase, stopped: $stopped, inActive: $inActive)';
   }
 
   @override
@@ -439,6 +495,8 @@ class _$EditingImpl implements _Editing {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditingImpl &&
+            (identical(other.portfolio, portfolio) ||
+                other.portfolio == portfolio) &&
             const DeepCollectionEquality().equals(other._inCase, _inCase) &&
             const DeepCollectionEquality().equals(other._stopped, _stopped) &&
             const DeepCollectionEquality().equals(other._inActive, _inActive));
@@ -447,6 +505,7 @@ class _$EditingImpl implements _Editing {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      portfolio,
       const DeepCollectionEquality().hash(_inCase),
       const DeepCollectionEquality().hash(_stopped),
       const DeepCollectionEquality().hash(_inActive));
@@ -461,38 +520,42 @@ class _$EditingImpl implements _Editing {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Company> companies) stats,
     required TResult Function(
-            List<Company> inCase, List<Company> stopped, List<Company> inActive)
+            Portfolio portfolio, List<PortfolioStock> companies)
+        stats,
+    required TResult Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)
         editing,
   }) {
-    return editing(inCase, stopped, inActive);
+    return editing(portfolio, inCase, stopped, inActive);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Company> companies)? stats,
-    TResult? Function(List<Company> inCase, List<Company> stopped,
-            List<Company> inActive)?
+    TResult? Function(Portfolio portfolio, List<PortfolioStock> companies)?
+        stats,
+    TResult? Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)?
         editing,
   }) {
-    return editing?.call(inCase, stopped, inActive);
+    return editing?.call(portfolio, inCase, stopped, inActive);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Company> companies)? stats,
-    TResult Function(List<Company> inCase, List<Company> stopped,
-            List<Company> inActive)?
+    TResult Function(Portfolio portfolio, List<PortfolioStock> companies)?
+        stats,
+    TResult Function(Portfolio portfolio, List<PortfolioStock> inCase,
+            List<PortfolioStock> stopped, List<PortfolioStock> inActive)?
         editing,
     required TResult orElse(),
   }) {
     if (editing != null) {
-      return editing(inCase, stopped, inActive);
+      return editing(portfolio, inCase, stopped, inActive);
     }
     return orElse();
   }
@@ -534,13 +597,15 @@ class _$EditingImpl implements _Editing {
 
 abstract class _Editing implements CaseState {
   const factory _Editing(
-      {required final List<Company> inCase,
-      required final List<Company> stopped,
-      required final List<Company> inActive}) = _$EditingImpl;
+      {required final Portfolio portfolio,
+      required final List<PortfolioStock> inCase,
+      required final List<PortfolioStock> stopped,
+      required final List<PortfolioStock> inActive}) = _$EditingImpl;
 
-  List<Company> get inCase;
-  List<Company> get stopped;
-  List<Company> get inActive;
+  Portfolio get portfolio;
+  List<PortfolioStock> get inCase;
+  List<PortfolioStock> get stopped;
+  List<PortfolioStock> get inActive;
   @JsonKey(ignore: true)
   _$$EditingImplCopyWith<_$EditingImpl> get copyWith =>
       throw _privateConstructorUsedError;

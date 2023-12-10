@@ -1,5 +1,7 @@
 import 'package:frontend/src/api/models/article_list.dart';
 import 'package:frontend/src/api/models/company_info.dart';
+import 'package:frontend/src/api/models/portfolio.dart';
+import 'package:frontend/src/api/models/portfolios_dashboard.dart';
 import 'package:frontend/src/repository/client_result.dart';
 import 'dart:core';
 import '../api/app_api.dart';
@@ -36,7 +38,34 @@ class AppRepository {
         return ClientResult.succeed(data);
       }
     } catch (e, s) {
-      print(e);
+      return ClientResult.failed(e, s);
+    }
+  }
+
+  Future<ClientResult<PortfoliosDashboard>> getAllPortfolios() async {
+    try {
+      final response = await _api.getAllPortfolios();
+      final data = response.data;
+      if (data == null) {
+        return ClientResult.failed(Exception());
+      } else {
+        return ClientResult.succeed(data);
+      }
+    } catch (e, s) {
+      return ClientResult.failed(e, s);
+    }
+  }
+
+  Future<ClientResult<Portfolio>> getPortfolio(String uuid) async {
+    try {
+      final response = await _api.getPortfolio(uuid: uuid);
+      final data = response.data;
+      if (data == null) {
+        return ClientResult.failed(Exception());
+      } else {
+        return ClientResult.succeed(data);
+      }
+    } catch (e, s) {
       return ClientResult.failed(e, s);
     }
   }

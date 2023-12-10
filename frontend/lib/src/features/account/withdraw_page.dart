@@ -8,7 +8,10 @@ import 'package:frontend/src/features/account/widgets/cards_block.dart';
 import 'package:frontend/src/features/account/widgets/cases_block.dart';
 
 class WithdrawPage extends StatefulWidget {
-  final Function({required AccountCase from, required AccountCard to, required double amount}) onTransfer;
+  final Function(
+      {required AccountCase from,
+      required AccountCard to,
+      required double amount}) onTransfer;
   final List<AccountCase> cases;
   final List<AccountCard> cards;
 
@@ -56,7 +59,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Вывести средства с',
                 style: TextStyle(
                   color: Color(0xFF14161C),
@@ -64,7 +67,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               CasesBlock(
                 cases: widget.cases,
                 onCaseTap: (n) {
@@ -74,8 +77,8 @@ class _WithdrawPageState extends State<WithdrawPage> {
                 },
                 selectedId: selectedId1,
               ),
-              SizedBox(height: 76),
-              Text(
+              const SizedBox(height: 76),
+              const Text(
                 'На карту',
                 style: TextStyle(
                   color: Color(0xFF14161C),
@@ -83,7 +86,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               CardsBlock(
                 cards: widget.cards,
                 onCadrTap: (n) {
@@ -93,8 +96,8 @@ class _WithdrawPageState extends State<WithdrawPage> {
                 },
                 selectedId: selectedId2,
               ),
-              SizedBox(height: 76),
-              Text(
+              const SizedBox(height: 76),
+              const Text(
                 'Укажите сумму',
                 style: TextStyle(
                   color: Color(0xFF14161C),
@@ -102,7 +105,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Row(
                 children: [
                   Container(
@@ -140,7 +143,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 25),
+                  const SizedBox(width: 25),
                   GestureDetector(
                     onTap: () {
                       if (!hasTransfered) {
@@ -160,7 +163,9 @@ class _WithdrawPageState extends State<WithdrawPage> {
                       height: 50,
                       clipBehavior: Clip.antiAlias,
                       decoration: ShapeDecoration(
-                        color: !hasTransfered ? Color(0xFF2C53F4) : Color(0xFF6783F7),
+                        color: !hasTransfered
+                            ? const Color(0xFF2C53F4)
+                            : const Color(0xFF6783F7),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -170,7 +175,9 @@ class _WithdrawPageState extends State<WithdrawPage> {
                           !hasTransfered ? 'Перевести' : 'Перевод выполнен',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: !hasTransfered ? Colors.white : Color(0xFFC0CBFC),
+                            color: !hasTransfered
+                                ? Colors.white
+                                : const Color(0xFFC0CBFC),
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                           ),
@@ -180,7 +187,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                   )
                 ],
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
             ],
           ),
         ),
@@ -193,7 +200,7 @@ FormFieldValidator<String> numberValidator() {
   return (value) {
     final rez = double.tryParse(value ?? '');
     if (rez == null) {
-      return 'некорректный формат числа';
+      return 'Некорректный формат числа';
     }
     if (rez < 0.01 || rez > 200000000) {
       return 'Сумма должна быть от 0.01 ₽ до 200 000 000 ₽';

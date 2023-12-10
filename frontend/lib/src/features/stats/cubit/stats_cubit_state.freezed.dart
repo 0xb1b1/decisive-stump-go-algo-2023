@@ -20,8 +20,8 @@ mixin _$StatsCubitState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)
+    required TResult Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,8 +29,8 @@ mixin _$StatsCubitState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
+    TResult? Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)?
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,8 +38,8 @@ mixin _$StatsCubitState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
+    TResult Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)?
         success,
     required TResult orElse(),
   }) =>
@@ -126,8 +126,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)
+    required TResult Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)
         success,
   }) {
     return loading();
@@ -138,8 +138,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
+    TResult? Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)?
         success,
   }) {
     return loading?.call();
@@ -150,8 +150,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
+    TResult Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)?
         success,
     required TResult orElse(),
   }) {
@@ -240,8 +240,8 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)
+    required TResult Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)
         success,
   }) {
     return error();
@@ -252,8 +252,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
+    TResult? Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)?
         success,
   }) {
     return error?.call();
@@ -264,8 +264,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
+    TResult Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)?
         success,
     required TResult orElse(),
   }) {
@@ -321,9 +321,12 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {ArticleList news, List<Transaction> transactions, List<Case> cases});
+      {ArticleList news,
+      List<Transaction> transactions,
+      PortfoliosDashboard cases});
 
   $ArticleListCopyWith<$Res> get news;
+  $PortfoliosDashboardCopyWith<$Res> get cases;
 }
 
 /// @nodoc
@@ -351,9 +354,9 @@ class __$$SuccessImplCopyWithImpl<$Res>
           : transactions // ignore: cast_nullable_to_non_nullable
               as List<Transaction>,
       cases: null == cases
-          ? _value._cases
+          ? _value.cases
           : cases // ignore: cast_nullable_to_non_nullable
-              as List<Case>,
+              as PortfoliosDashboard,
     ));
   }
 
@@ -364,6 +367,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
       return _then(_value.copyWith(news: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PortfoliosDashboardCopyWith<$Res> get cases {
+    return $PortfoliosDashboardCopyWith<$Res>(_value.cases, (value) {
+      return _then(_value.copyWith(cases: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -372,9 +383,8 @@ class _$SuccessImpl implements _Success {
   const _$SuccessImpl(
       {required this.news,
       required final List<Transaction> transactions,
-      required final List<Case> cases})
-      : _transactions = transactions,
-        _cases = cases;
+      required this.cases})
+      : _transactions = transactions;
 
   @override
   final ArticleList news;
@@ -386,13 +396,8 @@ class _$SuccessImpl implements _Success {
     return EqualUnmodifiableListView(_transactions);
   }
 
-  final List<Case> _cases;
   @override
-  List<Case> get cases {
-    if (_cases is EqualUnmodifiableListView) return _cases;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cases);
-  }
+  final PortfoliosDashboard cases;
 
   @override
   String toString() {
@@ -407,15 +412,12 @@ class _$SuccessImpl implements _Success {
             (identical(other.news, news) || other.news == news) &&
             const DeepCollectionEquality()
                 .equals(other._transactions, _transactions) &&
-            const DeepCollectionEquality().equals(other._cases, _cases));
+            (identical(other.cases, cases) || other.cases == cases));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      news,
-      const DeepCollectionEquality().hash(_transactions),
-      const DeepCollectionEquality().hash(_cases));
+  int get hashCode => Object.hash(runtimeType, news,
+      const DeepCollectionEquality().hash(_transactions), cases);
 
   @JsonKey(ignore: true)
   @override
@@ -428,8 +430,8 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)
+    required TResult Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)
         success,
   }) {
     return success(news, transactions, cases);
@@ -440,8 +442,8 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
+    TResult? Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)?
         success,
   }) {
     return success?.call(news, transactions, cases);
@@ -452,8 +454,8 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            ArticleList news, List<Transaction> transactions, List<Case> cases)?
+    TResult Function(ArticleList news, List<Transaction> transactions,
+            PortfoliosDashboard cases)?
         success,
     required TResult orElse(),
   }) {
@@ -502,11 +504,11 @@ abstract class _Success implements StatsCubitState {
   const factory _Success(
       {required final ArticleList news,
       required final List<Transaction> transactions,
-      required final List<Case> cases}) = _$SuccessImpl;
+      required final PortfoliosDashboard cases}) = _$SuccessImpl;
 
   ArticleList get news;
   List<Transaction> get transactions;
-  List<Case> get cases;
+  PortfoliosDashboard get cases;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;

@@ -14,7 +14,7 @@ class CompanyInfo with _$CompanyInfo {
     @JsonKey(name: 'stock_price') required String stockPrice,
     @JsonKey(name: 'prognosis_percentage') required String prognosisPercentage,
     required StockActionRecommendation recommendation,
-    String? portfolioId,
+    @JsonKey(name: 'portfolio_uuid')String? portfolioUuid,
   }) = _CompanyInfo;
 
   factory CompanyInfo.fromJson(Map<String, dynamic> json) =>

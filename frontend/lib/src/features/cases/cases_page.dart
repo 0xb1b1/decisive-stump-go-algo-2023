@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/api/models/portfolio_stripped.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 import 'package:frontend/src/features/cases/case_details.dart';
+import 'package:frontend/src/features/cases/provider/cases_provider.dart';
 import 'package:frontend/src/widgets/info_card.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/strings.dart';
-import 'models/case.dart';
 
 class CasesPage extends StatelessWidget {
-  final List<Case> cases;
-  final VoidCallback onCaseTap;
-
   const CasesPage({
-    required this.cases,
-    required this.onCaseTap,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final cases = Provider.of<CasesProvider>(context).data.strippedPortfolios;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -26,7 +24,6 @@ class CasesPage extends StatelessWidget {
         ),
         child: AllCasesBlock(
           cases: cases,
-          onCaseTap: onCaseTap,
         ),
       ),
     );
@@ -34,12 +31,10 @@ class CasesPage extends StatelessWidget {
 }
 
 class AllCasesBlock extends StatelessWidget {
-  final List<Case> cases;
-  final VoidCallback onCaseTap;
+  final List<PortfolioStripped> cases;
 
   const AllCasesBlock({
     required this.cases,
-    required this.onCaseTap,
     Key? key,
   }) : super(key: key);
 
@@ -52,7 +47,8 @@ class AllCasesBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final numberRows = calculateNumberOfRows(cases.length, 3);
-    final gridHeight = (208 * numberRows + 24 * (numberRows - 1)).toDouble();
+    final gridHeight =
+        (208 * numberRows + 24 * (numberRows - 1)).toDouble() - 8;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,13 +74,13 @@ class AllCasesBlock extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => CaseDetails(
-                          portfolio: e,
+                          portfolioUuid: e.uuid,
                         ),
                       ),
                     ),
                     child: InfoCard(
-                      title: '${Strings.singleCase}\n\n«${e.title}»',
-                      rewardAmount: e.weeklyProfitability,
+                      title: '${Strings.singleCase}\n«${e.sector}»',
+                      rewardAmount: double.parse(e.profit),
                     ),
                   ),
                 )

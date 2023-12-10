@@ -3,19 +3,19 @@ import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 import 'package:frontend/src/features/account/account_page.dart';
 
+import '../../../api/models/portfolio.dart';
 import '../../../common/strings.dart';
 import '../../../common/theme/border_radius/border_radius.dart';
 import '../../../widgets/info_card.dart';
-import '../models/case.dart';
 
 class CaseInfo extends StatelessWidget {
-  final Case portfolio;
+  final Portfolio portfolio;
 
   const CaseInfo({required this.portfolio, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final parts = portfolio.weeklyProfitability.toString().split('.');
+    final parts = portfolio.profitWeeklyPercent.toString().split('.');
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
@@ -36,7 +36,7 @@ class CaseInfo extends StatelessWidget {
               ),
               Text(
                 overflow: TextOverflow.ellipsis,
-                'Портфель\n«${portfolio.title}»',
+                'Портфель\n«${portfolio.sector}»',
                 style: AppTypography.caseTitle,
               ),
               Expanded(
@@ -99,7 +99,7 @@ class CaseInfo extends StatelessWidget {
               Parameter(
                 title: "Cчёт портфеля",
                 value: Text(
-                  "+ ${portfolio.account} ${Strings.rurSymbol}",
+                  "+ ${portfolio.balance} ${Strings.rurSymbol}",
                   style: AppTypography.sectionTitle,
                 ),
               ),

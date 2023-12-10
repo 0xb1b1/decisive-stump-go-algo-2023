@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/src/api/models/article_list.dart';
+import 'package:frontend/src/api/models/portfolio_stripped.dart';
+import 'package:frontend/src/api/models/portfolios_dashboard.dart';
 import 'package:frontend/src/features/stats/cubit/stats_cubit_state.dart';
 import 'package:frontend/src/features/transactions/models/transaction.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../api/models/article.dart';
 import '../../../repository/app_repository.dart';
-import '../../cases/models/case.dart';
-import '../models/news.dart';
 
 class StatsCubit extends Cubit<StatsCubitState> {
   final AppRepository _repository;
@@ -17,10 +17,10 @@ class StatsCubit extends Cubit<StatsCubitState> {
         super(const StatsCubitState.loading());
 
   Future<void> initialFetch() async {
-    final response = await _repository.getNews();
+    final newsResponse = await _repository.getNews();
     final ArticleList resultNews;
-    final value = response.value;
-    if (!response.succeed || value == null) {
+    final valueNews = newsResponse.value;
+    if (!newsResponse.succeed || valueNews == null) {
       resultNews = ArticleList(
         articles: List.generate(
           30,
@@ -28,19 +28,30 @@ class StatsCubit extends Cubit<StatsCubitState> {
         ),
       );
     } else {
-      resultNews = value;
+      resultNews = valueNews;
+    }
+
+    final portfoliosResponse = await _repository.getAllPortfolios();
+    final PortfoliosDashboard resultPortfolios;
+    final valuePortfolios = portfoliosResponse.value;
+    if (!portfoliosResponse.succeed || valuePortfolios == null) {
+      resultPortfolios = PortfoliosDashboard(
+        strippedPortfolios: List.generate(
+          8,
+          (index) => PortfolioStripped.mock(),
+        ),
+      );
+    } else {
+      resultPortfolios = valuePortfolios;
     }
 
     final transactions = mockedTransactions;
-    final cases = List.generate(
-      8,
-      (index) => Case.mock(),
-    );
+
     emit(
       StatsCubitState.success(
         news: resultNews,
         transactions: transactions,
-        cases: cases,
+        cases: resultPortfolios,
       ),
     );
   }
@@ -52,5 +63,4 @@ class StatsCubit extends Cubit<StatsCubitState> {
     }
   }
 
-  void onCaseTap() {}
 }

@@ -50,21 +50,12 @@ class InfoCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const CurrencyBlock(),
-                  Expanded(
-                    child: Container(
-                      width: 10,
-                    ),
-                  ),
-                  Flexible(
-                    child: Text(
-                      title,
-                      style: isPrimary
-                          ? AppTypography.regularWhite
-                          : AppTypography.regularBlack,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: smallPadding,
+                  const Spacer(),
+                  Text(
+                    title,
+                    style: isPrimary
+                        ? AppTypography.regularWhite
+                        : AppTypography.regularBlack,
                   ),
                   RichText(
                     text: TextSpan(
