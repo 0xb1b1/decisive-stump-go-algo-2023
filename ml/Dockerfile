@@ -24,7 +24,6 @@ ENV DS_ML_LOGGING_LEVEL \
 
 WORKDIR /srv/app
 
-
 # hadolint ignore=DL3008,DL3009,DL3015
 RUN apt-get update -y && \
     apt-get install -y p7zip && \
