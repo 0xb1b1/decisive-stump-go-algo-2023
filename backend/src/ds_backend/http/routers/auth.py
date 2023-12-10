@@ -3,16 +3,26 @@ from fastapi import APIRouter, Security, HTTPException
 from fastapi_jwt import JwtAuthorizationCredentials
 from loguru import logger
 import bcrypt
+import uuid
 from pymongo.errors import DuplicateKeyError
 
 from ds_backend.http.schemas.user import UserSignupSchema, \
     UserLoginSchema, UserInfoSchema
+
 from ds_backend.http.schemas.token import TokenSchema
+
 from ds_backend import config
 
 from ds_backend.db.databases import backend_db
-from ds_backend.db.repositories.user import UserRepository
-# from ds_backend.models.user import User
+
+from ds_backend.db.repositories.user import \
+    UserRepository
+
+from ds_backend.db.repositories.portfolio import \
+    PortfolioRepository
+
+from ds_backend.models.portfolio import \
+    Portfolio, PortfolioStock
 
 from ds_backend.http.utils.user_signup_schema_to_user \
     import user_signup_schema_to_user
@@ -27,6 +37,7 @@ router = APIRouter(
 )
 
 repo = UserRepository(database=backend_db)
+portfolio_repo = PortfolioRepository(database=backend_db)
 
 
 @router.post(
@@ -55,6 +66,116 @@ async def signup(credentials: UserSignupSchema):
         "email": user.email,
         "role": user.role,
     }
+
+    # Add demo portfolios
+    portfolio_repo.save_many(
+        [
+            Portfolio(
+                uuid=str(uuid.uuid4()),
+                owner_email=credentials.email,
+                sector="Информационные технологии",
+                balance=float(125447.12),
+                stocks=[
+                    PortfolioStock(
+                        ticker="YNDX",
+                        amount=12,
+                        is_paused=False,
+                        is_disabled=False,
+                    ),
+                    PortfolioStock(
+                        ticker="CIAN",
+                        amount=36,
+                        is_paused=False,
+                        is_disabled=False,
+                    ),
+                    PortfolioStock(
+                        ticker="QIWI",
+                        amount=0,
+                        is_paused=False,
+                        is_disabled=True,
+                    ),
+                    PortfolioStock(
+                        ticker="ASTR",
+                        amount=6,
+                        is_paused=True,
+                        is_disabled=False,
+                    ),
+                    PortfolioStock(
+                        ticker="VKCO",
+                        amount=30,
+                        is_paused=False,
+                        is_disabled=True,
+                    ),
+                ],
+            ),
+
+            Portfolio(
+                uuid=str(uuid.uuid4()),
+                owner_email=credentials.email,
+                sector="Телекоммуникации",
+                balance=float(41217.75),
+                stocks=[
+                    PortfolioStock(
+                        ticker="MTSS",
+                        amount=57,
+                        is_paused=False,
+                        is_disabled=False,
+                    ),
+                    PortfolioStock(
+                        ticker="700",
+                        amount=80,
+                        is_paused=True,
+                        is_disabled=False,
+                    ),
+                    PortfolioStock(
+                        ticker="BIDU",
+                        amount=0,
+                        is_paused=False,
+                        is_disabled=True,
+                    ),
+                    PortfolioStock(
+                        ticker="RTKM",
+                        amount=79,
+                        is_paused=False,
+                        is_disabled=False,
+                    ),
+                ],
+            ),
+
+            Portfolio(
+                uuid=str(uuid.uuid4()),
+                owner_email=credentials.email,
+                sector="Энергетика",
+                balance=float(217554.04),
+                stocks=[
+                    PortfolioStock(
+                        ticker="GAZP",
+                        amount=172,
+                        is_paused=False,
+                        is_disabled=False,
+                    ),
+                    PortfolioStock(
+                        ticker="TATNP",
+                        amount=2,
+                        is_paused=False,
+                        is_disabled=False,
+                    ),
+                    PortfolioStock(
+                        ticker="LKOH",
+                        amount=5,
+                        is_paused=False,
+                        is_disabled=False,
+                    ),
+                    PortfolioStock(
+                        ticker="SNGS",
+                        amount=351,
+                        is_paused=True,
+                        is_disabled=False,
+                    ),
+                ],
+            ),
+        ]
+    )
 
     return {
         "access_token": config.jwt_ac.create_access_token(
