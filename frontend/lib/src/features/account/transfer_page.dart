@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/src/common/theme/border_radius/border_radius.dart';
+import 'package:frontend/src/api/models/portfolio_wrapper.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
-import 'package:frontend/src/features/account/account_cubit.dart';
 import 'package:frontend/src/features/account/widgets/cases_block.dart';
 
 class TransferPage extends StatefulWidget {
-  final Function({required AccountCase from, required AccountCase to, required double amount}) onTransfer;
-  final List<AccountCase> cases;
+  final Function({required PortfolioWrapper from, required PortfolioWrapper to, required double amount}) onTransfer;
+  final List<PortfolioWrapper> cases;
 
-  TransferPage({
+  const TransferPage({
     Key? key,
     required this.onTransfer,
     required this.cases,
@@ -53,7 +51,7 @@ class _TransferPageState extends State<TransferPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Перевести с',
                 style: TextStyle(
                   color: Color(0xFF14161C),
@@ -61,7 +59,7 @@ class _TransferPageState extends State<TransferPage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               CasesBlock(
                 cases: widget.cases,
                 onCaseTap: (n) {
@@ -78,8 +76,8 @@ class _TransferPageState extends State<TransferPage> {
                 },
                 selectedId: selectedId1,
               ),
-              SizedBox(height: 76),
-              Text(
+              const SizedBox(height: 76),
+              const Text(
                 'На счет',
                 style: TextStyle(
                   color: Color(0xFF14161C),
@@ -87,7 +85,7 @@ class _TransferPageState extends State<TransferPage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               CasesBlock(
                 cases: widget.cases,
                 onCaseTap: (n) {
@@ -104,8 +102,8 @@ class _TransferPageState extends State<TransferPage> {
                 },
                 selectedId: selectedId2,
               ),
-              SizedBox(height: 76),
-              Text(
+              const SizedBox(height: 76),
+              const Text(
                 'Укажите сумму',
                 style: TextStyle(
                   color: Color(0xFF14161C),
@@ -113,7 +111,7 @@ class _TransferPageState extends State<TransferPage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Row(
                 children: [
                   Container(
@@ -171,7 +169,7 @@ class _TransferPageState extends State<TransferPage> {
                   //     obscureText: true, // To hide password text
                   //   ),
                   // ),
-                  SizedBox(width: 25),
+                  // const SizedBox(width: 25),
                   GestureDetector(
                     onTap: () {
                       if (!hasTransfered) {
@@ -191,7 +189,7 @@ class _TransferPageState extends State<TransferPage> {
                       height: 50,
                       clipBehavior: Clip.antiAlias,
                       decoration: ShapeDecoration(
-                        color: !hasTransfered ? Color(0xFF2C53F4) : Color(0xFF6783F7),
+                        color: !hasTransfered ? const Color(0xFF2C53F4) : const Color(0xFF6783F7),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -201,7 +199,7 @@ class _TransferPageState extends State<TransferPage> {
                           !hasTransfered ? 'Перевести' : 'Перевод выполнен',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: !hasTransfered ? Colors.white : Color(0xFFC0CBFC),
+                            color: !hasTransfered ? Colors.white : const Color(0xFFC0CBFC),
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                           ),
@@ -211,7 +209,7 @@ class _TransferPageState extends State<TransferPage> {
                   )
                 ],
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
             ],
           ),
         ),

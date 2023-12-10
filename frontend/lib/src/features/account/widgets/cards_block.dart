@@ -115,7 +115,7 @@ class CaseCard extends StatelessWidget {
         horizontal: 20,
         vertical: 24,
       ),
-      height: 154,
+      height: 200,
       width: 346,
       decoration: BoxDecoration(
         color: isSelected ? AppPalette.mainBlue : AppPalette.white,
@@ -128,16 +128,17 @@ class CaseCard extends StatelessWidget {
           Text(
             '*${accountcard.numberEnd}',
             style: TextStyle(
-              color: isSelected ? Colors.white : Color(0xFF14161C),
+              color: isSelected ? Colors.white : const Color(0xFF14161C),
               fontSize: 50,
               fontWeight: FontWeight.w500,
             ),
+            maxLines: 3,
           ),
-          SizedBox(height: 14),
+          const SizedBox(height: 14),
           Text(
             accountcard.name,
             style: TextStyle(
-              color: isSelected ? Colors.white : Color(0xFF14161C),
+              color: isSelected ? Colors.white : const Color(0xFF14161C),
               fontSize: 20,
               fontWeight: FontWeight.w400,
             ),

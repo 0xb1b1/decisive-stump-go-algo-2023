@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/src/api/models/portfolio_wrapper.dart';
 import 'package:frontend/src/features/account/account_cubit.dart';
 import 'package:frontend/src/features/account/transfer_page.dart';
 import 'package:frontend/src/features/account/withdraw_page.dart';
@@ -7,7 +8,7 @@ import 'package:frontend/src/features/account/withdraw_page.dart';
 class AccountSum extends StatelessWidget {
   const AccountSum({super.key});
 
-  int getSum(List<AccountCase> cases) {
+  int getSum(List<PortfolioWrapper> cases) {
     int sum = 0;
     for (var i = 0; i < cases.length; i++) {
       sum += cases[i].money;
@@ -26,11 +27,11 @@ class AccountSum extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            const Text(
               'Всего на счетах',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -44,13 +45,13 @@ class AccountSum extends StatelessWidget {
                 ? Text(
                     '${getSum(state.cases)} ₽',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 40,
                       fontWeight: FontWeight.w700,
                     ),
                   )
-                : CircularProgressIndicator(),
+                : const CircularProgressIndicator(),
             const SizedBox(height: 24),
             GestureDetector(
               onTap: () {
@@ -72,12 +73,12 @@ class AccountSum extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 clipBehavior: Clip.antiAlias,
                 decoration: ShapeDecoration(
-                  color: Color(0xFFF3F4F6),
+                  color: const Color(0xFFF3F4F6),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Вывести средства',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -108,12 +109,12 @@ class AccountSum extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 clipBehavior: Clip.antiAlias,
                 decoration: ShapeDecoration(
-                  color: Color(0xFFF3F4F6),
+                  color: const Color(0xFFF3F4F6),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Переводы между счетами',
                   textAlign: TextAlign.center,
                   style: TextStyle(

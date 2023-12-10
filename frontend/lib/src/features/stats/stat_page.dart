@@ -60,7 +60,7 @@ class StatsPage extends StatelessWidget {
                               ),
                               InfoCard(
                                 title: '${Strings.bestCase}\n«Недвижимость»',
-                                rewardAmount: 500.44,
+                                rewardAmount: 243.32,
                               ),
                             ],
                           ),

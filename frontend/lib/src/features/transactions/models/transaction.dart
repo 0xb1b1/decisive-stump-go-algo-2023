@@ -33,7 +33,7 @@ enum TransactionType {
   sale,
 }
 
-List<Transaction> mockedTransactions = List.generate(1000, (index) {
+List<Transaction> mockedTransactions = List.generate(100, (index) {
   final nowDate = DateTime.now();
   return Transaction(
     portfolio: 'Недвижимость',

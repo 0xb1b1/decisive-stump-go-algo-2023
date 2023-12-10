@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/api/models/portfolio_wrapper.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
-import 'package:frontend/src/features/account/account_cubit.dart';
 
 class AccountWidget extends StatelessWidget {
   const AccountWidget({
@@ -8,7 +8,7 @@ class AccountWidget extends StatelessWidget {
     required this.accountcase,
   }) : super(key: key);
 
-  final AccountCase accountcase;
+  final PortfolioWrapper accountcase;
 
   @override
   Widget build(BuildContext context) {

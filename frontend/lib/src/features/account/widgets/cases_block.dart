@@ -4,8 +4,10 @@ import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/common/theme/text/app_typography.dart';
 import 'package:frontend/src/features/account/account_cubit.dart';
 
+import '../../../api/models/portfolio_wrapper.dart';
+
 class CasesBlock extends StatefulWidget {
-  final List<AccountCase> cases;
+  final List<PortfolioWrapper> cases;
   final Function(int) onCaseTap;
   final int selectedId;
 
@@ -99,7 +101,7 @@ class _NewsBlockState extends State<CasesBlock> {
 }
 
 class CaseCard extends StatelessWidget {
-  final AccountCase accountcase;
+  final PortfolioWrapper accountcase;
   final bool isSelected;
 
   const CaseCard({
@@ -115,7 +117,7 @@ class CaseCard extends StatelessWidget {
         horizontal: 20,
         vertical: 24,
       ),
-      height: 186,
+      height: 230,
       width: 346,
       decoration: BoxDecoration(
         color: isSelected ? AppPalette.mainBlue : AppPalette.white,
@@ -133,7 +135,7 @@ class CaseCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: 14),
+          const Spacer(),
           Text(
             accountcase.name,
             style: TextStyle(
@@ -142,7 +144,7 @@ class CaseCard extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-          SizedBox(height: 14),
+          const Spacer(),
           Text(
             '*${accountcase.numberEnd}',
             style: AppTypography.regularBlack.copyWith(

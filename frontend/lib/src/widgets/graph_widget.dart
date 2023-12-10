@@ -69,14 +69,14 @@ class _GraphWidgetState extends State<GraphWidget> {
       return Text(
         value.toString(),
         textAlign: TextAlign.right,
-        style: TextStyle(
+        style: const TextStyle(
           color: Color(0xFF14161C),
           fontSize: 12,
           fontWeight: FontWeight.w400,
         ),
       );
     }
-    return SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 
   String getXTitle(double value) {
@@ -100,13 +100,13 @@ class _GraphWidgetState extends State<GraphWidget> {
       return Text(
         getXTitle(value),
         textAlign: TextAlign.right,
-        style: TextStyle(
+        style: const TextStyle(
           color: Color(0xFF14161C),
           fontSize: 12,
           fontWeight: FontWeight.w400,
         ),
       );
-    return SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 
   double getMinY() {
@@ -205,10 +205,10 @@ class _GraphWidgetState extends State<GraphWidget> {
                       });
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                       decoration: BoxDecoration(
                         color: type == GraphType.day ? AppPalette.mainBlue : AppPalette.greyBg,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(5),
                           bottomLeft: Radius.circular(5),
                         ),
@@ -217,7 +217,7 @@ class _GraphWidgetState extends State<GraphWidget> {
                         'ДН',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: type == GraphType.day ? Colors.white : Color(0xFF14161C),
+                          color: type == GraphType.day ? Colors.white : const Color(0xFF14161C),
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
@@ -235,12 +235,12 @@ class _GraphWidgetState extends State<GraphWidget> {
                     },
                     child: Container(
                       color: type == GraphType.week ? AppPalette.mainBlue : AppPalette.greyBg,
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                       child: Text(
                         'Н',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: type == GraphType.week ? Colors.white : Color(0xFF14161C),
+                          color: type == GraphType.week ? Colors.white : const Color(0xFF14161C),
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
@@ -258,12 +258,12 @@ class _GraphWidgetState extends State<GraphWidget> {
                     },
                     child: Container(
                       color: type == GraphType.month ? AppPalette.mainBlue : AppPalette.greyBg,
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                       child: Text(
                         'М',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: type == GraphType.month ? Colors.white : Color(0xFF14161C),
+                          color: type == GraphType.month ? Colors.white : const Color(0xFF14161C),
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
@@ -280,10 +280,10 @@ class _GraphWidgetState extends State<GraphWidget> {
                       });
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                       decoration: BoxDecoration(
                         color: type == GraphType.halfyear ? AppPalette.mainBlue : AppPalette.greyBg,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(5),
                           bottomRight: Radius.circular(5),
                         ),
@@ -292,7 +292,7 @@ class _GraphWidgetState extends State<GraphWidget> {
                         '6М',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: type == GraphType.halfyear ? Colors.white : Color(0xFF14161C),
+                          color: type == GraphType.halfyear ? Colors.white : const Color(0xFF14161C),
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
@@ -312,23 +312,23 @@ class _GraphWidgetState extends State<GraphWidget> {
                   drawVerticalLine: true,
                   drawHorizontalLine: true,
                   getDrawingHorizontalLine: (value) {
-                    return FlLine(
-                      color: const Color(0xffe7e8ec),
+                    return const FlLine(
+                      color: Color(0xffe7e8ec),
                       strokeWidth: 1,
                     );
                   },
                   getDrawingVerticalLine: (value) {
-                    return FlLine(
-                      color: const Color(0xffe7e8ec),
+                    return const FlLine(
+                      color: Color(0xffe7e8ec),
                       strokeWidth: 1,
                     );
                   },
                 ),
                 titlesData: FlTitlesData(
-                  topTitles: AxisTitles(
+                  topTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
-                  rightTitles: AxisTitles(
+                  rightTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
                   bottomTitles: AxisTitles(
@@ -356,10 +356,10 @@ class _GraphWidgetState extends State<GraphWidget> {
                 lineBarsData: [
                   LineChartBarData(
                     spots: real.map((e) => FlSpot(e.pointX, e.pointY)).toList(),
-                    color: Colors.blue,
+                    color: AppPalette.mainBlue,
                     barWidth: 4,
                     isStrokeCapRound: true,
-                    dotData: FlDotData(show: false),
+                    dotData: const FlDotData(show: false),
                     belowBarData: BarAreaData(show: false),
                   ),
                   LineChartBarData(
@@ -367,10 +367,10 @@ class _GraphWidgetState extends State<GraphWidget> {
                       FlSpot(real.last.pointX, real.last.pointY),
                       ...predicted.map((e) => FlSpot(e.pointX, e.pointY)).toList()
                     ],
-                    color: Colors.blue,
+                    color: AppPalette.mainBlue,
                     barWidth: 4,
                     isStrokeCapRound: true,
-                    dotData: FlDotData(show: false),
+                    dotData: const FlDotData(show: false),
                     belowBarData: BarAreaData(show: false),
                     dashArray: [5, 5], // This creates the dotted effect
                   ),

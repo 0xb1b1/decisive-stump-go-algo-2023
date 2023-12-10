@@ -62,5 +62,4 @@ class StatsCubit extends Cubit<StatsCubitState> {
       await launchUrl(uri);
     }
   }
-
 }

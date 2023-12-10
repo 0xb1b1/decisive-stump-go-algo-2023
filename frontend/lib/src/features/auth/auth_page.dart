@@ -143,6 +143,22 @@ class _AuthPageState extends State<AuthPage> {
                               ),
                             ),
                             obscureText: true,
+                            onSubmitted: (_) async {
+                              final values = _getInputValues();
+                              final isSuccess =
+                                  await BlocProvider.of<AuthCubit>(context)
+                                      .enterToApp(
+                                email: values[0],
+                                password: values[1],
+                              );
+                              if (isSuccess) {
+                                transition();
+                              } else {
+                                showToast();
+                                _controller1.clear();
+                                _controller2.clear();
+                              }
+                            },
                           ),
                           const SizedBox(height: 36),
                           ElevatedButton(

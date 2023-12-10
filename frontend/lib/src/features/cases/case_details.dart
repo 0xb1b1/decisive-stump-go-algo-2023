@@ -75,7 +75,9 @@ class CaseDetails extends StatelessWidget {
                               buttonTitle: Strings.withdrawMoney,
                               onButtonTap: () => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const AccountPage(),
+                                  builder: (context) => const AccountPage(
+                                    isNeedAppBar: true,
+                                  ),
                                 ),
                               ),
                               income: double.parse(portfolio.profit),
@@ -175,7 +177,9 @@ class CaseDetails extends StatelessWidget {
                               buttonTitle: Strings.withdrawMoney,
                               onButtonTap: () => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const AccountPage(),
+                                  builder: (context) => const AccountPage(
+                                    isNeedAppBar: true,
+                                  ),
                                 ),
                               ),
                               income: double.parse(portfolio.profit),

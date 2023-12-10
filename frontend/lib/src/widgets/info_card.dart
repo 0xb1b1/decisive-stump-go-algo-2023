@@ -56,12 +56,13 @@ class InfoCard extends StatelessWidget {
                     style: isPrimary
                         ? AppTypography.regularWhite
                         : AppTypography.regularBlack,
+                    maxLines: 3,
                   ),
                   RichText(
                     text: TextSpan(
                       text: '+ ${rewardAmount.truncate()}',
-                      style:
-                          AppTypography.rewardBig.copyWith(color: rewardColor),
+                      style: AppTypography.rewardBig
+                          .copyWith(color: rewardColor, fontSize: 36),
                       children: parts.length > 1
                           ? [
                               TextSpan(
@@ -99,7 +100,6 @@ class CurrencyBlock extends StatelessWidget {
     return Container(
       height: 54,
       width: 54,
-      // padding: const EdgeInsets.all(smallPadding),
       decoration: BoxDecoration(
         color: appColors.minorBlue,
         borderRadius: BorderRadius.circular(smallRadius),

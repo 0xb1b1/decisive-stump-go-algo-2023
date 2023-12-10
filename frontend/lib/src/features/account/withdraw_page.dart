@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/src/common/theme/border_radius/border_radius.dart';
 import 'package:frontend/src/common/theme/colors/app_palette.dart';
 import 'package:frontend/src/features/account/account_cubit.dart';
 import 'package:frontend/src/features/account/widgets/cards_block.dart';
 import 'package:frontend/src/features/account/widgets/cases_block.dart';
 
+import '../../api/models/portfolio_wrapper.dart';
+
 class WithdrawPage extends StatefulWidget {
   final Function(
-      {required AccountCase from,
+      {required PortfolioWrapper from,
       required AccountCard to,
       required double amount}) onTransfer;
-  final List<AccountCase> cases;
+  final List<PortfolioWrapper> cases;
   final List<AccountCard> cards;
 
-  WithdrawPage({
+  const WithdrawPage({
     Key? key,
     required this.onTransfer,
     required this.cases,
@@ -143,7 +143,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 25),
+                  // const SizedBox(width: 25),
                   GestureDetector(
                     onTap: () {
                       if (!hasTransfered) {

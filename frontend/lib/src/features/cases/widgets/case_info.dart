@@ -47,7 +47,9 @@ class CaseInfo extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const AccountPage(),
+                    builder: (context) => const AccountPage(
+                      isNeedAppBar: true,
+                    ),
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -57,7 +59,7 @@ class CaseInfo extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12), // Rounded edgesr
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 child: const Text(
@@ -99,7 +101,7 @@ class CaseInfo extends StatelessWidget {
               Parameter(
                 title: "Cчёт портфеля",
                 value: Text(
-                  "+ ${portfolio.balance} ${Strings.rurSymbol}",
+                  "${portfolio.balance} ${Strings.rurSymbol}",
                   style: AppTypography.sectionTitle,
                 ),
               ),
