@@ -3,14 +3,14 @@ FROM debian:bookworm AS build
 
 # Install system packages/dependencies
 # hadolint ignore=DL3008
-RUN apt-get update &&\
+RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     curl git unzip ca-certificates
 
 # Define build variables
 ARG FLUTTER_SDK=/usr/local/flutter
 ARG FLUTTER_VERSION=3.10.5
-ARG APP=/app/
+ARG APP=/app
 
 # Change workdir to SDKs dir
 WORKDIR /usr/local/flutter
@@ -39,6 +39,7 @@ RUN flutter clean && \
     flutter pub get && \
     flutter build web
 
+RUN cp -r ${APP}/build/web/assets/assets/* ${APP}/build/web/assets/
 
 #########################
 # Production Docker Image
