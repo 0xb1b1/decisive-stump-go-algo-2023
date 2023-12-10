@@ -10,7 +10,7 @@ class TradeStatRepository(AbstractRepository[TradeStat]):
     def __init__(self, database: Database):
         AbstractRepository.__init__(self, database)
         database["tradestats"].create_index("secid", unique=False)
-        database["portfolios"].create_index(
+        database["tradestats"].create_index(
             [
                 ("year", ASCENDING),
                 ("year_row", ASCENDING)
