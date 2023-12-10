@@ -35,7 +35,7 @@ stock_info_repo = StockInfoRepository(database=news_db)
 
 
 @router.get(
-    "/get",
+    "/get_news",
     response_model=ArticlesSchema,
 )
 def get_articles(
@@ -65,6 +65,7 @@ def get_articles(
             }
         },
         limit=article_limit,
+        sort=[("timestamp", -1),]
     ):
         article_schema = ArticleSchema(
             title=article.title,

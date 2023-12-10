@@ -9,7 +9,7 @@ services:
   news-parser:
     image: 0xb1b1/ds-news-parser-algo-hack-2023:latest
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile
     restart: always
     ports:
